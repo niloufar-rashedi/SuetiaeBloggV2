@@ -25,6 +25,7 @@ namespace SuetiaeBlogg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen();
             services.AddControllers();
         }
 
@@ -37,6 +38,8 @@ namespace SuetiaeBlogg
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/Swagger/v1/swagger.json", "BloggAPI v1"); });
 
             app.UseRouting();
 

@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[16.5.0, )"
             },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[1.2.0, )"
@@ -70,6 +74,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

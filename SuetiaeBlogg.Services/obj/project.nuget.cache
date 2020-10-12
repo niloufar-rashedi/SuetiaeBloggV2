@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Rudtp1WeoAmWNQMuMY20esFX2TLFCtCZf3E7po54JI9RBpsmGlt+uVmhtKcsf/42hhCLioWCQ81rn3fIUfEr4Q==",
+  "dgSpecHash": "uERSt7+PAspgpU2nY/FomhMEy9UZsw5UhecEU3p0k9YH2iAyBL01AFWg01fXSOb52dD5kXsDy5GjJFZk7tqwzg==",
   "success": true,
   "projectFilePath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\nilou\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\nilou\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\nilou\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NdboXLinb8gWaLf2m+DThII7/IvQibbqXfmzf3pwVluMmqozKmCgpPqXC+gvkWEsHCzQG0NMuJnO3XpwVkhKqg==",
+  "dgSpecHash": "rysGRqIcUvN9kRwCdnWkn5bUcz+pry4KgWRJz1ZOFX9xMJcm3OCWZuq7c+9AMer0Wdr7RtvQHAqCGt9nOYguqg==",
   "success": true,
   "projectFilePath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Tests\\SuetiaeBlogg.Tests.csproj",
   "expectedPackageFiles": [
@@ -10,10 +10,13 @@
     "C:\\Users\\nilou\\.nuget\\packages\\microsoft.net.test.sdk\\16.5.0\\microsoft.net.test.sdk.16.5.0.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\microsoft.netcore.targets\\1.0.1\\microsoft.netcore.targets.1.0.1.nupkg.sha512",
+    "C:\\Users\\nilou\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.5.0\\microsoft.testplatform.objectmodel.16.5.0.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\microsoft.testplatform.testhost\\16.5.0\\microsoft.testplatform.testhost.16.5.0.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\newtonsoft.json\\9.0.1\\newtonsoft.json.9.0.1.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
+    "C:\\Users\\nilou\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\nilou\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\system.collections\\4.0.11\\system.collections.4.0.11.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\system.diagnostics.debug\\4.0.11\\system.diagnostics.debug.4.0.11.nupkg.sha512",
     "C:\\Users\\nilou\\.nuget\\packages\\system.diagnostics.tools\\4.0.1\\system.diagnostics.tools.4.0.1.nupkg.sha512",
