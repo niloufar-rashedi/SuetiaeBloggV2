@@ -40,6 +40,56 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "SuetiaeBlogg.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3"
+        },
+        "compile": {
+          "bin/placeholder/SuetiaeBlogg.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SuetiaeBlogg.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "SuetiaeBlogg.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "SuetiaeBlogg.Core": "1.0.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3"
+        },
+        "compile": {
+          "bin/placeholder/SuetiaeBlogg.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SuetiaeBlogg.Data.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "SuetiaeBlogg.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "SuetiaeBlogg.Core": "1.0.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3"
+        },
+        "compile": {
+          "bin/placeholder/SuetiaeBlogg.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SuetiaeBlogg.Services.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -94,10 +144,28 @@
         "swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggergen.nuspec"
       ]
+    },
+    "SuetiaeBlogg.Core/1.0.0": {
+      "type": "project",
+      "path": "../SuetiaeBlogg.Core/SuetiaeBlogg.Core.csproj",
+      "msbuildProject": "../SuetiaeBlogg.Core/SuetiaeBlogg.Core.csproj"
+    },
+    "SuetiaeBlogg.Data/1.0.0": {
+      "type": "project",
+      "path": "../SuetiaeBlogg.Data/SuetiaeBlogg.Data.csproj",
+      "msbuildProject": "../SuetiaeBlogg.Data/SuetiaeBlogg.Data.csproj"
+    },
+    "SuetiaeBlogg.Services/1.0.0": {
+      "type": "project",
+      "path": "../SuetiaeBlogg.Services/SuetiaeBlogg.Services.csproj",
+      "msbuildProject": "../SuetiaeBlogg.Services/SuetiaeBlogg.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "SuetiaeBlogg.Core >= 1.0.0",
+      "SuetiaeBlogg.Data >= 1.0.0",
+      "SuetiaeBlogg.Services >= 1.0.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 5.6.3"
     ]
   },
@@ -126,7 +194,17 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Core\\SuetiaeBlogg.Core.csproj": {
+              "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Core\\SuetiaeBlogg.Core.csproj"
+            },
+            "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj": {
+              "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj"
+            },
+            "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj": {
+              "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

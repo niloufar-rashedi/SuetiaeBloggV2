@@ -3,19 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.API", "SuetiaeBlogg\SuetiaeBlogg.API.csproj", "{7650A6A4-5960-4727-9A39-8F2CD4DC397F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.API", "SuetiaeBlogg\SuetiaeBlogg.API.csproj", "{7650A6A4-5960-4727-9A39-8F2CD4DC397F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F251E3B-E7B7-42D7-AEAC-E60F31515696} = {8F251E3B-E7B7-42D7-AEAC-E60F31515696}
+		{CEFA0F68-4533-4FAD-AC8A-7C5A3FC82CC5} = {CEFA0F68-4533-4FAD-AC8A-7C5A3FC82CC5}
+		{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3} = {C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.Core", "SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj", "{8F251E3B-E7B7-42D7-AEAC-E60F31515696}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Core", "SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj", "{8F251E3B-E7B7-42D7-AEAC-E60F31515696}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.Data", "SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj", "{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Data", "SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj", "{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F251E3B-E7B7-42D7-AEAC-E60F31515696} = {8F251E3B-E7B7-42D7-AEAC-E60F31515696}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.React", "SuetiaeBlogg.React\SuetiaeBlogg.React.csproj", "{E7D139F0-CD67-4937-ADF4-375B701B36E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.React", "SuetiaeBlogg.React\SuetiaeBlogg.React.csproj", "{E7D139F0-CD67-4937-ADF4-375B701B36E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.Tests", "SuetiaeBlogg.Tests\SuetiaeBlogg.Tests.csproj", "{2B28274F-5A15-42F6-9BC7-471A9F64B409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Tests", "SuetiaeBlogg.Tests\SuetiaeBlogg.Tests.csproj", "{2B28274F-5A15-42F6-9BC7-471A9F64B409}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.Services", "SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj", "{CEFA0F68-4533-4FAD-AC8A-7C5A3FC82CC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Services", "SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj", "{CEFA0F68-4533-4FAD-AC8A-7C5A3FC82CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuetiaeBlogg.frontend", "SuetiaeBlogg.frontend\SuetiaeBlogg.frontend.csproj", "{B18DD9E0-FDDB-4924-8F34-40F6D8CBDB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.frontend", "SuetiaeBlogg.frontend\SuetiaeBlogg.frontend.csproj", "{B18DD9E0-FDDB-4924-8F34-40F6D8CBDB13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

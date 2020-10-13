@@ -40,6 +40,22 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "SuetiaeBlogg.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3"
+        },
+        "compile": {
+          "bin/placeholder/SuetiaeBlogg.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SuetiaeBlogg.Core.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -94,10 +110,16 @@
         "swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggergen.nuspec"
       ]
+    },
+    "SuetiaeBlogg.Core/1.0.0": {
+      "type": "project",
+      "path": "../SuetiaeBlogg.Core/SuetiaeBlogg.Core.csproj",
+      "msbuildProject": "../SuetiaeBlogg.Core/SuetiaeBlogg.Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "SuetiaeBlogg.Core >= 1.0.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 5.6.3"
     ]
   },
@@ -126,7 +148,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Core\\SuetiaeBlogg.Core.csproj": {
+              "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Core\\SuetiaeBlogg.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
