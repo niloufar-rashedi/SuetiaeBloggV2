@@ -43,9 +43,11 @@ namespace SuetiaeBlogg
 
             app.UseHttpsRedirection();
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/Swagger/v1/swagger.json", "BloggAPI v1"); });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/Swagger/v1/swagger.json", "SuetiaeBloggAPI v1");
+                c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
+                });
 
-            app.UseRouting();
+                app.UseRouting();
 
             app.UseAuthorization();
 
