@@ -102,25 +102,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nilou\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Anna\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj",
+      "projectUniqueName": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj",
       "projectName": "SuetiaeBlogg.Data",
-      "projectPath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj",
-      "packagesPath": "C:\\Users\\nilou\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Data\\obj\\",
+      "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Data\\SuetiaeBlogg.Data.csproj",
+      "packagesPath": "C:\\Users\\Anna\\.nuget\\packages\\",
+      "outputPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Data\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\nilou\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Anna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

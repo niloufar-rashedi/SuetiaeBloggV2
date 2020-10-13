@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj": {}
+    "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj": {
+    "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj",
+        "projectUniqueName": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj",
         "projectName": "SuetiaeBlogg.Services",
-        "projectPath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj",
-        "packagesPath": "C:\\Users\\nilou\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nilou\\MyFolders\\ITHogskolan\\ITHS\\Uppgift_6_V2\\SuetiaeBlogg\\SuetiaeBlogg.Services\\obj\\",
+        "projectPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\SuetiaeBlogg.Services.csproj",
+        "packagesPath": "C:\\Users\\Anna\\.nuget\\packages\\",
+        "outputPath": "D:\\Git\\SuetiaeBloggV2\\SuetiaeBlogg.Services\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\nilou\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Anna\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
