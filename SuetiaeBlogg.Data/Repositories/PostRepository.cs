@@ -31,11 +31,12 @@ namespace SuetiaeBlogg.Data.Repositories
 
         public async Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(Guid categoryId)
         {
-            throw new NotImplementedException(); 
-        //    return await SuetiaeBloggDbContext.Posts
-        //        .Include(m => m.Categories)
-        //        .Where(m => m.Categories.Id == categoryId)
-        //        .ToListAsync();
+            await Task.Yield();
+            throw new NotImplementedException();
+            //    return await SuetiaeBloggDbContext.Posts
+            //        .Include(m => m.Categories)
+            //        .Where(m => m.Categories.Id == categoryId)
+            //        .ToListAsync();
         }
 
         private SuetiaeBloggDbContext SuetiaeBloggDbContext

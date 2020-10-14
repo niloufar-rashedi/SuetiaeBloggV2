@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fakes\" />
+    <ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
   </ItemGroup>
 
 </Project>
