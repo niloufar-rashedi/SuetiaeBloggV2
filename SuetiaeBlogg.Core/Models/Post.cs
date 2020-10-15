@@ -7,9 +7,11 @@ namespace SuetiaeBlogg.Core.Models
 {
     public class Post
     {
-        public int Id { get; set; }
+        [Key]
+        public int PostId { get; set; }
         public IList<Comment> Comments { get; set; } = new List<Comment>();
-        public IList<Category> Categories { get; set; } = new List<Category>();
+        public IList<PostCategory> PostsCategories { get; set; }
+        //public IList<Category> Categories { get; set; }
         [Required(ErrorMessage = "Title required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Post text required")]

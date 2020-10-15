@@ -10,8 +10,8 @@ using SuetiaeBlogg.Data;
 namespace SuetiaeBlogg.Data.Migrations
 {
     [DbContext(typeof(SuetiaeBloggDbContext))]
-    [Migration("20201013085334_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201015190041_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,11 +21,33 @@ namespace SuetiaeBlogg.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SuetiaeBlogg.Core.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlSlug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Comment", b =>
                 {
-                    b.Property<Guid>("UniqueId")
+                    b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AuthorName")
                         .IsRequired()
@@ -38,13 +60,13 @@ namespace SuetiaeBlogg.Data.Migrations
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("PostId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("PubDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.HasKey("UniqueId");
+                    b.HasKey("CommentId");
 
                     b.HasIndex("PostId");
 
@@ -53,13 +75,17 @@ namespace SuetiaeBlogg.Data.Migrations
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Post", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("PostId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Body")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -81,9 +107,24 @@ namespace SuetiaeBlogg.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PostId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("SuetiaeBlogg.Core.Models.PostCategory", b =>
+                {
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PostId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("PostsCategories");
                 });
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Comment", b =>
@@ -91,6 +132,21 @@ namespace SuetiaeBlogg.Data.Migrations
                     b.HasOne("SuetiaeBlogg.Core.Models.Post", null)
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("SuetiaeBlogg.Core.Models.PostCategory", b =>
+                {
+                    b.HasOne("SuetiaeBlogg.Core.Models.Category", "Category")
+                        .WithMany("PostsCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SuetiaeBlogg.Core.Models.Post", "Post")
+                        .WithMany("PostsCategories")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SuetiaeBlogg.Services.Services
 {
-    class IPostService
+    public class IPostService
     {
     }
 }

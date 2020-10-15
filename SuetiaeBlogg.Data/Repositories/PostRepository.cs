@@ -15,34 +15,19 @@ namespace SuetiaeBlogg.Data.Repositories
             : base(context)
         { }
 
-        public async Task<IEnumerable<Post>> GetAllWithCategoryAsync()
+        public Task<IEnumerable<Post>> GetAllWithCategoryAsync()
         {
-            return await SuetiaeBloggDbContext.Posts
-                .Include(m => m.Categories)
-                .ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<Post> GetWithCategoryByIdAsync(int id)
+        public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
-            return await SuetiaeBloggDbContext.Posts
-                .Include(m => m.Categories)
-                .SingleOrDefaultAsync(m => m.Id == id); ;
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
+        public Task<Post> GetWithCategoryByIdAsync(int id)
         {
-            return await SuetiaeBloggDbContext.Posts
-                .Include(m => m.Categories)
-                .Where(c => c.Id == categoryId)
-                .ToListAsync();
-
-
+            throw new NotImplementedException();
         }
-
-        private SuetiaeBloggDbContext SuetiaeBloggDbContext
-        {
-            get { return Context as SuetiaeBloggDbContext; }
-        }
-
     }
 }

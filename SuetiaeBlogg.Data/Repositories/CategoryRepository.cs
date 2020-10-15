@@ -13,23 +13,14 @@ namespace SuetiaeBlogg.Data.Repositories
         public CategoryRepository(SuetiaeBloggDbContext context)
             : base(context)
         { }
-
-        public async Task<IEnumerable<Category>> GetAllWithPostsAsync()
+        public Task<IEnumerable<Category>> GetAllWithPostsAsync()
         {
-            return await SuetiaeBloggDbContext.Categories
-                .Include(a => a.Posts)
-                .ToListAsync();
+            throw new NotImplementedException();
         }
 
         public Task<Category> GetWithPostssByIdAsync(int id)
         {
-            return SuetiaeBloggDbContext.Categories
-               .Include(a => a.Posts)
-               .SingleOrDefaultAsync(a => a.Id == id);
-        }
-        private SuetiaeBloggDbContext SuetiaeBloggDbContext
-        {
-            get { return Context as SuetiaeBloggDbContext; }
+            throw new NotImplementedException();
         }
     }
 }

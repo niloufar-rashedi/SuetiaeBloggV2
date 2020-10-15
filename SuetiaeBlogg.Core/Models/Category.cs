@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace SuetiaeBlogg.Core.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        [Key]
+        public int CategoryId { get; set; }
 
         public string Name { get; set; }
 
@@ -14,6 +16,7 @@ namespace SuetiaeBlogg.Core.Models
 
         public string Description { get; set; }
 
-        public IList<Post> Posts { get; set; }
+        public IList<PostCategory> PostsCategories { get; set; }
+        //public IList<Post> Posts { get; set; }
     }
 }
