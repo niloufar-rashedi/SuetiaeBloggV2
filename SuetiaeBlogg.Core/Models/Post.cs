@@ -7,9 +7,9 @@ namespace SuetiaeBlogg.Core.Models
 {
     public class Post
     {
-        public Guid Id { get; set; }
-        public List<Comment> Comments { get; set; } = new List<Comment>();
-        public List<Category> Categories { get; set; } = new List<Category>();
+        public int Id { get; set; }
+        public IList<Comment> Comments { get; set; } = new List<Comment>();
+        public IList<Category> Categories { get; set; } = new List<Category>();
         [Required(ErrorMessage = "Title required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Post text required")]

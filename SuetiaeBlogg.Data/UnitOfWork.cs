@@ -7,7 +7,7 @@ using SuetiaeBlogg.Data.Repositories;
 
 namespace SuetiaeBlogg.Data
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly SuetiaeBloggDbContext _context;
         private PostRepository _postRepository;

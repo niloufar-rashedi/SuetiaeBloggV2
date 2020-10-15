@@ -22,21 +22,21 @@ namespace SuetiaeBlogg.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Post> GetWithCategoryByIdAsync(Guid id)
+        public async Task<Post> GetWithCategoryByIdAsync(int id)
         {
             return await SuetiaeBloggDbContext.Posts
                 .Include(m => m.Categories)
                 .SingleOrDefaultAsync(m => m.Id == id); ;
         }
 
-        public async Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(Guid categoryId)
+        public async Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
-            //    return await SuetiaeBloggDbContext.Posts
-            //        .Include(m => m.Categories)
-            //        .Where(m => m.Categories.Id == categoryId)
-            //        .ToListAsync();
+            return await SuetiaeBloggDbContext.Posts
+                .Include(m => m.Categories)
+                .Where(c => c.Id == categoryId)
+                .ToListAsync();
+
+
         }
 
         private SuetiaeBloggDbContext SuetiaeBloggDbContext

@@ -21,7 +21,7 @@ namespace SuetiaeBlogg.Data.Repositories
                 .ToListAsync();
         }
 
-        public Task<Category> GetWithPostssByIdAsync(Guid id)
+        public Task<Category> GetWithPostssByIdAsync(int id)
         {
             return SuetiaeBloggDbContext.Categories
                .Include(a => a.Posts)

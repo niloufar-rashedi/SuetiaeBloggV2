@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Data;
 
 namespace SuetiaeBlogg
@@ -40,6 +41,7 @@ namespace SuetiaeBlogg
             });
             services.AddDbContext<SuetiaeBloggDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SuetiaeBlogg"), x => x.MigrationsAssembly("SuetiaeBlogg.Data")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddSwaggerGen();
             services.AddControllers();
         }

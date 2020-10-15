@@ -9,7 +9,7 @@ namespace SuetiaeBlogg.Core.Repositories
         public interface ICategoryRepository : IRepository<Category>
         {
             Task<IEnumerable<Category>> GetAllWithPostsAsync();
-            Task<Category> GetWithPostssByIdAsync(Guid id);
+            Task<Category> GetWithPostssByIdAsync(int id);
         }
     
 }
