@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace SuetiaeBlogg.Core.Models
@@ -10,7 +9,6 @@ namespace SuetiaeBlogg.Core.Models
     {
         public Guid Id { get; set; }
         public List<Comment> Comments { get; set; } = new List<Comment>();
-        [NotMapped]
         public List<Category> Categories { get; set; } = new List<Category>();
         [Required(ErrorMessage = "Title required")]
         public string Title { get; set; }

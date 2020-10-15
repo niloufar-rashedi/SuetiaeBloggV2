@@ -11,12 +11,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using SuetiaeBlogg.Data;
 
 namespace SuetiaeBlogg
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +29,15 @@ namespace SuetiaeBlogg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("https://localhost:44301")
+                                      .WithHeaders(HeaderNames.ContentType, "x-custom-header");
+                                  });
+            });
             services.AddDbContext<SuetiaeBloggDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SuetiaeBlogg"), x => x.MigrationsAssembly("SuetiaeBlogg.Data")));
             services.AddSwaggerGen();
@@ -47,7 +58,12 @@ namespace SuetiaeBlogg
                 c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root
                 });
 
-                app.UseRouting();
+            app.UseRouting();
+
+            app.UseCors(builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyHeader());
+   
 
             app.UseAuthorization();
 

@@ -3,13 +3,13 @@ import axios from 'axios';
 
 import Card from 'react-bootstrap/Card'
 
-export default class Posts extends React.Component {
+export class Posts extends React.Component {
     state = {
         posts: [],
     };
 
     componentDidMount() {
-        axios.get('https://localhost:5001/api/Posts').then(response => {
+        axios.get('https://localhost:44351/api/Posts').then(response => {
             console.log(response);
             this.setState({ posts: response.data });
         });
