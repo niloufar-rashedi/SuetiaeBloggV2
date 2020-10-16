@@ -12,11 +12,11 @@ namespace SuetiaeBlogg.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class BlogPostsController : ControllerBase
     {
         private readonly SuetiaeBloggDbContext _context;
 
-        public PostsController(SuetiaeBloggDbContext context)
+        public BlogPostsController(SuetiaeBloggDbContext context)
         {
             _context = context;
         }
