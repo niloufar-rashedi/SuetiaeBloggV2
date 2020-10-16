@@ -14,6 +14,6 @@ namespace SuetiaeBlogg.Core.Models
         public DateTimeOffset PubDate { get; set; } = DateTimeOffset.Now;
         public bool IsPublic { get; set; }
         [Key]
-        public Guid UniqueId { get; set; }
+        public int CommentId { get; set; }
     }
 }

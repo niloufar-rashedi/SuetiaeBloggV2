@@ -12,11 +12,11 @@ namespace SuetiaeBlogg.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class BlogPostsController : ControllerBase
     {
         private readonly SuetiaeBloggDbContext _context;
 
-        public PostsController(SuetiaeBloggDbContext context)
+        public BlogPostsController(SuetiaeBloggDbContext context)
         {
             _context = context;
         }
@@ -30,7 +30,7 @@ namespace SuetiaeBlogg.API.Controllers
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(Guid id)
+        public async Task<ActionResult<Post>> GetPost(int id)
         {
             var post = await _context.Posts.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace SuetiaeBlogg.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(Guid id, Post post)
+        public async Task<IActionResult> PutPost(int id, Post post)
         {
-            if (id != post.Id)
+            if (id != post.PostId)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace SuetiaeBlogg.API.Controllers
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPost", new { id = post.Id }, post);
+            return CreatedAtAction("GetPost", new { id = post.PostId }, post);
         }
 
         // DELETE: api/Posts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Post>> DeletePost(Guid id)
+        public async Task<ActionResult<Post>> DeletePost(int id)
         {
             var post = await _context.Posts.FindAsync(id);
             if (post == null)
@@ -102,9 +102,9 @@ namespace SuetiaeBlogg.API.Controllers
             return post;
         }
 
-        private bool PostExists(Guid id)
+        private bool PostExists(int id)
         {
-            return _context.Posts.Any(e => e.Id == id);
+            return _context.Posts.Any(e => e.PostId == id);
         }
     }
 }

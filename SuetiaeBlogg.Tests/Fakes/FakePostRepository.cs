@@ -35,7 +35,7 @@ namespace SuetiaeBlogg.Tests.Fakes
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(Guid categoryId)
+        public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
             throw new NotImplementedException();
         }
@@ -45,7 +45,7 @@ namespace SuetiaeBlogg.Tests.Fakes
             throw new NotImplementedException();
         }
 
-        public Task<Post> GetWithCategoryByIdAsync(Guid id)
+        public Task<Post> GetWithCategoryByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
