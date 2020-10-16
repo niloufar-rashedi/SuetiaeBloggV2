@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Col, Row, Form } from 'reactstrap';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -6,20 +7,119 @@ export class Home extends Component {
   render () {
     return (
       <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <img src="https://images.unsplash.com/photo-1551730708-87acf0563a4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+                            class="img-fluid" alt="Responsive image"
+                        />
+                    </div>
+                </div>
+
+                <div class="input-group mb-3 mt-5">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-danger">Search among posts</button>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Author, Subject, Publication date, ..." />
+                </div>
+
+
+                <h3>Vitae dicta sunt explicabo</h3>
+                <div class="row">
+                    <div class="col">
+                        <img src="https://images.unsplash.com/photo-1569937728357-4971c45997c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2117&q=80"
+                            className="img-fluid rounded"
+                            alt="..."
+                        />
+                    </div>
+                    <div class="col">
+                        <p class="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                            magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam <a href="#" class="text-info"> read more </a>
+                        </p>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item font-weight-bold">Archive</li>
+                                    <li class="list-group-item">Cras justo odio</li>
+                                    <li class="list-group-item">Dapibus ac</li>
+                                    <li class="list-group-item">Morbi leo risus</li>
+                                    <li class="list-group-item">Consectetur ac</li>
+                                    <li class="list-group-item">Vestibulum at</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item font-weight-bold">Categories</li>
+                                    <li class="list-group-item">Cras justo odio</li>
+                                    <li class="list-group-item">Dapibus ac</li>
+                                    <li class="list-group-item">Morbi leo risus</li>
+                                    <li class="list-group-item">Consectetur ac</li>
+                                    <li class="list-group-item">Vestibulum at</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* </Container>*/}
+                <button type="button" class="btn btn-info btn-lg btn-block mt-3">Write your own post</button>
+                <div class="container">
+                    <h3>Celebrate "kanelbullens dag" with a fantastic recipe </h3>
+                    <img src="https://images.unsplash.com/photo-1580677881307-5852a81368ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                        class="img-fluid" alt="Responsive image"
+                        href="https://www.ica.se/buffe/artikel/recept-till-kanelbullens-dag/"
+                    />
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <img src="https://images.unsplash.com/photo-1526644253653-a411eaafdfe6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80"
+                            className="img-fluid rounded"
+                            alt="..."
+                        />
+                    </div>
+                    <div class="col">
+                        <p class="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+                            </p>
+                    </div>
+                    <div class="col">
+                        <p class="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                            magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,<a href="#" class="text-info"> read more </a>
+                        </p>
+                    </div>
+                </div>
+
+
+                <Form>
+                    <h3 class="text-center">subscribe to our newsletter</h3>
+                    <div class="form-row mx-auto">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationServer01"></label>
+                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" required />
+                            <div class="valid-feedback">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationServerUsername"></label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                </div>
+                                <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="E-mail" aria-describedby="inputGroupPrepend3" required />
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div class="col-auto my-1">
+
+                        </div>
+                    </div>
+                </Form>
+            </div>
+
       </div>
     );
   }

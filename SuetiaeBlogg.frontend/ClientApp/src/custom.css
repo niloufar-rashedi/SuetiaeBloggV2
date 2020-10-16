@@ -1,14 +1,28 @@
 /* Provide sufficient contrast against white background */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
 a {
-  color: #0366d6;
+    color: #0366d6;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
 }
 
 code {
-  color: #E01A76;
+    color: #E01A76;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.imageOneStyle {
+    background-image: url('https://images.unsplash.com/photo-1569937728357-4971c45997c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2117&q=80');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
