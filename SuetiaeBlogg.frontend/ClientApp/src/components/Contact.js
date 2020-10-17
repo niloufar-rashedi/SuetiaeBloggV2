@@ -6,10 +6,17 @@ export class Contact extends Component {
             <div class="container p-4">
                 <h3>Contact Us</h3>
                 <div class="col">
-                    <p class="text-justify">We love feedback, so drop us a line below using the contact form provided. Alternatively, direct email is ask [at] suetiaeblog [dot] com
-                    SuetiaeBlog.com </p>
-                    <p class="text-justify"> Lindholmspiren, 30 - Gothenburg, Sweden, 41 756</p>
+                    <p class="text-justify">We love feedback, so drop us a line below using the contact form provided. Alternatively, our direct email is: ask [at] suetiaeblog [dot] com</p>
+                    <p class="text-justify"> SuetiaeBlog.com- Lindholmspiren, 30 - Gothenburg, Sweden, 41 756</p>
                 </div>
+                <div class="w-60 h-60">
+                    <div class="col">
+                        <img src="bilder/Sverige-contact.jpg"
+                            className="img-fluid rounded"
+                            alt="..."
+                        />
+                    </div>
+                 </div>
 
                 <form class="text-center border border-light p-5" action="#!">
 
