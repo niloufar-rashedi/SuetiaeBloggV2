@@ -22,6 +22,11 @@ namespace SuetiaeBlogg.Data.Repositories
             await Context.Set<T>().AddAsync(entity);
         }
 
+        public Task AddAsync(IEnumerable<T> entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await Context.Set<T>().AddRangeAsync(entities);

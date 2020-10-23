@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
+using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
+using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
 namespace SuetiaeBlogg.API.Controllers
@@ -15,96 +19,114 @@ namespace SuetiaeBlogg.API.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly SuetiaeBloggDbContext _context;
+        private readonly IPostCategoryService _postCategoryService;
+        //private readonly IPostService _postService;
+        //private readonly IMapper _mapper;
 
-        public BlogPostsController(SuetiaeBloggDbContext context)
+        //public BlogPostsController(IPostService postService, IMapper mapper)
+        //{
+        //    _postService = postService;
+        //    _mapper = mapper;}
+
+        public BlogPostsController(IPostCategoryService postCategoryService)
         {
-            _context = context;
+            _postCategoryService = postCategoryService;
         }
-
+       
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<Post>>> GetAllPosts()
         {
-            return await _context.Posts.ToListAsync();
+            var posts = await _postCategoryService.GetAllWithCategories();
+
+            return Ok(posts);
+            //var postResources = _mapper.Map<IEnumerable<Post>, IEnumerable<PostResource>>(posts);
+            //return Ok(postResources);
+
+            //var posts = await _postService.GetAllWithCategories();
+            //return Ok(posts);
+
+
+            
         }
 
         // GET: api/Posts/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Post>> GetPost(int id)
-        {
-            var post = await _context.Posts.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Post>> GetPost(int id)
+        //{
+        //    var post = await _postService.Posts.FindAsync(id);
 
-            if (post == null)
-            {
-                return NotFound();
-            }
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return post;
-        }
+        //    return post;
+        //}
 
         // PUT: api/Posts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
-        {
-            if (id != post.PostId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPost(int id, Post post)
+        //{
+        //    if (id != post.PostId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(post).State = EntityState.Modified;
+        //    _postService.Entry(post).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _postService.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PostExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Posts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Post>> PostPost(Post post)
-        {
-            _context.Posts.Add(post);
-            await _context.SaveChangesAsync();
+        //[HttpPost]
+        //public async Task<ActionResult<Post>> PostPost(Post post)
+        //{
+        //    _postService.Posts.Add(post);
+        //    await _postService.SaveChangesAsync();
 
-            return CreatedAtAction("GetPost", new { id = post.PostId }, post);
-        }
+        //    return CreatedAtAction("GetPost", new { id = post.PostId }, post);
+        //}
 
         // DELETE: api/Posts/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Post>> DeletePost(int id)
-        {
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<Post>> DeletePost(int id)
+        //{
+        //    var post = await _postService.Posts.FindAsync(id);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
+        //    _postService.Posts.Remove(post);
+        //    await _postService.SaveChangesAsync();
 
-            return post;
-        }
+        //    return post;
+        //}
 
-        private bool PostExists(int id)
-        {
-            return _context.Posts.Any(e => e.PostId == id);
-        }
+        //private bool PostExists(int id)
+        //{
+        //    return _postService.Posts.Any(e => e.PostId == id);
+        //}
     }
 }

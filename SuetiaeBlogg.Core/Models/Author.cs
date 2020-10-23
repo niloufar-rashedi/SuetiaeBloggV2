@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SuetiaeBlogg.Services.Services
+namespace SuetiaeBlogg.Core.Models
 {
-    public class ICategoryService
+    class Author
     {
     }
 }

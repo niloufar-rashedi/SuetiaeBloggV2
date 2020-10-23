@@ -8,59 +8,60 @@ using SuetiaeBlogg.Core.Repositories;
 
 namespace SuetiaeBlogg.Tests.Fakes
 {
-    public class FakePostRepository : IPostRepository
+    public class FakePostCategoriesRepository : IPostCategoriesRepository
     {
-        public Task AddAsync(Post entity)
+        
+        public Task AddAsync(IEnumerable<PostCategories> entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task AddRangeAsync(IEnumerable<Post> entities)
+        public Task AddRangeAsync(IEnumerable<PostCategories> entities)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Post> Find(Expression<Func<Post, bool>> predicate)
+        public IEnumerable<PostCategories> Find(Expression<Func<PostCategories, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Post>> GetAllAsync()
+        public Task<IEnumerable<PostCategories>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Post>> GetAllWithCategoryAsync()
+        public Task<IEnumerable<PostCategories>> GetAllWithCategoryAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
+        public Task<IEnumerable<PostCategories>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public ValueTask<Post> GetByIdAsync(int id)
+        public ValueTask<PostCategories> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Post> GetWithCategoryByIdAsync(int id)
+        public Task<PostCategories> GetWithCategoryByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(Post entity)
+        public void Remove(PostCategories entity)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveRange(IEnumerable<Post> entities)
+        public void RemoveRange(IEnumerable<PostCategories> entities)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Post> SingleOrDefaultAsync(Expression<Func<Post, bool>> predicate)
+        public Task<PostCategories> SingleOrDefaultAsync(Expression<Func<PostCategories, bool>> predicate)
         {
             throw new NotImplementedException();
         }

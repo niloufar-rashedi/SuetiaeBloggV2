@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuetiaeBlogg.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NewModelMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,8 @@ namespace SuetiaeBlogg.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: false),
                     Body = table.Column<string>(nullable: false),
+                    Meta = table.Column<string>(nullable: true),
+                    UrlSlug = table.Column<string>(nullable: true),
                     PubDate = table.Column<DateTimeOffset>(nullable: false),
                     LastModified = table.Column<DateTimeOffset>(nullable: false),
                     IsPublic = table.Column<bool>(nullable: false),
@@ -43,30 +45,28 @@ namespace SuetiaeBlogg.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
+                name: "Comments",
                 columns: table => new
                 {
-                    CommentId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentId = table.Column<int>(nullable: false),
                     AuthorName = table.Column<string>(nullable: false),
                     Body = table.Column<string>(nullable: false),
                     PubDate = table.Column<DateTimeOffset>(nullable: false),
-                    IsPublic = table.Column<bool>(nullable: false),
-                    PostId = table.Column<int>(nullable: true)
+                    IsPublic = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comment", x => x.CommentId);
+                    table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Comment_Posts_PostId",
-                        column: x => x.PostId,
+                        name: "FK_Comments_Posts_CommentId",
+                        column: x => x.CommentId,
                         principalTable: "Posts",
                         principalColumn: "PostId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PostsCategories",
+                name: "PostCategories",
                 columns: table => new
                 {
                     PostId = table.Column<int>(nullable: false),
@@ -74,42 +74,99 @@ namespace SuetiaeBlogg.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostsCategories", x => new { x.PostId, x.CategoryId });
+                    table.PrimaryKey("PK_PostCategories", x => new { x.PostId, x.CategoryId });
                     table.ForeignKey(
-                        name: "FK_PostsCategories_Categories_CategoryId",
+                        name: "FK_PostCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostsCategories_Posts_PostId",
+                        name: "FK_PostCategories_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Comment_PostId",
-                table: "Comment",
-                column: "PostId");
+            migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    TagId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Urlslug = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    PostId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                    table.ForeignKey(
+                        name: "FK_Tag_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostTags",
+                columns: table => new
+                {
+                    PostId = table.Column<int>(nullable: false),
+                    TagId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostTags", x => new { x.PostId, x.TagId });
+                    table.ForeignKey(
+                        name: "FK_PostTags_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostTags_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "TagId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostsCategories_CategoryId",
-                table: "PostsCategories",
+                name: "IX_PostCategories_CategoryId",
+                table: "PostCategories",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PostTags_TagId",
+                table: "PostTags",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_PostId",
+                table: "Tag",
+                column: "PostId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comment");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "PostsCategories");
+                name: "PostCategories");
+
+            migrationBuilder.DropTable(
+                name: "PostTags");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "Posts");

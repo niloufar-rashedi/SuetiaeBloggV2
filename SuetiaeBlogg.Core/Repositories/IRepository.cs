@@ -12,7 +12,7 @@ namespace SuetiaeBlogg.Core.Repositories
         Task<IEnumerable<T>> GetAllAsync();
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate);
-        Task AddAsync(T entity);
+        Task AddAsync(IEnumerable<T> entity);
         Task AddRangeAsync(IEnumerable<T> entities);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

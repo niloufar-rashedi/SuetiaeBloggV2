@@ -13,7 +13,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using SuetiaeBlogg.Core.Repositories;
+using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
+using SuetiaeBlogg.Services.Services;
+using AutoMapper;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace SuetiaeBlogg
 {
@@ -41,9 +46,19 @@ namespace SuetiaeBlogg
             });
             services.AddDbContext<SuetiaeBloggDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SuetiaeBlogg"), x => x.MigrationsAssembly("SuetiaeBlogg.Data")));
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPostCategoryService, PostCategoryService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
+            
             services.AddSwaggerGen();
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +69,7 @@ namespace SuetiaeBlogg
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/Swagger/v1/swagger.json", "SuetiaeBloggAPI v1");
                 c.RoutePrefix = string.Empty;  // Set Swagger UI at apps root

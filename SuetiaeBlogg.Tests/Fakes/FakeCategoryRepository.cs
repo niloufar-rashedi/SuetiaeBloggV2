@@ -10,7 +10,7 @@ namespace SuetiaeBlogg.Tests.Fakes
 {
     public class FakeCategoryRepository : ICategoryRepository
     {
-        public Task AddAsync(Category entity)
+        public Task AddAsync(IEnumerable<Category> entity)
         {
             throw new NotImplementedException();
         }

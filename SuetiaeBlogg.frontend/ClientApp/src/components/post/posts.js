@@ -9,9 +9,9 @@ export class Posts extends React.Component {
     };
 
     componentDidMount() {
-        axios.get('https://localhost:44351/api/BlogPosts').then(response => {
+        axios.get('https://localhost:5001/api/BlogPosts').then(response => {
             console.log(response);
-            this.setState({ posts: response.data});
+            this.setState({ posts: response.data });
         });
     }
 
@@ -22,7 +22,7 @@ export class Posts extends React.Component {
                     <div className="card" key={post.id}>
 
                         <Card style={{ width: '50rem' }}>
-                            
+
                             <Card.Header>Last modified: {post.lastModified}</Card.Header>
                             <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
@@ -31,10 +31,10 @@ export class Posts extends React.Component {
                                 </Card.Text>
                                 <Card.Link href="#">
                                     <div class="button read-more absolute-bottom">Read more</div>
-                                    
-                                    
-                                    </Card.Link>
-                               
+
+
+                                </Card.Link>
+
                             </Card.Body>
                         </Card>
 
@@ -46,11 +46,4 @@ export class Posts extends React.Component {
             </div>
         );
     }
-
-
-
-
-
-
-
 }

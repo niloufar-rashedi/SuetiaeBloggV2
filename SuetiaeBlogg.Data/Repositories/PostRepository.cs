@@ -11,15 +11,21 @@ namespace SuetiaeBlogg.Data.Repositories
 {
     public class PostRepository : Repository<Post>, IPostRepository
     {
-        public PostRepository(SuetiaeBloggDbContext context)
-            : base(context)
-        { }
-
-        public Task<IEnumerable<Post>> GetAllWithCategoryAsync()
+        private SuetiaeBloggDbContext _context;
+        public PostRepository(SuetiaeBloggDbContext context) : base(context)
         {
-            throw new NotImplementedException();
+            this._context = context;
         }
 
+    
+        public async Task<IEnumerable<Post>> GetAllWithCategoryAsync()
+        {
+            return await _context.Posts
+                .Include(p => p.PostCategories)
+                .ThenInclude(e => e.Category)
+                .ToListAsync();
+                    
+        }
         public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
             throw new NotImplementedException();
