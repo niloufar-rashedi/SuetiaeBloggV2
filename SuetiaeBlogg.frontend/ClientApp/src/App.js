@@ -4,7 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
-import {Posts} from './components/post/posts';
+//import { Posts } from './components/post/posts';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
@@ -14,7 +14,7 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 import './custom.css'
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
   render () {
     return (
@@ -22,13 +22,14 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
-        <Route exact path="/" component={Posts} />
+        //<Route exact path="/" component={Posts} />
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
 
-      </Layout>
-    );
-  }
+
+            </Layout>
+        );
+    }
 }

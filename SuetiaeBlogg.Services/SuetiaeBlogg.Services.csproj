@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
+    <ProjectReference Include="..\SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj" />
   </ItemGroup>
 
 </Project>

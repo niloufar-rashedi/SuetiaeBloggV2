@@ -22,4 +22,3 @@ ReactDOM.render(
 // disabled by default when Identity is being used.
 //
 //registerServiceWorker();
-

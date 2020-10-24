@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Link } from 'react';
 import { Posts } from './post/posts';
-import { AddPost } from './post/addpost';
+
 import { Container, Col, Row, Form } from 'reactstrap';
 
 export class Home extends Component {
@@ -24,15 +24,11 @@ export class Home extends Component {
                     </div>
                     <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Author, Subject, Publication date, ..." />
                 </div>
-
-
-                
                 <div class="row">
-                  
-                    
                     <div>
                         <Posts />
                         </div>
+                    
                     <div class="col">
                         <div class="row">
                             <div class="col">
@@ -59,7 +55,9 @@ export class Home extends Component {
                     </div>
                 </div>
                 {/* </Container>*/}
-                <button type="button" class="btn btn-info btn-lg btn-block mt-3">Write your own post</button>
+
+                
+                
                 <div class="container">
                     <h3>Celebrate "kanelbullens dag" with a fantastic recipe </h3>
                     <img src="https://images.unsplash.com/photo-1580677881307-5852a81368ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"

@@ -8,11 +8,11 @@ namespace SuetiaeBlogg.Core.Services
 {
     public interface IPostService
     {
-        Task<IEnumerable<Post>> GetAllWithcategory();
-        Task<Post> GetPostById(int id);
-        Task<IEnumerable<Post>> GetPostsByCategoryId(int categoryId);
-        Task<Post> CreatePost(Post newPost);
-        Task UpdatePost(Post postToBeUpdated, Post post);
-        Task DeletePost(Post post);
+        Task<ServiceResponse<IEnumerable<Post>>> GetAllWithCategories();
+        Task<ServiceResponse<Post>> GetPostById(int id);
+        Task<ServiceResponse<IEnumerable<Post>>> GetPostsByCategoryId(int categoryId);
+        Task<ServiceResponse<Post>> CreatePost(Post newPost);
+        ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post);
+        ServiceResponse<Task> DeletePost(Post post);
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.7" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
@@ -16,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
+    <ProjectReference Include="..\SuetiaeBlogg\SuetiaeBlogg.API.csproj" />
   </ItemGroup>
 
 </Project>
