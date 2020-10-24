@@ -2,16 +2,18 @@
 import axios from 'axios';
 
 import Card from 'react-bootstrap/Card'
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 export class Posts extends React.Component {
     state = {
         posts: [],
-    };
+    }
+    apiURL='https://localhost:5001/api/BlogPosts';
 
-    componentDidMount() {
-        axios.get('https://localhost:5001/api/BlogPosts').then(response => {
+    async componentDidMount() {
+        await axios.get(this.apiURL).then(response => {
             console.log(response);
-            this.setState({ posts: response.data });
+            this.setState({ posts: response.data.data});
         });
     }
 
@@ -22,7 +24,7 @@ export class Posts extends React.Component {
                     <div className="card" key={post.id}>
 
                         <Card style={{ width: '50rem' }}>
-
+                            
                             <Card.Header>Last modified: {post.lastModified}</Card.Header>
                             <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
@@ -31,10 +33,10 @@ export class Posts extends React.Component {
                                 </Card.Text>
                                 <Card.Link href="#">
                                     <div class="button read-more absolute-bottom">Read more</div>
-
-
-                                </Card.Link>
-
+                                    
+                                    
+                                    </Card.Link>
+                               
                             </Card.Body>
                         </Card>
 
