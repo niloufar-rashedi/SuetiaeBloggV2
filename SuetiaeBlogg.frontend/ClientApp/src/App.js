@@ -10,6 +10,7 @@ import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 import './custom.css'
 
@@ -22,13 +23,10 @@ export default class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
-        //<Route exact path="/" component={Posts} />
+            {/*<Route exact path="/" component={Posts} />*/}
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-
-
-
             </Layout>
         );
     }

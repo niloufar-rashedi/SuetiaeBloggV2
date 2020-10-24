@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="....Core">
+    <Position X="7.854" Y="0.542" Height="0.417" Width="0.7" />
+  </Comment>
+  <Comment CommentText="... .Data&#xD;&#xA;">
+    <Position X="14.594" Y="0.729" Height="0.438" Width="0.752" />
+  </Comment>
+  <Comment CommentText="... .API&#xD;&#xA;">
+    <Position X="1.625" Y="0.552" Height="0.417" Width="0.742" />
+  </Comment>
+  <Class Name="SuetiaeBlogg.Core.Models.Category">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuetiaeBlogg.Core.Models.Comment">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuetiaeBlogg.Core.Models.Post">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.SeedData">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.SuetiaeBloggDbContext">
+    <Position X="15.25" Y="1.5" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.UnitOfWork" BaseTypeListCollapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.Repositories.CategoryRepository">
+    <Position X="13.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.Repositories.PostRepository">
+    <Position X="18.25" Y="4.75" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuetiaeBlogg.Data.Repositories.Repository&lt;T&gt;">
+    <Position X="15.75" Y="4" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SuetiaeBlogg.Program">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuetiaeBlogg.Startup" Collapsed="true">
+    <Position X="0.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAABAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuetiaeBlogg.WeatherForecast">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAEAAA=</HashCode>
+      <FileName>WeatherForecast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SuetiaeBlogg.API.Controllers.BlogPostsController">
+    <Position X="0.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BlogPostsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SuetiaeBlogg.Core.Repositories.ICategoryRepository">
+    <Position X="4.75" Y="5.25" Width="2" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuetiaeBlogg.Core.Repositories.IPostRepository">
+    <Position X="7" Y="5.25" Width="2.75" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuetiaeBlogg.Core.Repositories.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuetiaeBlogg.Core.Repositories.IUnitOfWork" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuetiaeBlogg.Core.Services.ICategoryService" Collapsed="true">
+    <Position X="10.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="SuetiaeBlogg.Core.Services.IPostService" Collapsed="true">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
