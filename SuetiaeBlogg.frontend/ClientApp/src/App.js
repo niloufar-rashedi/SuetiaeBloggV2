@@ -16,15 +16,17 @@ import './custom.css'
 export default class App extends Component {
     static displayName = App.name;
 
-    render() {
-        return (
-            <Layout>
-                <Route exact path='/' component={Home} />
-                <Route path='/about' component={About} />
-                <Route path='/contact' component={Contact} />
-                <Route path='/counter' component={Counter} />
-                <AuthorizeRoute path='/fetch-data' component={FetchData} />
-                <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+  render () {
+    return (
+      <Layout>
+        <Route exact path='/' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/contact' component={Contact} />
+        //<Route exact path="/" component={Posts} />
+        <Route path='/counter' component={Counter} />
+        <AuthorizeRoute path='/fetch-data' component={FetchData} />
+        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+
 
 
             </Layout>

@@ -27,6 +27,7 @@ export class NavMenu extends Component {
     render() {
         return (
 
+
             <div class="sticky-top bg-light">
                 <header class="text-center">
                     <section className="text-center text-md-right">
