@@ -3,10 +3,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuetiaeBlogg.Data.Migrations
 {
-    public partial class NewModelMigration : Migration
+    public partial class AuthorModelMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Author",
+                columns: table => new
+                {
+                    AuthorId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Author", x => x.AuthorId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -23,6 +36,21 @@ namespace SuetiaeBlogg.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    TagId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Urlslug = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -30,18 +58,25 @@ namespace SuetiaeBlogg.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: false),
                     Body = table.Column<string>(nullable: false),
+                    Summary = table.Column<string>(maxLength: 140, nullable: true),
+                    AuthorId = table.Column<int>(nullable: true),
                     Meta = table.Column<string>(nullable: true),
                     UrlSlug = table.Column<string>(nullable: true),
                     PubDate = table.Column<DateTimeOffset>(nullable: false),
                     LastModified = table.Column<DateTimeOffset>(nullable: false),
                     IsPublic = table.Column<bool>(nullable: false),
                     IsApproved = table.Column<bool>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    Summary = table.Column<string>(maxLength: 140, nullable: true)
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
+                    table.ForeignKey(
+                        name: "FK_Posts_Author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Author",
+                        principalColumn: "AuthorId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,7 +84,7 @@ namespace SuetiaeBlogg.Data.Migrations
                 columns: table => new
                 {
                     CommentId = table.Column<int>(nullable: false),
-                    AuthorName = table.Column<string>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: true),
                     Body = table.Column<string>(nullable: false),
                     PubDate = table.Column<DateTimeOffset>(nullable: false),
                     IsPublic = table.Column<bool>(nullable: false)
@@ -57,6 +92,12 @@ namespace SuetiaeBlogg.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
+                    table.ForeignKey(
+                        name: "FK_Comments_Author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Author",
+                        principalColumn: "AuthorId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Posts_CommentId",
                         column: x => x.CommentId,
@@ -90,28 +131,6 @@ namespace SuetiaeBlogg.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tag",
-                columns: table => new
-                {
-                    TagId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Urlslug = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    PostId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tag", x => x.TagId);
-                    table.ForeignKey(
-                        name: "FK_Tag_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "PostId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PostTags",
                 columns: table => new
                 {
@@ -136,19 +155,24 @@ namespace SuetiaeBlogg.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AuthorId",
+                table: "Comments",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostCategories_CategoryId",
                 table: "PostCategories",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Posts_AuthorId",
+                table: "Posts",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostTags_TagId",
                 table: "PostTags",
                 column: "TagId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tag_PostId",
-                table: "Tag",
-                column: "PostId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -166,10 +190,13 @@ namespace SuetiaeBlogg.Data.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Posts");
+
+            migrationBuilder.DropTable(
                 name: "Tag");
 
             migrationBuilder.DropTable(
-                name: "Posts");
+                name: "Author");
         }
     }
 }
