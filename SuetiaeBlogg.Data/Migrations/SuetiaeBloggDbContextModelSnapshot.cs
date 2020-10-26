@@ -19,6 +19,22 @@ namespace SuetiaeBlogg.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SuetiaeBlogg.Core.Models.Author", b =>
+                {
+                    b.Property<int?>("AuthorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AuthorId");
+
+                    b.ToTable("Author");
+                });
+
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -45,9 +61,8 @@ namespace SuetiaeBlogg.Data.Migrations
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Body")
                         .IsRequired()
@@ -61,6 +76,8 @@ namespace SuetiaeBlogg.Data.Migrations
 
                     b.HasKey("CommentId");
 
+                    b.HasIndex("AuthorId");
+
                     b.ToTable("Comments");
                 });
 
@@ -70,6 +87,9 @@ namespace SuetiaeBlogg.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Body")
                         .IsRequired()
@@ -105,6 +125,8 @@ namespace SuetiaeBlogg.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PostId");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Posts");
                 });
@@ -152,26 +174,32 @@ namespace SuetiaeBlogg.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PostId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Urlslug")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TagId");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Comment", b =>
                 {
+                    b.HasOne("SuetiaeBlogg.Core.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("SuetiaeBlogg.Core.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SuetiaeBlogg.Core.Models.Post", b =>
+                {
+                    b.HasOne("SuetiaeBlogg.Core.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.PostCategories", b =>
@@ -202,13 +230,6 @@ namespace SuetiaeBlogg.Data.Migrations
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SuetiaeBlogg.Core.Models.Tag", b =>
-                {
-                    b.HasOne("SuetiaeBlogg.Core.Models.Post", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("PostId");
                 });
 #pragma warning restore 612, 618
         }

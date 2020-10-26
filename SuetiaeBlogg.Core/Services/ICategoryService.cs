@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using SuetiaeBlogg.Core.Models;
+using SuetiaeBlogg.Core.Models.Categories;
+using SuetiaeBlogg.Core.Models.PostCategory;
+using SuetiaeBlogg.Core.Models.Posts;
 
 namespace SuetiaeBlogg.Core.Services
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAllCategories();
+        Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory);
+        Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories();
+        public Task<ServiceResponse<IEnumerable<Post>>> FindPostsByCategoryId(int categoryId);
         Task<IEnumerable<Category>> GetAllWithPosts();
-
         Task<Category> GetCategoryById(int id);
         Task<IEnumerable<Category>> GetCategoriesByPostId(int postId);
         Task<Category> CreateCategory(Category newCategory);

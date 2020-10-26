@@ -22,6 +22,7 @@ namespace SuetiaeBlogg.Core.Models
         public string Body { get; set; }
         [MaxLength(140)] 
         public string Summary { get; set; }
+        public Author Author { get; set; }
         public string Meta { get; set; }
         public string UrlSlug { get; set; }
         [DataType(DataType.Date)]
