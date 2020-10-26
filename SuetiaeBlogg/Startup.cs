@@ -1,5 +1,8 @@
 using System;
+using System.Reflection;
+using System.IO;
 using System.Collections.Generic;
+using Microsoft.OpenApi.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +22,9 @@ using SuetiaeBlogg.Services.Services;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.Swagger;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace SuetiaeBlogg
 {
@@ -48,12 +54,24 @@ namespace SuetiaeBlogg
             options.UseSqlServer(Configuration.GetConnectionString("SuetiaeBlogg"), x => x.MigrationsAssembly("SuetiaeBlogg.Data")));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPostCategoryService, PostCategoryService>();
+            services.AddScoped<IPostService, PostService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
 
             
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "SuetiaeBlogg APIs",
+                    Description = "REST APIs "
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
             services.AddControllers()
                 .AddNewtonsoftJson(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

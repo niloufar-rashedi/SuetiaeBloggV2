@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
+using SuetiaeBlogg.Core.Models.Categories;
+using SuetiaeBlogg.Core.Models.PostCategory;
+using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
@@ -18,37 +21,99 @@ namespace SuetiaeBlogg.API.Controllers
     [ApiController]
     public class BlogPostsController : ControllerBase
     {
-        private readonly SuetiaeBloggDbContext _context;
-        private readonly IPostCategoryService _postCategoryService;
-        //private readonly IPostService _postService;
-        //private readonly IMapper _mapper;
+        
+        private readonly IPostService _postService;
+        private readonly ICategoryService _categoryService;
 
-        //public BlogPostsController(IPostService postService, IMapper mapper)
-        //{
-        //    _postService = postService;
-        //    _mapper = mapper;}
-
-        public BlogPostsController(IPostCategoryService postCategoryService)
+        public BlogPostsController(IPostService postService, ICategoryService categoryService)
         {
-            _postCategoryService = postCategoryService;
+            _postService = postService;
+            _categoryService = categoryService;
         }
-       
-        // GET: api/Posts
+        /// <summary>
+        /// Retrieves all posts with all properties ***just for test
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetAllPosts()
+        [Route("AllPostsDetails")]
+        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
-            var posts = await _postCategoryService.GetAllWithCategories();
+            var posts = await _postService.GetAllComplete();
 
             return Ok(posts);
-            //var postResources = _mapper.Map<IEnumerable<Post>, IEnumerable<PostResource>>(posts);
-            //return Ok(postResources);
-
-            //var posts = await _postService.GetAllWithCategories();
-            //return Ok(posts);
-
-
-            
         }
+        /// <summary>
+        /// Retrieves posts headlines
+        /// </summary>
+        [HttpGet("")]
+        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostsHeadline()
+        {
+            var posts = await _postService.GetAllHeadline();
+
+            return Ok(posts);
+        }
+        /// <summary>
+        /// Retrieves a post by ID
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetPostDto>> GetPostById( int Id)
+        {
+            var posts = await _postService.GetPostById(Id);
+            return Ok(posts);
+        }
+        /// <summary>
+        /// Retrieves posts by categoryId
+        /// </summary>
+        [HttpGet("~/api/[controller]/categories/{categoryId:int}/posts")]
+        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostsByCategories(int categoryId)
+        {
+            var posts = await _categoryService.FindPostsByCategoryId(categoryId);
+
+            return Ok(posts);
+
+        }
+        /// <summary>
+        /// Retrieves posts by tagId
+        /// </summary>
+        [HttpGet("~/api/[controller]/tags/{tagId:int}/posts")]
+        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostsByTags(int tagId)
+        {
+            var posts = await _postService.FindPostsByTagId(tagId);
+
+            return Ok(posts);
+
+        }
+        /// <summary>
+        /// Retrieves posts by authorId
+        /// </summary>
+        [HttpGet("~/api/[controller]/authors/{authorId:int}/posts")]
+        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostByAuthor(int authorId)
+        {
+            var posts = await _postService.FindPostsByAuthorId(authorId);
+
+            return Ok(posts);
+
+        }
+
+        /// <summary>
+        /// Retrieves all categories
+        /// </summary>
+
+        [HttpGet("~/api/[controller]/categories/")]
+        public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetCategories()
+        {
+            var categories = await _categoryService.GetAllCategories();
+
+            return Ok(categories);
+
+        }
+
+        // POST: api/BlogPosts
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
+        //add category to existing post
+
+
 
         // GET: api/Posts/5
         //[HttpGet("{id}")]
@@ -96,17 +161,7 @@ namespace SuetiaeBlogg.API.Controllers
         //    return NoContent();
         //}
 
-        // POST: api/Posts
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<Post>> PostPost(Post post)
-        //{
-        //    _postService.Posts.Add(post);
-        //    await _postService.SaveChangesAsync();
 
-        //    return CreatedAtAction("GetPost", new { id = post.PostId }, post);
-        //}
 
         // DELETE: api/Posts/5
         //[HttpDelete("{id}")]
@@ -128,5 +183,13 @@ namespace SuetiaeBlogg.API.Controllers
         //{
         //    return _postService.Posts.Any(e => e.PostId == id);
         //}
+        /// <summary>
+        /// Add a category to an existing post
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> AddPostCategory(AddPostCategoryDto newPostCategory)
+        {
+            return Ok(await _categoryService.AddCategoryToAPost(newPostCategory));
+        }
     }
 }
