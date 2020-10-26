@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Categories;
@@ -57,36 +58,8 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        public async Task<ServiceResponse<IEnumerable<GetPostHeadlineDto>>> GetAllHeadline()
-        {
-            ServiceResponse<IEnumerable<GetPostHeadlineDto>> response = new ServiceResponse<IEnumerable<GetPostHeadlineDto>>();
-            try
-            {
-                var posts = await _context.Posts
-                                    .Include(p => p.Author)
-                                    .Include(c => c.PostCategories)
-                                    .ThenInclude(Postcategories => Postcategories.Category)
-                                    .Include(t => t.PostTags)
-                                    .ThenInclude(PostTags => PostTags.Tag)
-                                    .Select(g => new GetCommentsCountDto()
-                                    {
-                                        Post = g,
-                                        CommentsCount = g.Comments.Count(),
-                                    })
-                                    .AsNoTracking()
-                                    .ToListAsync();
-
-                response.Data = _mapper.Map<IEnumerable<GetPostHeadlineDto>>(posts);
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
-            }
-
-            return response;
-        }
-        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPostById(int postId)
+        
+        public  async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPostById(int postId)
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
@@ -113,9 +86,33 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        public Task<ServiceResponse<Post>> CreatePost(Post newPost)
+
+        public async Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost)
+
         {
-            throw new NotImplementedException();
+            ServiceResponse<Post> response = new ServiceResponse<Post>();
+            try
+            {
+                _context.Posts.Add(new Post()
+                {
+                    Title = newPost.Title,
+                    Summary = newPost.Summary,
+                    Body = newPost.Body,
+                    LastModified = newPost.LastModified
+                });
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<Post>(newPost);
+
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+
+
         }
         public ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post)
         {

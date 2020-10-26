@@ -8,7 +8,9 @@ export class Posts extends React.Component {
     state = {
         posts: [],
     }
-    apiURL='https://localhost:5001/api/BlogPosts';
+    apiURL = 'https://localhost:5001/api/BlogPosts/AllPostsDetails';
+
+    
 
     async componentDidMount() {
         await axios.get(this.apiURL).then(response => {

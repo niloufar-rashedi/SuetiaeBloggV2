@@ -41,16 +41,7 @@ namespace SuetiaeBlogg.API.Controllers
 
             return Ok(posts);
         }
-        /// <summary>
-        /// Retrieves posts headlines
-        /// </summary>
-        [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostsHeadline()
-        {
-            var posts = await _postService.GetAllHeadline();
-
-            return Ok(posts);
-        }
+        
         /// <summary>
         /// Retrieves a post by ID
         /// </summary>
@@ -111,14 +102,17 @@ namespace SuetiaeBlogg.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
-        //[HttpPost]
-        //public async Task<ActionResult<Post>> PostPost(Post post)
-        //{
-        //    _context.Posts.Add(post);
-        //    await _context.SaveChangesAsync();
+        [HttpPost]
+        public async Task<ActionResult<GetPostDto>> AddPost([FromBody] AddPostDto post)
+        {
 
-        //    return CreatedAtAction("GetPost", new { id = post.Id }, post);
-        //}
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data.");
+
+            await _postService.CreatePost(post);
+            return Ok();
+
+        }
 
 
 
@@ -190,13 +184,14 @@ namespace SuetiaeBlogg.API.Controllers
         //{
         //    return _postService.Posts.Any(e => e.PostId == id);
         //}
-        /// <summary>
-        /// Add a category to an existing post
-        /// </summary>
-        [HttpPost]
-        public async Task<IActionResult> AddPostCategory(AddPostCategoryDto newPostCategory)
-        {
-            return Ok(await _categoryService.AddCategoryToAPost(newPostCategory));
-        }
+
+        ///// <summary>
+        ///// Add a category to an existing post
+        ///// </summary>
+        //[HttpPost]
+        //public async Task<IActionResult> AddPostCategory(AddPostCategoryDto newPostCategory)
+        //{
+        //    return Ok(await _categoryService.AddCategoryToAPost(newPostCategory));
+        //}
     }
 }
