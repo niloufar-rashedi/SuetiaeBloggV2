@@ -76,9 +76,6 @@ namespace SuetiaeBlogg.Services.Services
                                     .AsNoTracking()
                                     .ToListAsync();
 
-
-
-
                 response.Data = _mapper.Map<IEnumerable<GetPostHeadlineDto>>(posts);
             }
             catch (Exception ex)
