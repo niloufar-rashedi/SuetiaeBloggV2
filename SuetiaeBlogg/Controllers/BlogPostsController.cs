@@ -111,7 +111,14 @@ namespace SuetiaeBlogg.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
-        //add category to existing post
+        //[HttpPost]
+        //public async Task<ActionResult<Post>> PostPost(Post post)
+        //{
+        //    _context.Posts.Add(post);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction("GetPost", new { id = post.Id }, post);
+        //}
 
 
 
