@@ -38,7 +38,17 @@ namespace SuetiaeBlogg.frontend
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllHeaders",
+                        corsbuilder =>
+                        {
+                            corsbuilder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins("https://localhost:5001");
+                        });
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
 

@@ -13,12 +13,12 @@ export class Posts extends React.Component {
     
 
     async componentDidMount() {
-        await axios.get(this.apiURL).then(response => {
+        await axios.get(this.apiURL)
+            .then(response => {
             console.log(response);
             this.setState({ posts: response.data.data});
         });
     }
-
     render() {
         return (
             <div>
