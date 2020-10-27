@@ -103,6 +103,7 @@ namespace SuetiaeBlogg.API.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
         [HttpPost]
+        [Route("InsertNewPost")]
         public async Task<ActionResult<GetPostDto>> AddPost([FromBody] AddPostDto post)
         {
 
