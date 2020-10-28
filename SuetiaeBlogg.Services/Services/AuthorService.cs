@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SuetiaeBlogg.Core.Models;
+using SuetiaeBlogg.Core.Models.Authors;
 using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
@@ -51,6 +52,28 @@ namespace SuetiaeBlogg.Services.Services
             }
 
             return (response);
+        }
+
+        public async Task<ServiceResponse<IEnumerable<GetAuthorDto>>> GetAllAuthors()
+        {
+            {
+                ServiceResponse<IEnumerable<GetAuthorDto>> response = new ServiceResponse<IEnumerable<GetAuthorDto>>();
+                try
+                {
+                    var authors = await _context.Authors
+                                             .ToListAsync();
+
+
+                    response.Data = _mapper.Map<IEnumerable<GetAuthorDto>>(authors);
+                }
+                catch (Exception ex)
+                {
+                    response.Success = false;
+                    response.Message = ex.Message;
+                }
+
+                return response;
+            }
         }
     }
 }

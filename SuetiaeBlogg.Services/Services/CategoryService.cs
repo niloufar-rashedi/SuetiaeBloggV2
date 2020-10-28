@@ -27,18 +27,6 @@ namespace SuetiaeBlogg.Services.Services
             this._context = context;
             this._mapper = mapper;
         }
-        public Task<Category> CreateCategory(Category newCategory)
-        {
-            throw new NotImplementedException();
-        }
-        public Task DeleteCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-        public Task UpdateCategory(Category categoryToBeUpdated, Category category)
-        {
-            throw new NotImplementedException();
-        }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId)
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
@@ -74,7 +62,7 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        public async Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories()
+        public async Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetCategories()
         {
             ServiceResponse<IEnumerable<GetCategoryDto>> response = new ServiceResponse<IEnumerable<GetCategoryDto>>();
             try
@@ -93,10 +81,6 @@ namespace SuetiaeBlogg.Services.Services
             }
 
             return response;
-        }
-        public Task<IEnumerable<Category>> GetCategoriesByPostId(int postId)
-        {
-            throw new NotImplementedException();
         }
         public Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory)
         {
@@ -141,11 +125,18 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        public Task<Category> GetCategoryById(int id)
+        public Task<Category> CreateCategory(Category newCategory)
         {
             throw new NotImplementedException();
         }
-        
+        public Task UpdateCategory(Category categoryToBeUpdated, Category category)
+        {
+            throw new NotImplementedException();
+        }
+        public Task DeleteCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

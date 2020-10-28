@@ -13,11 +13,11 @@ namespace SuetiaeBlogg.Core.Services
     {
         
 
-        public Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete();
+        public Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts();
         public Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost);
         public ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post);
         public ServiceResponse<Task> DeletePost(Post post);
-        public Task<ServiceResponse<GetPostDto>> GetPostById(int Id);
+        public Task<ServiceResponse<GetPostDto>> FindPostById(int Id);
         public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate);
 
 

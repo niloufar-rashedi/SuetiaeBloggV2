@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
+using SuetiaeBlogg.Core.Models.Authors;
 using SuetiaeBlogg.Core.Models.Categories;
 using SuetiaeBlogg.Core.Models.PostCategory;
 using SuetiaeBlogg.Core.Models.Posts;
@@ -41,10 +42,9 @@ namespace SuetiaeBlogg.API.Controllers
         /// Retrieves all posts with details
         /// </summary>
         [HttpGet]
-        //[Route("AllPostsDetails")]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
-            var posts = await _postService.GetAllComplete();
+            var posts = await _postService.GetPosts();
 
             return Ok(posts);
         }
@@ -55,7 +55,7 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
         {
-            var posts = await _postService.GetPostById(Id);
+            var posts = await _postService.FindPostById(Id);
             return Ok(posts);
         }
 
@@ -70,6 +70,7 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(posts);
 
         }
+        
         /// <summary>
         /// Retrieves posts by tagId
         /// </summary>
@@ -81,6 +82,7 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(posts);
 
         }
+        
         /// <summary>
         /// Retrieves posts by authorId
         /// </summary>
@@ -100,21 +102,33 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet("~/api/[controller]/categories/")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetCategories()
         {
-            var categories = await _categoryService.GetAllCategories();
+            var categories = await _categoryService.GetCategories();
 
             return Ok(categories);
 
         }
+        
         /// <summary>
         /// Retrieves all tags
         /// </summary>
-
         [HttpGet("~/api/[controller]/tags/")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetTags()
         {
             var categories = await _tagService.GetAllTags();
 
             return Ok(categories);
+
+        }
+        
+        /// <summary>
+        /// Retrieves all authors
+        /// </summary>
+        [HttpGet("~/api/[controller]/authors/")]
+        public async Task<ActionResult<IEnumerable<GetAuthorDto>>> GetAuthors()
+        {
+            var authors = await _authorService.GetAllAuthors();
+
+            return Ok(authors);
 
         }
 
@@ -134,22 +148,6 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok();
 
         }
-
-
-
-        // GET: api/Posts/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Post>> GetPost(int id)
-        //{
-        //    var post = await _postService.Posts.FindAsync(id);
-
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return post;
-        //}
 
         // PUT: api/Posts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

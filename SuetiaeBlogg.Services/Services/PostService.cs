@@ -31,8 +31,7 @@ namespace SuetiaeBlogg.Services.Services
             this._context = context;
             this._mapper = mapper;
         }
-
-        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete()
+        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
@@ -58,7 +57,7 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        public  async Task<ServiceResponse<GetPostDto>> GetPostById(int postId)
+        public  async Task<ServiceResponse<GetPostDto>> FindPostById(int postId)
         {
             ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
@@ -125,15 +124,6 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
-        public Task<ServiceResponse<Post>> FindPostsByAuthorId(int authorId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<ServiceResponse<Post>> FindPostsByTagId(int tagId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
         {
             throw new NotImplementedException();
