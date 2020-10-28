@@ -30,27 +30,31 @@ namespace SuetiaeBlogg.API.Controllers
             _postService = postService;
             _categoryService = categoryService;
         }
+
+        
+
         /// <summary>
-        /// Retrieves all posts with all properties ***just for test
+        /// Retrieves all posts with details
         /// </summary>
         [HttpGet]
-        [Route("AllPostsDetails")]
+        //[Route("AllPostsDetails")]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
             var posts = await _postService.GetAllComplete();
 
             return Ok(posts);
         }
-        
+
         /// <summary>
         /// Retrieves a post by ID
         /// </summary>
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetPostDto>> GetPostById( int Id)
+        public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
         {
             var posts = await _postService.GetPostById(Id);
             return Ok(posts);
         }
+
         /// <summary>
         /// Retrieves posts by categoryId
         /// </summary>

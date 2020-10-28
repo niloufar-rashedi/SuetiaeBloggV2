@@ -58,25 +58,29 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        
-        public  async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPostById(int postId)
+        public  async Task<ServiceResponse<GetPostDto>> GetPostById(int postId)
         {
-            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
+            ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var posts = await _context.Posts
+                var post = await _context.Posts
+                                    .Where(d => d.PostId == postId)
                                     .Include(a => a.Author)
                                     .Include(c => c.PostCategories)
                                     .ThenInclude(Postcategories => Postcategories.Category)
                                     .Include(t => t.PostTags)
                                     .ThenInclude(PostTags => PostTags.Tag)
                                     .Include(t => t.Comments)
-                                    .Select(d => d.PostId == postId)
                                     .FirstOrDefaultAsync();
+                                     
 
 
-
-                response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
+                else
+                    response.Data = _mapper.Map<GetPostDto>(post);
             }
             catch (Exception ex)
             {
@@ -86,7 +90,6 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-
         public async Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost)
 
         {

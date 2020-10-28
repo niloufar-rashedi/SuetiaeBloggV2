@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -45,10 +46,6 @@ namespace SuetiaeBlogg.Services.Services
             }
 
             return response;
-        }
-        public Task<ServiceResponse<IEnumerable<Post>>> GetPostsByCategoryId(int categoryId)
-        {
-            throw new NotImplementedException();
         }
         public Task<IEnumerable<Category>> GetAllWithPosts()
         {
@@ -109,9 +106,40 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
-        public Task<ServiceResponse<IEnumerable<Post>>> FindPostsByCategoryId(int categoryId)
+        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId)
         {
-            throw new NotImplementedException();
+            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
+            try
+            {
+                var postIds = await _context.PostCategories
+                                    .Where(c => c.CategoryId == categoryId)
+                                    .Select(x => x.PostId)
+                                    .Distinct()
+                                    .ToListAsync();
+                var posts = await _context.Posts
+                                .Where(x => postIds.Contains(x.PostId))
+                                .Include(a => a.Author)
+                                .Include(c => c.PostCategories)
+                                .ThenInclude(Postcategories => Postcategories.Category)
+                                .Include(t => t.PostTags)
+                                .ThenInclude(PostTags => PostTags.Tag)
+                                .Include(t => t.Comments)
+                                .ToListAsync();
+
+                if (posts == null)
+                {
+                    response.Message = "No posts found in this category";
+                }
+                else
+                    response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
         }
         public Task<Category> GetCategoryById(int id)
         {

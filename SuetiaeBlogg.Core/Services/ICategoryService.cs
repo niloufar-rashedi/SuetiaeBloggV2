@@ -13,7 +13,7 @@ namespace SuetiaeBlogg.Core.Services
     {
         Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory);
         Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories();
-        public Task<ServiceResponse<IEnumerable<Post>>> FindPostsByCategoryId(int categoryId);
+        public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId);
         Task<IEnumerable<Category>> GetAllWithPosts();
         Task<Category> GetCategoryById(int id);
         Task<IEnumerable<Category>> GetCategoriesByPostId(int postId);

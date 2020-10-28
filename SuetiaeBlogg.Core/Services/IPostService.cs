@@ -14,7 +14,7 @@ namespace SuetiaeBlogg.Core.Services
         //add category to existing post
 
         Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete();
-        Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPostById(int Id);
+        Task<ServiceResponse<GetPostDto>> GetPostById(int Id);
         public Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost);
         public ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post);
         public ServiceResponse<Task> DeletePost(Post post);
