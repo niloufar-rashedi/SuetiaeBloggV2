@@ -42,10 +42,10 @@ namespace SuetiaeBlogg.Services.Services
                                 .ThenInclude(PostTags => PostTags.Tag)
                                 .Include(t => t.Comments)
                                 .ToListAsync();
-
-                if (posts == null)
+                
+                if (posts.Count() == 0) 
                 {
-                    response.Message = "No posts found in this category";
+                    response.Message = "No posts found with this tag";
                 }
                 else
                     response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);

@@ -25,12 +25,14 @@ namespace SuetiaeBlogg.API.Controllers
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
+        private readonly IAuthorService _authorService;
 
-        public BlogPostsController(IPostService postService, ICategoryService categoryService, ITagService tagService)
+        public BlogPostsController(IPostService postService, ICategoryService categoryService, ITagService tagService, IAuthorService authorService)
         {
             _postService = postService;
             _categoryService = categoryService;
             _tagService = tagService;
+            _authorService = authorService;
         }
 
         
@@ -85,7 +87,7 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet("~/api/[controller]/authors/{authorId:int}/posts")]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostByAuthor(int authorId)
         {
-            var posts = await _postService.FindPostsByAuthorId(authorId);
+            var posts = await _authorService.FindPostsByAuthorId(authorId);
 
             return Ok(posts);
 

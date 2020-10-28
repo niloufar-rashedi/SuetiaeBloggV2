@@ -59,7 +59,7 @@ namespace SuetiaeBlogg.Services.Services
                                 .Include(t => t.Comments)
                                 .ToListAsync();
 
-                if (posts == null)
+                if (posts.Count() == 0)
                 {
                     response.Message = "No posts found in this category";
                 }

@@ -56,6 +56,7 @@ namespace SuetiaeBlogg
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ITagService, TagService>();
+            services.AddTransient<IAuthorService, AuthorService>();
 
 
             services.AddSwaggerGen(c =>
