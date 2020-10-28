@@ -27,6 +27,53 @@ namespace SuetiaeBlogg.Services.Services
             this._context = context;
             this._mapper = mapper;
         }
+        public Task<Category> CreateCategory(Category newCategory)
+        {
+            throw new NotImplementedException();
+        }
+        public Task DeleteCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+        public Task UpdateCategory(Category categoryToBeUpdated, Category category)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId)
+        {
+            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
+            try
+            {
+                var postIds = await _context.PostCategories
+                                    .Where(c => c.CategoryId == categoryId)
+                                    .Select(x => x.PostId)
+                                    .Distinct()
+                                    .ToListAsync();
+                var posts = await _context.Posts
+                                .Where(x => postIds.Contains(x.PostId))
+                                .Include(a => a.Author)
+                                .Include(c => c.PostCategories)
+                                .ThenInclude(Postcategories => Postcategories.Category)
+                                .Include(t => t.PostTags)
+                                .ThenInclude(PostTags => PostTags.Tag)
+                                .Include(t => t.Comments)
+                                .ToListAsync();
+
+                if (posts == null)
+                {
+                    response.Message = "No posts found in this category";
+                }
+                else
+                    response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
         public async Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories()
         {
             ServiceResponse<IEnumerable<GetCategoryDto>> response = new ServiceResponse<IEnumerable<GetCategoryDto>>();
@@ -46,10 +93,6 @@ namespace SuetiaeBlogg.Services.Services
             }
 
             return response;
-        }
-        public Task<IEnumerable<Category>> GetAllWithPosts()
-        {
-            throw new NotImplementedException();
         }
         public Task<IEnumerable<Category>> GetCategoriesByPostId(int postId)
         {
@@ -98,57 +141,11 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        public Task<Category> CreateCategory(Category newCategory)
-        {
-            throw new NotImplementedException();
-        }
-        public Task DeleteCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId)
-        {
-            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
-            try
-            {
-                var postIds = await _context.PostCategories
-                                    .Where(c => c.CategoryId == categoryId)
-                                    .Select(x => x.PostId)
-                                    .Distinct()
-                                    .ToListAsync();
-                var posts = await _context.Posts
-                                .Where(x => postIds.Contains(x.PostId))
-                                .Include(a => a.Author)
-                                .Include(c => c.PostCategories)
-                                .ThenInclude(Postcategories => Postcategories.Category)
-                                .Include(t => t.PostTags)
-                                .ThenInclude(PostTags => PostTags.Tag)
-                                .Include(t => t.Comments)
-                                .ToListAsync();
-
-                if (posts == null)
-                {
-                    response.Message = "No posts found in this category";
-                }
-                else
-                    response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message;
-            }
-
-            return response;
-        }
         public Task<Category> GetCategoryById(int id)
         {
             throw new NotImplementedException();
         }
-        public Task UpdateCategory(Category categoryToBeUpdated, Category category)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
 

@@ -55,8 +55,9 @@ namespace SuetiaeBlogg
             //services.AddScoped<IPostService, PostService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ITagService, TagService>();
 
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

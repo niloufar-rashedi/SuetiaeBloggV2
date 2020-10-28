@@ -24,11 +24,13 @@ namespace SuetiaeBlogg.API.Controllers
         
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
+        private readonly ITagService _tagService;
 
-        public BlogPostsController(IPostService postService, ICategoryService categoryService)
+        public BlogPostsController(IPostService postService, ICategoryService categoryService, ITagService tagService)
         {
             _postService = postService;
             _categoryService = categoryService;
+            _tagService = tagService;
         }
 
         
@@ -72,7 +74,7 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet("~/api/[controller]/tags/{tagId:int}/posts")]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostsByTags(int tagId)
         {
-            var posts = await _postService.FindPostsByTagId(tagId);
+            var posts = await _tagService.FindPostsByTagId(tagId);
 
             return Ok(posts);
 
