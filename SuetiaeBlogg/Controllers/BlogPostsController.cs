@@ -105,6 +105,18 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(categories);
 
         }
+        /// <summary>
+        /// Retrieves all tags
+        /// </summary>
+
+        [HttpGet("~/api/[controller]/tags/")]
+        public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetTags()
+        {
+            var categories = await _tagService.GetAllTags();
+
+            return Ok(categories);
+
+        }
 
         // POST: api/BlogPosts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

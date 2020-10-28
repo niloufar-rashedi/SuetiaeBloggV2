@@ -11,15 +11,15 @@ namespace SuetiaeBlogg.Core.Services
 {
     public interface IPostService
     {
-        //add category to existing post
+        
 
-        Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete();
-        Task<ServiceResponse<GetPostDto>> GetPostById(int Id);
+        public Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete();
         public Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost);
         public ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post);
         public ServiceResponse<Task> DeletePost(Post post);
-        public Task<ServiceResponse<Post>> FindPostsByAuthorId(int authorId);
-        public Task<ServiceResponse<Post>> FindPostsByTagId(int tagId);
+        public Task<ServiceResponse<GetPostDto>> GetPostById(int Id);
+        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate);
+
 
 
 

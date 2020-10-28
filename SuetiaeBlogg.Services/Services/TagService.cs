@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Posts;
+using SuetiaeBlogg.Core.Models.Tags;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
@@ -49,6 +50,25 @@ namespace SuetiaeBlogg.Services.Services
                 }
                 else
                     response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        public async Task<ServiceResponse<IEnumerable<GetTagDto>>> GetAllTags()
+        {
+            ServiceResponse<IEnumerable<GetTagDto>> response = new ServiceResponse<IEnumerable<GetTagDto>>();
+            try
+            {
+                var tags = await _context.Tags
+                                         .ToListAsync();
+
+
+                response.Data = _mapper.Map<IEnumerable<GetTagDto>>(tags);
             }
             catch (Exception ex)
             {

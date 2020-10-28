@@ -133,5 +133,10 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

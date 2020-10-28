@@ -27,7 +27,7 @@ namespace SuetiaeBlogg.Core.Models
         public string UrlSlug { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset PubDate { get; set; }
+        public DateTimeOffset PubDate { get; set; } = DateTimeOffset.Now;
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTimeOffset LastModified { get; set; } = DateTimeOffset.Now;

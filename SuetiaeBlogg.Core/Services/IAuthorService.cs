@@ -10,6 +10,7 @@ namespace SuetiaeBlogg.Core.Services
     public interface IAuthorService
     {
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByAuthorId(int authorId);
+       
 
     }
 }
