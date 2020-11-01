@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using NodaTime;
 
 namespace SuetiaeBlogg.Core.Models
 {
@@ -31,6 +32,7 @@ namespace SuetiaeBlogg.Core.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTimeOffset LastModified { get; set; } = DateTimeOffset.Now;
+
         public bool IsPublic { get; set; }
         public bool IsApproved { get; set; }
         public bool IsDeleted { get; set; }
