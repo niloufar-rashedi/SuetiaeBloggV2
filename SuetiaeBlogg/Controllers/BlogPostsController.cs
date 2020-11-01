@@ -22,7 +22,7 @@ namespace SuetiaeBlogg.API.Controllers
     [ApiController]
     public class BlogPostsController : ControllerBase
     {
-        
+
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
@@ -36,7 +36,7 @@ namespace SuetiaeBlogg.API.Controllers
             _authorService = authorService;
         }
 
-        
+
 
         /// <summary>
         /// Retrieves all posts with details
@@ -50,13 +50,14 @@ namespace SuetiaeBlogg.API.Controllers
         }
 
         /// <summary>
-        /// Retrieves a post by ID
+        /// Retrieves a post by Id
         /// </summary>
-        [HttpGet("{id}")]
+        [HttpGet("/api/[controller]/{Id}")]
         public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
         {
-            var posts = await _postService.FindPostById(Id);
-            return Ok(posts);
+
+            var post = await _postService.FindPostById(Id);
+            return Ok(post);
         }
 
         /// <summary>
