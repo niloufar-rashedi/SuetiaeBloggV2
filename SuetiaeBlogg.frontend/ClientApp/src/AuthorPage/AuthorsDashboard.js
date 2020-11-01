@@ -1,7 +1,7 @@
 import React, { Component, Link } from 'react';
 import { Row, Form, Col, Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
-import BlogDataService from '../../services/blog.service';
-import http from '../../constants/http-common';
+import BlogDataService from '../services/blog.service';
+import http from '../constants/http-common';
 
 
 export class AuthorsDashboard extends Component {
@@ -64,8 +64,6 @@ export class AuthorsDashboard extends Component {
         return (
             <div class="container">
                 <div class="row">
-                                <div class="col">
-                    
                             <h4>Your posts list...</h4>
                             <ul className="list-group">
                                 {posts &&
@@ -82,7 +80,7 @@ export class AuthorsDashboard extends Component {
                                         </li>
                                     ))}
                                 <li>
-                                    A mock post out of database
+                                    Here the GetAllByAuthor() will return all postsrelated to this author
                                 </li>
                             </ul>
                             <button
@@ -91,9 +89,9 @@ export class AuthorsDashboard extends Component {
                             >
                                         Remove All
                             </button>
+                </div>
 
-
-                            <div className="col-md-6">
+                            <div class="row">
                                 {currentPost ? (
                                     <div>
                                         <h4>A Post</h4>
@@ -123,13 +121,11 @@ export class AuthorsDashboard extends Component {
                                         </div>
                                     )}
                             </div>
-                    </div>
-
-                    <div class="col">
+                <div class="row">
                 <Card style={{ width: '18rem' }}>
                     {/*<Card.Img variant="top" src="holder.js/100px180?text=Image cap" />*/}
                     <Card.Body>
-                        <Card.Title>Your recent post</Card.Title>
+                        <Card.Title>Recent post based on LastModified</Card.Title>
                         <Card.Text>
                             Summary: "Some quick example text to build on the card title and make up the bulk of
                             the card's content."
@@ -145,15 +141,11 @@ export class AuthorsDashboard extends Component {
                     </Card>
                 </div>
 
-                    <div class="row">
-                        <div class="col">
+                <div class="row mt-5">
                             <a href='/addpost' class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Add a new post</a>
-                        </div>
-
                     </div>
 
                 </div>
-            </div>
             );
     }
 }
