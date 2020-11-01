@@ -130,7 +130,7 @@ namespace SuetiaeBlogg
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials()
+            //.AllowCredentials()
             );
 
             app.UseAuthentication();
