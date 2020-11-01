@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { About } from './components/About';
-import { Contact } from './components/Contact';
+import { Home } from './HomePage/Home';
+import { About } from './AboutPage/About';
+import { Contact } from './ContactPage/Contact';
 //import { Posts } from './components/post/posts';
 //import { FetchData } from './components/FetchData';
-import { FetchData } from './components/post/FetchData';
+import { AuthorsDashboard } from './components/post/AuthorsDashboard';
 import { Counter } from './components/Counter';
+import  AddPost from '../src/components/Addpost'
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -26,7 +27,10 @@ export default class App extends Component {
         <Route path='/contact' component={Contact} />
             {/*<Route exact path="/" component={Posts} />*/}
         <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
+            {/*<AuthorizeRoute path='/authosdashboarad' component={AuthorsDashboard} />*/}
+            <AuthorizeRoute path='/authorsdashboarad' component={AuthorsDashboard} />
+
+            <Route path='/addpost' component={AddPost} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );
