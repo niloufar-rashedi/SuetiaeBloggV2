@@ -26,15 +26,15 @@ namespace SuetiaeBlogg.Data
                 {
                     Author = new Author
                     {
-                        Name = "EttoreM"
+                        FirstName = "EttoreM"
                     },
                     Title = "This is the first post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
                     Body = "Write something here!"};
                 var comment = new Comment { 
                     Body = "my first comment", 
-                    Author = new Author { 
-                        Name ="anna77" }, 
+                    Author = new Author {
+                        FirstName = "anna77" }, 
                     Post = post1 };
                 var category1 = new Category { 
                     Name = "General"};
@@ -53,8 +53,8 @@ namespace SuetiaeBlogg.Data
                     Tag = tag2 };
 
                 var post2 = new Post { 
-                    Author = new Author { 
-                        Name = "AlbertoM" }, 
+                    Author = new Author {
+                        FirstName = "AlbertoM" }, 
                     Title = "This is the second post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
                     Body = "Write something here!" };

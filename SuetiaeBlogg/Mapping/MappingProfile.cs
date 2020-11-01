@@ -22,6 +22,7 @@ namespace SuetiaeBlogg.API.Mapping
             CreateMap<Tag, GetTagDto>();
             CreateMap<Comment, GetCommentDto>();
             CreateMap<Author, GetAuthorDto>();
+            CreateMap<GetAuthorDto, Author>();
             CreateMap<Post, GetPostDto>()
             .ForMember(dto => dto.Categories, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category)))
     .ForMember(dto => dto.Tags, c => c.MapFrom(c => c.PostTags.Select(cs => cs.Tag)));

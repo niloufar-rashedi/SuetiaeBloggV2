@@ -59,3 +59,18 @@ code {
 h4 {
     color: #fff;
 }
+.list {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+}
+
+.submit-form {
+    max-width: auto;
+    margin: auto;
+}
+
+.edit-form {
+    max-width: 300px;
+    margin: auto;
+}
