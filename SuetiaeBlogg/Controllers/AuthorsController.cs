@@ -7,6 +7,7 @@ using SuetiaeBlogg.API.Helpers;
 using SuetiaeBlogg.Core.Helpers;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Authors;
+using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Services.Services;
 using System;
 using System.Collections.Generic;
@@ -87,21 +88,21 @@ namespace SuetiaeBlogg.API.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var authors = _authorService.GetAll();
-            var authorDtos = _mapper.Map<IList<GetAuthorDto>>(authors);
-            return Ok(authorDtos);
-        }
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var authors = _authorService.GetAll();
+        //    var authorDtos = _mapper.Map<IList<GetAuthorDto>>(authors);
+        //    return Ok(authorDtos);
+        //}
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var author = _authorService.GetById(id);
-            var authorDto = _mapper.Map<GetAuthorDto>(author);
-            return Ok(authorDto);
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult GetById(int id)
+        //{
+        //    var author = _authorService.GetById(id);
+        //    var authorDto = _mapper.Map<GetAuthorDto>(author);
+        //    return Ok(authorDto);
+        //}
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] GetAuthorDto authorDto)

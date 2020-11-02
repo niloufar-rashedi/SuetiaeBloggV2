@@ -5,16 +5,11 @@ using SuetiaeBlogg.API.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Authors;
 using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
-using SuetiaeBlogg.Data;
-
 
 namespace SuetiaeBlogg.Services.Services
 {
@@ -42,7 +37,7 @@ namespace SuetiaeBlogg.Services.Services
                                 .Include(t => t.Comments)
                                 .ToListAsync();
 
-                if (posts.Count()==0)
+                if (posts.Count() == 0)
                 {
                     response.Message = "No posts found by this author";
                 }
@@ -78,7 +73,7 @@ namespace SuetiaeBlogg.Services.Services
 
                 return response;
             }
-
+        }
         public Author Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -194,5 +189,36 @@ namespace SuetiaeBlogg.Services.Services
 
             return true;
         }
+
+        Author IAuthorService.Authenticate(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        Author IAuthorService.Create(Author author, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IAuthorService.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //IEnumerable<Author> IAuthorService.GetAll()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        Author IAuthorService.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IAuthorService.Update(Author userParam, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+

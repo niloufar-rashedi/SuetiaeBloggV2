@@ -36,9 +36,9 @@ namespace SuetiaeBlogg.Data
                 
                 context.Tags.AddRange(tag1, tag2, tag3);
 
-                var author1 = new Author { Name = "Anna" };
-                var author2 = new Author { Name = "Evelyn" };
-                var author3 = new Author { Name = "Niloufar" };
+                var author1 = new Author { FirstName = "Anna" };
+                var author2 = new Author { FirstName = "Evelyn" };
+                var author3 = new Author { FirstName = "Niloufar" };
 
                 context.Authors.AddRange(author1, author2, author3);
 
@@ -62,10 +62,7 @@ namespace SuetiaeBlogg.Data
                 {
 
                     Author = author2,
-                    Author = new Author
-                    {
-                        FirstName = "EttoreM"
-                    },
+
                     Title = "This is the first post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
                     Body = "Write something here!"};
@@ -74,12 +71,6 @@ namespace SuetiaeBlogg.Data
                     Author = new Author {
                         FirstName = "anna77" }, 
                     Post = post1 };
-                var category1 = new Category { 
-                    Name = "General"};
-                var tag1 = new Tag {
-                    Name = "Fika" };
-                var tag2 = new Tag {
-                    Name = "Event" };
                 var postCategory1 = new PostCategories { 
                     Post = post1, 
                     Category = category1 };
@@ -90,7 +81,7 @@ namespace SuetiaeBlogg.Data
                     Post = post1, 
                     Tag = tag2 };
 
-                var post2 = new Post { 
+                var post3 = new Post { 
                     Author = new Author {
                         FirstName = "AlbertoM" }, 
 
@@ -110,7 +101,7 @@ namespace SuetiaeBlogg.Data
                     //}
                     
                 };
-                var post3 = new Post
+                var post4 = new Post
                 {
 
                     Author = author3,
@@ -132,7 +123,6 @@ namespace SuetiaeBlogg.Data
                     //}
                 };
 
-                var postCategory1 = new PostCategories {Post = post1, Category = category1};
                 var postCategory2 = new PostCategories {Post = post1, Category = category2};
                 var postCategory3 = new PostCategories {Post = post1, Category = category3};
                 var postCategory4 = new PostCategories { Post = post2, Category = category4 };
@@ -142,8 +132,6 @@ namespace SuetiaeBlogg.Data
                 var postCategory8 = new PostCategories { Post = post3, Category = category2 };
                 var postCategory9 = new PostCategories { Post = post3, Category = category3 };
 
-                var postTag1 = new PostTags {Post = post1, Tag = tag1};
-                var postTag2 = new PostTags {Post = post1, Tag = tag2 };
                 var postTag3 = new PostTags {Post = post2, Tag = tag2 };
                 var postTag4 = new PostTags {Post = post3, Tag = tag3 };
                 var postTag5 = new PostTags { Post = post3, Tag = tag2 };

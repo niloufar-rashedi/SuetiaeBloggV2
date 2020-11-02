@@ -38,9 +38,9 @@ namespace SuetiaeBlogg.API.Controllers
 
 
 
-        /// <summary>
-        /// Retrieves all posts with details
-        /// </summary>
+        // <summary>
+        // Retrieves all posts with details
+        // </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
@@ -49,9 +49,9 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(posts);
         }
 
-        /// <summary>
-        /// Retrieves a post by Id
-        /// </summary>
+        // <summary>
+        // Retrieves a post by Id
+        // </summary>
         [HttpGet("/api/[controller]/{Id}")]
         public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
         {
@@ -96,9 +96,9 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
-        /// <summary>
-        /// Retrieves all categories
-        /// </summary>
+        // <summary>
+        // Retrieves all categories
+        // </summary>
 
         [HttpGet("~/api/[controller]/categories/")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetCategories()
@@ -108,10 +108,10 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(categories);
 
         }
-        
-        /// <summary>
-        /// Retrieves all tags
-        /// </summary>
+
+        // <summary>
+        // Retrieves all tags
+        // </summary>
         [HttpGet("~/api/[controller]/tags/")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetTags()
         {

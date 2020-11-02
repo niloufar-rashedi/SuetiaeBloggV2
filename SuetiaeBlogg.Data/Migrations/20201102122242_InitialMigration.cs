@@ -3,21 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuetiaeBlogg.Data.Migrations
 {
-    public partial class AuthorModelMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Author",
+                name: "Authors",
                 columns: table => new
                 {
                     AuthorId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false)
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Author", x => x.AuthorId);
+                    table.PrimaryKey("PK_Authors", x => x.AuthorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,7 +40,7 @@ namespace SuetiaeBlogg.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "Tags",
                 columns: table => new
                 {
                     TagId = table.Column<int>(nullable: false)
@@ -47,7 +51,7 @@ namespace SuetiaeBlogg.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                    table.PrimaryKey("PK_Tags", x => x.TagId);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,9 +76,9 @@ namespace SuetiaeBlogg.Data.Migrations
                 {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
-                        name: "FK_Posts_Author_AuthorId",
+                        name: "FK_Posts_Authors_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "Author",
+                        principalTable: "Authors",
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -93,9 +97,9 @@ namespace SuetiaeBlogg.Data.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentId);
                     table.ForeignKey(
-                        name: "FK_Comments_Author_AuthorId",
+                        name: "FK_Comments_Authors_AuthorId",
                         column: x => x.AuthorId,
-                        principalTable: "Author",
+                        principalTable: "Authors",
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -147,9 +151,9 @@ namespace SuetiaeBlogg.Data.Migrations
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PostTags_Tag_TagId",
+                        name: "FK_PostTags_Tags_TagId",
                         column: x => x.TagId,
-                        principalTable: "Tag",
+                        principalTable: "Tags",
                         principalColumn: "TagId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -193,10 +197,10 @@ namespace SuetiaeBlogg.Data.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Tags");
 
             migrationBuilder.DropTable(
-                name: "Author");
+                name: "Authors");
         }
     }
 }

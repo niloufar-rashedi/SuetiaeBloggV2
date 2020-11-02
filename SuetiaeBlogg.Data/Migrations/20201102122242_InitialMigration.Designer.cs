@@ -10,8 +10,8 @@ using SuetiaeBlogg.Data;
 namespace SuetiaeBlogg.Data.Migrations
 {
     [DbContext(typeof(SuetiaeBloggDbContext))]
-    [Migration("20201025123300_AuthorModelMigration")]
-    partial class AuthorModelMigration
+    [Migration("20201102122242_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,18 +23,30 @@ namespace SuetiaeBlogg.Data.Migrations
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Author", b =>
                 {
-                    b.Property<int?>("AuthorId")
+                    b.Property<int>("AuthorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AuthorId");
 
-                    b.ToTable("Author");
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Category", b =>
@@ -181,7 +193,7 @@ namespace SuetiaeBlogg.Data.Migrations
 
                     b.HasKey("TagId");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Comment", b =>
