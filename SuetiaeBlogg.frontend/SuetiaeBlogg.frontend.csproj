@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="bootstrap" Version="4.5.3" />
     <PackageReference Include="Fable.Reactstrap" Version="0.5.0" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
@@ -36,6 +37,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuetiaeBlogg\SuetiaeBlogg.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\LoginPage\" />
+    <Folder Include="ClientApp\src\RegisterPage\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

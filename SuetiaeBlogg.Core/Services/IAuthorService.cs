@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +12,12 @@ namespace SuetiaeBlogg.Core.Services
     {
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByAuthorId(int authorId);
         public Task<ServiceResponse<IEnumerable<GetAuthorDto>>> GetAllAuthors();
+        Author Authenticate(string username, string password);
+        Author Create(Author author, string password);
+        void Delete(int id);
+        IEnumerable<Author> GetAll();
+        Author GetById(int id);
+        void Update(Author userParam, string password = null);
 
 
     }

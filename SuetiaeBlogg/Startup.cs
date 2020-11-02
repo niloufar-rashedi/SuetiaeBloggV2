@@ -22,7 +22,10 @@ using SuetiaeBlogg.Services.Services;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
+using SuetiaeBlogg.Core.Helpers;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SuetiaeBlogg
 {
@@ -55,7 +58,9 @@ namespace SuetiaeBlogg
             //services.AddScoped<IPostService, PostService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
+
             services.AddTransient<ITagService, TagService>();
+            services.AddScoped<IAuthorService, AuthorService>();
             services.AddTransient<IAuthorService, AuthorService>();
 
 
@@ -77,7 +82,33 @@ namespace SuetiaeBlogg
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -97,9 +128,12 @@ namespace SuetiaeBlogg
 
             app.UseCors(builder => builder
             .AllowAnyOrigin()
-            .AllowAnyHeader());
-   
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            //.AllowCredentials()
+            );
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

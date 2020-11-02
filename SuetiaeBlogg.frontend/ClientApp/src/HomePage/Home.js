@@ -1,7 +1,9 @@
 import React, { Component, Link } from 'react';
-import { Posts } from './post/posts';
+import { Posts } from '../components/post/posts';
+import AddPost from '../AuthorPage/Addpost'
 
-import { Container, Col, Row, Form } from 'reactstrap';
+
+import { Container, Col, Row, Form, Button } from 'reactstrap';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -16,8 +18,11 @@ export class Home extends Component {
                             class="img-fluid" alt="Responsive image"
                         />
                     </div>
+                    
                 </div>
 
+                
+                
                 <div class="input-group mb-3 mt-5">
                     <div class="input-group-prepend">
                         <button type="button" class="btn btn-danger">Search among posts</button>
@@ -56,8 +61,8 @@ export class Home extends Component {
                 </div>
                 {/* </Container>*/}
 
-                
-                
+
+
                 <div class="container">
                     <h3>Celebrate "kanelbullens dag" with a fantastic recipe </h3>
                     <img src="https://images.unsplash.com/photo-1580677881307-5852a81368ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
