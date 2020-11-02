@@ -8,7 +8,7 @@ import { Contact } from './ContactPage/Contact';
 //import { FetchData } from './components/FetchData';
 import { AuthorsDashboard } from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
-import  AddPost from './AuthorPage/Addpost'
+//import  AddPost from './AuthorPage/Addpost'
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
@@ -30,7 +30,7 @@ export default class App extends Component {
             {/*<AuthorizeRoute path='/authosdashboarad' component={AuthorsDashboard} />*/}
             <Route path='/authorsdashboarad' component={AuthorsDashboard} />
 
-            <Route path='/addpost' component={AddPost} />
+            {/*<Route path='/addpost' component={AddPost} />*/}
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );
