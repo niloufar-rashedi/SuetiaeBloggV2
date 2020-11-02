@@ -1,12 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<TargetFramework>netcoreapp3.1</TargetFramework>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+
+	<PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
+	<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+	<PackageReference Include="NodaTime" Version="3.0.3" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
+	<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
@@ -22,12 +38,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
+
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
-    <ProjectReference Include="..\SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj" />
-    <ProjectReference Include="..\SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj" />
+	<ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
+	<ProjectReference Include="..\SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj" />
+	<ProjectReference Include="..\SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj" />
   </ItemGroup>
 
 

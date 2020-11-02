@@ -55,13 +55,13 @@ namespace SuetiaeBlogg
             options.UseSqlServer(Configuration.GetConnectionString("SuetiaeBlogg"), x => x.MigrationsAssembly("SuetiaeBlogg.Data")));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPostService, PostService>();
+            //services.AddScoped<IPostService, PostService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
-            //To be decided later which one to keep!:
+
+            services.AddTransient<ITagService, TagService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddTransient<IAuthorService, AuthorService>();
-
 
 
             services.AddSwaggerGen(c =>

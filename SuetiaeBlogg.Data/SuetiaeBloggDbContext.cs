@@ -17,8 +17,9 @@ namespace SuetiaeBlogg.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<PostCategories> PostCategories { get; set; }
         public DbSet<PostTags> PostTags { get; set; }
-
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>()

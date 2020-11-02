@@ -11,14 +11,11 @@ namespace SuetiaeBlogg.Core.Services
 {
     public interface ICategoryService
     {
-        Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory);
-        Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories();
-        public Task<ServiceResponse<IEnumerable<Post>>> FindPostsByCategoryId(int categoryId);
-        Task<IEnumerable<Category>> GetAllWithPosts();
-        Task<Category> GetCategoryById(int id);
-        Task<IEnumerable<Category>> GetCategoriesByPostId(int postId);
-        Task<Category> CreateCategory(Category newCategory);
-        Task UpdateCategory(Category categoryToBeUpdated, Category category);
-        Task DeleteCategory(Category category);
+        public Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory);
+        public Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetCategories();
+        public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId);
+        public Task<Category> CreateCategory(Category newCategory);
+        public Task UpdateCategory(Category categoryToBeUpdated, Category category);
+        public Task DeleteCategory(Category category);
     }
 }

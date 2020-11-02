@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -26,7 +27,42 @@ namespace SuetiaeBlogg.Services.Services
             this._context = context;
             this._mapper = mapper;
         }
-        public async Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetAllCategories()
+        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId)
+        {
+            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
+            try
+            {
+                var postIds = await _context.PostCategories
+                                    .Where(c => c.CategoryId == categoryId)
+                                    .Select(x => x.PostId)
+                                    .Distinct()
+                                    .ToListAsync();
+                var posts = await _context.Posts
+                                .Where(x => postIds.Contains(x.PostId))
+                                .Include(a => a.Author)
+                                .Include(c => c.PostCategories)
+                                .ThenInclude(Postcategories => Postcategories.Category)
+                                .Include(t => t.PostTags)
+                                .ThenInclude(PostTags => PostTags.Tag)
+                                .Include(t => t.Comments)
+                                .ToListAsync();
+
+                if (posts.Count() == 0)
+                {
+                    response.Message = "No posts found in this category";
+                }
+                else
+                    response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        public async Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetCategories()
         {
             ServiceResponse<IEnumerable<GetCategoryDto>> response = new ServiceResponse<IEnumerable<GetCategoryDto>>();
             try
@@ -45,18 +81,6 @@ namespace SuetiaeBlogg.Services.Services
             }
 
             return response;
-        }
-        public Task<ServiceResponse<IEnumerable<Post>>> GetPostsByCategoryId(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<IEnumerable<Category>> GetAllWithPosts()
-        {
-            throw new NotImplementedException();
-        }
-        public Task<IEnumerable<Category>> GetCategoriesByPostId(int postId)
-        {
-            throw new NotImplementedException();
         }
         public Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory)
         {
@@ -105,19 +129,11 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
-        public Task DeleteCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<ServiceResponse<IEnumerable<Post>>> FindPostsByCategoryId(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<Category> GetCategoryById(int id)
-        {
-            throw new NotImplementedException();
-        }
         public Task UpdateCategory(Category categoryToBeUpdated, Category category)
+        {
+            throw new NotImplementedException();
+        }
+        public Task DeleteCategory(Category category)
         {
             throw new NotImplementedException();
         }

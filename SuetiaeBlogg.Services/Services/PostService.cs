@@ -31,8 +31,7 @@ namespace SuetiaeBlogg.Services.Services
             this._context = context;
             this._mapper = mapper;
         }
-
-        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetAllComplete()
+        public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
@@ -58,25 +57,29 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        
-        public  async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPostById(int postId)
+        public  async Task<ServiceResponse<GetPostDto>> FindPostById(int postId)
         {
-            ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
+            ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var posts = await _context.Posts
+                var post = await _context.Posts
+                                    .Where(d => d.PostId == postId)
                                     .Include(a => a.Author)
                                     .Include(c => c.PostCategories)
                                     .ThenInclude(Postcategories => Postcategories.Category)
                                     .Include(t => t.PostTags)
                                     .ThenInclude(PostTags => PostTags.Tag)
                                     .Include(t => t.Comments)
-                                    .Select(d => d.PostId == postId)
                                     .FirstOrDefaultAsync();
+                                     
 
 
-
-                response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
+                else
+                    response.Data = _mapper.Map<GetPostDto>(post);
             }
             catch (Exception ex)
             {
@@ -86,7 +89,6 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-
         public async Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost)
 
         {
@@ -122,11 +124,7 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
-        public Task<ServiceResponse<Post>> FindPostsByAuthorId(int authorId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<ServiceResponse<Post>> FindPostsByTagId(int tagId)
+        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
         {
             throw new NotImplementedException();
         }
