@@ -74,7 +74,7 @@ namespace SuetiaeBlogg.Services.Services
                 return response;
             }
         }
-        public Author Authenticate(string username, string password)
+        Author IAuthorService.Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 return null;
@@ -93,7 +93,7 @@ namespace SuetiaeBlogg.Services.Services
             return author;
         }
 
-        public Author Create(Author author, string password)
+        Author IAuthorService.Create(Author author, string password)
         {
             // validation
             if (string.IsNullOrWhiteSpace(password))
@@ -114,7 +114,7 @@ namespace SuetiaeBlogg.Services.Services
             return author;
         }
 
-        public void Update(Author userParam, string password = null)
+         void IAuthorService.Update(Author userParam, string password)
         {
             var author = _context.Authors.Find(userParam.AuthorId);
 
@@ -190,20 +190,20 @@ namespace SuetiaeBlogg.Services.Services
             return true;
         }
 
-        Author IAuthorService.Authenticate(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
+        //Author IAuthorService.Authenticate(string username, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        Author IAuthorService.Create(Author author, string password)
-        {
-            throw new NotImplementedException();
-        }
+        //Author IAuthorService.Create(Author author, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        void IAuthorService.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //void IAuthorService.Delete(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //IEnumerable<Author> IAuthorService.GetAll()
         //{
@@ -215,10 +215,10 @@ namespace SuetiaeBlogg.Services.Services
             throw new NotImplementedException();
         }
 
-        void IAuthorService.Update(Author userParam, string password)
-        {
-            throw new NotImplementedException();
-        }
+        //void IAuthorService.Update(Author userParam, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
 

@@ -1,6 +1,8 @@
 import React, { Component, Link } from 'react';
 import { Posts } from '../components/post/posts';
 import AddPost from '../AuthorPage/Addpost'
+import AuthorRegistration from '../RegisterPage/author-registration';
+
 
 
 import { Container, Col, Row, Form, Button } from 'reactstrap';
@@ -10,7 +12,7 @@ export class Home extends Component {
 
   render () {
     return (
-      <div>
+        <div>
             <div>
                 <div class="row">
                     <div class="col">

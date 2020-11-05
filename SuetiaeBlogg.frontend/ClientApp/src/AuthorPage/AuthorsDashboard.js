@@ -1,7 +1,7 @@
 import React, { Component, Link } from 'react';
 import { Row, Form, Col, Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import BlogDataService from '../services/blog.service';
-import http from '../constants/http-common';
+//import http from '../constants/http-common';
 
 
 export class AuthorsDashboard extends Component {
@@ -63,6 +63,9 @@ export class AuthorsDashboard extends Component {
         const { posts, currentPost, currentIndex } = this.state;
         return (
             <div class="container">
+                <div>
+
+                </div>
                 <div class="row">
                             <h4>Your posts list...</h4>
                             <ul className="list-group">
@@ -108,7 +111,7 @@ export class AuthorsDashboard extends Component {
                                             {currentPost.summary}
                                         </div>
                                         <Link
-                                            to={http + currentPost.id}
+                                            //to={http + currentPost.id}
                                             className="badge badge-warning"
                                         >
                                             Edit
