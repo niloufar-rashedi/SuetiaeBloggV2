@@ -14,6 +14,7 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import AuthorRegistration from '../src/RegisterPage/author-registration';
+import Login from '../src/LoginPage/author-login'
 
 
 import './custom.css'
@@ -32,6 +33,7 @@ export default class App extends Component {
             { /*<AuthorizeRoute path='/authosdashboarad' component={AuthorsDashboard} />*/}
             <Route path='/authorsdashboarad' component={AuthorsDashboard} />
             <Route path='/register' component={AuthorRegistration} />
+            <Route path='/login' component={Login} />
 
             {/*<Route path='/addpost' component={AddPost} />*/}
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

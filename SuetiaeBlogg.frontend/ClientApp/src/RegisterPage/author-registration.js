@@ -22,7 +22,7 @@ function Regster(props) {
                 if (result.data.Status == 'Invalid')
                     alert('Invalid User');
                 else
-                    props.history.push('/authorsdashboarad')
+                    props.history.push('/login')
             }).catch(e => {
                 console.log(e.result);
             }); }
@@ -34,18 +34,14 @@ function Regster(props) {
    
         return (
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 btn btn-primary" style={{ "margin": "6px" }}>
-                        Add New Contact
-       </div>
-                </div>
+
                 <div class="card o-hidden border-0 shadow-lg my-5" style={{ "marginTop": "5rem!important;" }}>
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Create a New User</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Register today to be Suetiae author</h1>
                                     </div>
                                     <form onSubmit={Registration} class="user">
                                         <div class="form-group row">
@@ -60,14 +56,14 @@ function Regster(props) {
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="email" name="UserName" onChange={onChange} value={data.UserName} class="form-control" id="exampleInputPassword" placeholder="UserName" />
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="Password" name="Password" onChange={onChange} value={data.Password} class="form-control" id="exampleLastName" placeholder="Password" />
                                             </div>
 
                                         </div>
                                         <button type="submit" class="btn btn-primary  btn-block">
-                                            Create User
-                </button>
+                                            Sign Up
+                                        </button>
                                         <hr />
                                     </form>
                                     <hr />
