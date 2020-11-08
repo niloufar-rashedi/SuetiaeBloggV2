@@ -24,12 +24,13 @@ namespace SuetiaeBlogg.Services.Services
         //private readonly IUnitOfWork _unitOfWork;
         private readonly SuetiaeBloggDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
 
-
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper)
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService)
         {
             this._context = context;
             this._mapper = mapper;
+            this._categoryService = categoryService;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
@@ -95,27 +96,56 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
             {
-                _context.Posts.Add(new Post()
+                var post = new Post()
                 {
                     Title = newPost.Title,
                     Summary = newPost.Summary,
                     Body = newPost.Body,
                     LastModified = newPost.LastModified
-                });
+                };
+                _context.Posts.Add(post);
+                //now check if the new post as a category specified
+                var categoryName = newPost.Categories.FirstOrDefault().Name;
+                if (!string.IsNullOrEmpty(categoryName))
+                {
+                    //finds the category object that corresponds to the category name received
+                    //just one category is added from the frontend
+                    var query = await _categoryService.FindCategoryByName(categoryName);
+                    if (!query.Success)
+                    {
+                        response.Message = "There has been a problem retrieving the category";
+                    }
+                    var category = query.Data.FirstOrDefault();
+                    var postCategory = new PostCategories
+                    {
+                        Post = post,
+                        Category = category
+                    };
+                    _context.PostCategories.Add(postCategory);
+                }
+                else
+                {
+                    //assign the default category as General that is the category with Id 1
+                    var category = await _context.Categories.Where(c => c.CategoryId == 1)
+                                            .ToListAsync();
+                    var postCategory = new PostCategories
+                    {
+                        Post = post,
+                        Category = category.FirstOrDefault()
+                    };
+                    _context.PostCategories.Add(postCategory);
+                }
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<Post>(newPost);
-
             }
             catch (Exception ex)
             {
                 response.Success = false;
                 response.Message = ex.Message;
             }
-
             return response;
-
-
         }
+
         public ServiceResponse<Task> UpdatePost(Post postToBeUpdated, Post post)
         {
             throw new NotImplementedException();
@@ -125,6 +155,11 @@ namespace SuetiaeBlogg.Services.Services
             throw new NotImplementedException();
         }
         public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
+        {
+            throw new NotImplementedException();
+        }
+
+        ServiceResponse<Task> IPostService.DeletePost(int Id)
         {
             throw new NotImplementedException();
         }

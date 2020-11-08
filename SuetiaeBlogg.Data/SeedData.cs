@@ -103,7 +103,6 @@ namespace SuetiaeBlogg.Data
                 };
                 var post4 = new Post
                 {
-
                     Author = author3,
                     Title = "This is the third post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
@@ -122,6 +121,7 @@ namespace SuetiaeBlogg.Data
                     //    }
                     //}
                 };
+
 
                 var postCategory2 = new PostCategories {Post = post1, Category = category2};
                 var postCategory3 = new PostCategories {Post = post1, Category = category3};

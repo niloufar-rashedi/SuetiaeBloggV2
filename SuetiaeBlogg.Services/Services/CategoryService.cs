@@ -129,6 +129,23 @@ namespace SuetiaeBlogg.Services.Services
         {
             throw new NotImplementedException();
         }
+        public async Task<ServiceResponse<IEnumerable<Category>>> FindCategoryByName(string categoryName)
+        {
+            ServiceResponse<IEnumerable<Category>> response = new ServiceResponse<IEnumerable<Category>>();
+            try
+            {
+                var category = await _context.Categories
+                                                .Where(c => c.Name == categoryName)
+                                                .ToListAsync();
+                response.Data = category;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
         public Task UpdateCategory(Category categoryToBeUpdated, Category category)
         {
             throw new NotImplementedException();

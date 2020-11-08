@@ -14,6 +14,7 @@ namespace SuetiaeBlogg.Core.Services
         public Task<ServiceResponse<GetPostDto>> AddCategoryToAPost(AddPostCategoryDto newPostCategory);
         public Task<ServiceResponse<IEnumerable<GetCategoryDto>>> GetCategories();
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByCategoryId(int categoryId);
+        public Task<ServiceResponse<IEnumerable<Category>>> FindCategoryByName(string categoryName);
         public Task<Category> CreateCategory(Category newCategory);
         public Task UpdateCategory(Category categoryToBeUpdated, Category category);
         public Task DeleteCategory(Category category);

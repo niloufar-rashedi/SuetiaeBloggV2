@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuetiaeBlogg.Core.Models.Categories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -14,7 +15,8 @@ namespace SuetiaeBlogg.Core.Models.Posts
         public string Body { get; set; }
         [MaxLength(140)]
         public string Summary { get; set; }
-        
+        public List<GetCategoryDto> Categories { get; set; }
+
         public DateTimeOffset LastModified { get; set; } = DateTimeOffset.Now;
         
 
