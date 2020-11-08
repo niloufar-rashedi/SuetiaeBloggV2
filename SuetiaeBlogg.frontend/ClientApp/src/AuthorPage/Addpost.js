@@ -1,190 +1,133 @@
-﻿import React, { Fragment, Button } from 'react';
-import BlogDataService from "../services/blog.service";
-//import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-//import { Editor } from 'react-draft-wysiwyg';
-import ReactQuill from 'react-quill';
+﻿import React, { useState } from "react";
+import axios from 'axios';
 
+const AddPost = () => {
+    const initialPostState = {
+        id: null,
+        title: "",
+        category: "",
+        summary: "",
+        body: "",
+        lastModified: "",
+    };
+    const [post, setPost] = useState(initialPostState);
+    const [submitted, setSubmitted] = useState(false);
 
-export default class AddPost extends React.Component {
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setPost({ ...post, [name]: value });
+    };
+    const apiURL = 'https://localhost:44351/api/BlogPosts/InsertNewPost';
 
-    constructor(props) {
-        super(props);
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.state = { body: '' }
-        this.onChangeBody = this.onChangeBody.bind(this);
-        this.onChangeSummary = this.onChangeSummary.bind(this);
-        this.saveData = this.saveData.bind(this);
-        this.newData = this.newData.bind(this);
-
-        this.state = {
-            id: null,
-            title: "",
-            body: "",
-            summary: "",
-
-            published: false,
-
-            submitted: false
-        };
-    }
-
-
-    //state = {
-    //    posts: [],
-    //};
-
-    onChangeTitle(e) {
-        this.setState({
-            title: e.target.value
-        });
-    }
-    onChangeBody(value) {
-        this.setState({
-            body: value
-        });
-    }
-    onChangeSummary(e) {
-        this.setState({
-            summary: e.target.value
-        });
-    }
-    saveData() {
+    const savePost = () => {
         var data = {
-            id: this.state.id,
-            title: this.state.title,
-            summary: this.state.summary,
-            body: this.state.body
+            title: post.title,
+            category: post.category
         };
 
-        BlogDataService.create(data)
+        axios.post(apiURL, data)
             .then(response => {
-                this.setState({
+                setPost({
                     id: response.data.id,
                     title: response.data.title,
-                    body: response.data.body,
+                    category: response.data.category,
                     summary: response.data.summary,
+                    lastModified: response.data.lastModified
 
-                    published: response.data.published,
-
-                    submitted: true
                 });
+                setSubmitted(true);
                 console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
             });
-    }
-    newData() {
-        this.setState({
-            id: null,
-            title: "",
-            body: "",
-            //body: JSON.stringify(convertToRaw(editorState.editorState.getCurrentContent())),
-            summary: "",
-            published: false,
-            submitted: false
+    };
 
-        })
-    }
-
-    handleChange = (value) => {
-        this.setState({ body: value })
-    }
-
-    //handleSubmit = event => {
-    //    event.preventDefault();
-
-    //    const post = {
-    //        title: this.state.title,
-    //        summary: this.state.summary,
-    //        body: this.state.body
-    //        //category: {
-    //        //name: this.state.category.name
-
-    //        // }
-    //    };
-
-    //    axios.post('/api/BlogPosts', this.state)
-    //        .then(res => {
-    //            console.log(res);
-    //            console.log(res.data);
-    //        })
-
-    //}
-
-            //    <div>
-            //        <form onSubmit={this.handleSubmit}>
-            //            <label>
-            //                Title:
-            //    <input type="text" name="title" onChange={this.handleChange} />
-            //            </label>
-            //            <label>
-            //                Summary:
-            //    <input type="text" name="summary" onChange={this.handleChange} />
-            //            </label>
-            //            <label>
-            //                Body:
-            //    <input type="text" name="body" onChange={this.handleChange} />
-            //            </label>
-
-            //            <button type="submit">Add</button>
-            //        </form>
-            //    </div>
-            //)
-    render() {
-        return (
-            <div className="submit-form">
-                {this.state.submitted ? (
+    const newPost = () => {
+        setPost(initialPostState);
+        setSubmitted(false);
+    };
+    return (
+        <div className="submit-form">
+            {submitted ? (
+                <div>
+                    <h4>You submitted successfully!</h4>
+                    <button className="btn btn-success" onClick={newPost}>
+                        Add
+          </button>
+                </div>
+            ) : (
                     <div>
-                        <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newTutorial}>
-                            Add
-            </button>
-                    </div>
-                ) : (
-                        <div>
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="title"
-                                    required
-                                    value={this.state.title}
-                                    onChange={this.onChangeTitle}
-                                    name="title"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="description"
-                                    required
-                                    value={this.state.summary}
-                                    onChange={this.onChangeSummary}
-                                    name="description"
-                                />
-                            </div>
-                            <div>
-                                <ReactQuill
-                                    id="body"
-                                    required
-                                    value={this.state.body}
-                                    onChange={this.onChangeBody}
-                                name="body"/>
-
-                            </div>
-                            <button onClick={this.saveData} className="btn btn-success">
-                                Submit
-                            </button>
+                        <div className="form-group">
+                            <label htmlFor="title">Title</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="title"
+                                required
+                                value={post.title}
+                                onChange={handleInputChange}
+                                name="title"
+                            />
                         </div>
-                    )}
-            </div>
-        );
-    }
-}
 
-                {/*<PreviewModal output={getHtml(editorState)} />*/}
+                        <div className="form-group">
+                            <label htmlFor="category">Category</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="category"
+                                required
+                                value={post.category}
+                                onChange={handleInputChange}
+                                name="category"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="title">Summary</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="summary"
+                                required
+                                value={post.summary}
+                                onChange={handleInputChange}
+                                name="summary"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="title">Body</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="body"
+                                required
+                                value={post.body}
+                                onChange={handleInputChange}
+                                name="body"
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="title">Last modfied</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="lastModified"
+                                required
+                                value={post.lastModified}
+                                onChange={handleInputChange}
+                                name="lastModified"
+                            />
+                        </div>
+
+                        <button onClick={savePost} className="btn btn-success">
+                            Submit
+          </button>
+                    </div>
+                )}
+        </div>
+    );
+};
+
+export default AddPost;

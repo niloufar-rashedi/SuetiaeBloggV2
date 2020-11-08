@@ -3,6 +3,7 @@ import { Posts } from '../components/post/posts';
 import AddPost from '../AuthorPage/Addpost'
 
 
+
 import { Container, Col, Row, Form, Button } from 'reactstrap';
 
 export class Home extends Component {
@@ -10,7 +11,7 @@ export class Home extends Component {
 
   render () {
     return (
-      <div>
+        <div>
             <div>
                 <div class="row">
                     <div class="col">

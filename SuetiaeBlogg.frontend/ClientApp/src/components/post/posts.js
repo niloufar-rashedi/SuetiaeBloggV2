@@ -11,7 +11,7 @@ export class Posts extends React.Component {
     state = {
         posts: [],
     }
-    apiURL = 'https://localhost:5001/api/BlogPosts';
+    apiURL = 'https://localhost:44351/api/BlogPosts';
 
     
 

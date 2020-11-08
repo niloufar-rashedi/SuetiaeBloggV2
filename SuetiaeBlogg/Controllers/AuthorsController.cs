@@ -35,7 +35,7 @@ namespace SuetiaeBlogg.API.Controllers
             _appSettings = appSettings.Value;
         }
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public IActionResult Authenticate([FromBody] GetAuthorDto authorDto)
         {
             var author = _authorService.Authenticate(authorDto.Username, authorDto.Password);
@@ -61,9 +61,9 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(new
             {
                 Id = author.AuthorId,
-                Username = author.Username,
-                FirstName = author.FirstName,
-                LastName = author.LastName,
+                author.Username,
+                author.FirstName,
+                author.LastName,
                 Token = tokenString
             });
         }

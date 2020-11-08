@@ -10,7 +10,7 @@ using SuetiaeBlogg.Data;
 namespace SuetiaeBlogg.Data.Migrations
 {
     [DbContext(typeof(SuetiaeBloggDbContext))]
-    [Migration("20201102122242_InitialMigration")]
+    [Migration("20201105013754_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

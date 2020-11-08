@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -100,7 +101,7 @@ namespace SuetiaeBlogg.API.Controllers
         // Retrieves all categories
         // </summary>
 
-        [HttpGet("~/api/[controller]/categories/")]
+        [HttpGet("~/api/[controller]/categories")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetCategories()
         {
             var categories = await _categoryService.GetCategories();
@@ -138,6 +139,7 @@ namespace SuetiaeBlogg.API.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
 
         [HttpPost]
+        [Authorize]
         [Route("InsertNewPost")]
         public async Task<ActionResult<GetPostDto>> AddPost([FromBody] AddPostDto post)
         {
@@ -184,11 +186,11 @@ namespace SuetiaeBlogg.API.Controllers
 
 
 
-        // DELETE: api/Posts/5
+       // DELETE: api/Posts/5
         //[HttpDelete("{id}")]
         //public async Task<ActionResult<Post>> DeletePost(int id)
         //{
-        //    var post = await _postService.Posts.FindAsync(id);
+        //    var post = await _postService.DeletePost(id);
         //    if (post == null)
         //    {
         //        return NotFound();
