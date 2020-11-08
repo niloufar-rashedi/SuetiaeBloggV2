@@ -11,6 +11,7 @@ using SuetiaeBlogg.frontend.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace SuetiaeBlogg.frontend
 {
@@ -97,6 +98,7 @@ namespace SuetiaeBlogg.frontend
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(180);
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });

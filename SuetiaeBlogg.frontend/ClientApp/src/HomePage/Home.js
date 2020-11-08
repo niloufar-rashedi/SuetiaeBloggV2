@@ -2,8 +2,6 @@ import React, { Component, Link } from 'react';
 import { Posts } from '../components/post/posts';
 import AddPost from '../AuthorPage/Addpost'
 
-
-
 import { Container, Col, Row, Form, Button } from 'reactstrap';
 
 export class Home extends Component {
@@ -50,11 +48,11 @@ export class Home extends Component {
                             <div class="col">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item font-weight-bold">Categories</li>
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac</li>
-                                    <li class="list-group-item">Morbi leo risus</li>
-                                    <li class="list-group-item">Consectetur ac</li>
-                                    <li class="list-group-item">Vestibulum at</li>
+                                    <li class="list-group-item">General</li>
+                                    <li class="list-group-item">Event</li>
+                                    <li class="list-group-item">Sverige</li>
+                                    <li class="list-group-item">Nationaldag</li>
+                                    <li class="list-group-item">Historia</li>
                                 </ul>
                             </div>
                         </div>

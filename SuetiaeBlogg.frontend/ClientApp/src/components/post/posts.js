@@ -1,12 +1,29 @@
 ﻿import React from 'react';
 import axios from 'axios';
-
+import { Button } from 'react-bootstrap';
+import styled from 'styled-components';
 import Moment from 'react-moment';
-
-
+import posts from './posts';
+import history from './../../history';
 import Card from 'react-bootstrap/Card'
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
+const Block = styled.div`
+        cursor: pointer;
+        background: transparent;
+        font-size:16px;
+        border-radius: 3px;
+        border: 2px solid darkgray;
+        margin: 0 1em;
+        padding: 0.25em 1em;
+        margin-bottom: 3vh;
+        margin-top: 1vh;
+        transition: 0.5s all ease-out;
+     &: hover {
+        background-color: darkgray;
+        color: white;
+        }
+    `;
 export class Posts extends React.Component {
     state = {
         posts: [],
@@ -22,10 +39,12 @@ export class Posts extends React.Component {
             this.setState({ posts: response.data.data});
         });
     }
+
     render() {
         return (
             <div>
                 {this.state.posts.map(post => (
+                <Block>
                     <div className="card" key={post.id}>
 
                         <Card style={{ width: '50rem' }}>
@@ -40,20 +59,16 @@ export class Posts extends React.Component {
                                 <Card.Text>{post.body}
                                 </Card.Text>
                                 <Card.Link href="#">
-                                    <div class="button read-more absolute-bottom">Read more</div>
-                                    
-                                    
-                                    </Card.Link>
-                               
+                                    <Button variant="btn btn-success" onClick={() => history.push('/Blogs')}>Read more</Button>    
+                                </Card.Link>
                             </Card.Body>
                         </Card>
-
-
-
-
                     </div>
+                    </Block>
                 ))}
             </div>
         );
     }
 }
+
+export default posts;

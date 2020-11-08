@@ -56,7 +56,8 @@ namespace SuetiaeBlogg.Data
                                 FirstName = "anna77"
                             }
                         }
-                    }
+                    },
+                    UrlSlug = "/Blogs"
                 };
                 var post2 = new Post
                 {
@@ -65,7 +66,9 @@ namespace SuetiaeBlogg.Data
 
                     Title = "This is the first post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
-                    Body = "Write something here!"};
+                    Body = "Write something here!",
+                    UrlSlug = "/Blogs"
+                };
                 var comment = new Comment { 
                     Body = "my first comment", 
                     Author = new Author {
@@ -92,6 +95,7 @@ namespace SuetiaeBlogg.Data
                     "Förändringar som inte tas emot väl av alla."+
                     "– Det känns som ett misslyckande i planeringen"+
                     "säger Anna Andrén som är en av dem som drabbas.!",
+                    UrlSlug = "/Blogs",
                     //Comments = new List<Comment>{
                     //        new Comment {
                     //            Body = "I write a comment here",
