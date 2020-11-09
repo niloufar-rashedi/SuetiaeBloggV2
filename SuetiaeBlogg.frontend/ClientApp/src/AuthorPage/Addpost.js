@@ -1,5 +1,6 @@
 ﻿import React, { useState } from "react";
 import axios from 'axios';
+import ReturnCategories from "../components/post/return-categories";
 
 const AddPost = () => {
     const initialPostState = {
@@ -94,6 +95,9 @@ const AddPost = () => {
                                 onChange={handleInputChange}
                                 name="summary"
                             />
+                        </div>
+                        <div>
+                            <ReturnCategories/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="title">Body</label>

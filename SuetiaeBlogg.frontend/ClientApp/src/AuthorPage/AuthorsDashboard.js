@@ -218,7 +218,7 @@ function PostsList(props) {
 
                                 </br>
                                 <tbody>
-                            <a href='/addpost' class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add a new post</a>
+                                    <a href='/addposttrial' class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add a new post</a>
 
                                 </tbody>
                             </Table>

@@ -2,42 +2,44 @@
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import axios from 'axios';
+import Card from 'react-bootstrap/Card'
+
 
 
 //First Carl Rippon solution: 
 
-function ReturnCategories() {
+//function ReturnCategories() {
 
-    const animatedComponents = makeAnimated();
+//    const animatedComponents = makeAnimated();
 
-    const [items] = useState([
-        { label: "General", value: "General" },
-        { label: "Historia", value: "Historia" },
-        { label: "Holiday", value: "Holiday" }
+//    const [items] = useState([
+//        { label: "General", value: "General" },
+//        { label: "Historia", value: "Historia" },
+//        { label: "Holiday", value: "Holiday" }
 
-    ]);
-    return (
+//    ]);
+//    return (
 
-        //<select>
-        //    {items.map(item => (
-        //        <option
-        //            key={item.value}
-        //            value={item.value}
-        //        >
-        //            {item.label}
-        //        </option>                
-        //        ))}
-        //</select>
+//        //<select>
+//        //    {items.map(item => (
+//        //        <option
+//        //            key={item.value}
+//        //            value={item.value}
+//        //        >
+//        //            {item.label}
+//        //        </option>                
+//        //        ))}
+//        //</select>
 
-        <Select
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isMulti
-            options={items}
-        />
-        );
-}
-export default ReturnCategories;
+//        <Select
+//            closeMenuOnSelect={false}
+//            components={animatedComponents}
+//            isMulti
+//            options={items}
+//        />
+//        );
+//}
+//export default ReturnCategories;
 
 
 
@@ -123,3 +125,34 @@ export default ReturnCategories;
 //}
 
 //export default ReturnCategories;
+
+export class ReturnCategories extends React.Component {
+    state = {
+        categories: [],
+    }
+         apiUrl = 'https://localhost:44351/api/BlogPosts/categories';
+
+    async componentDidMount() {
+        await axios.get(this.apiUrl)
+            .then(response => {
+                console.log(response);
+                this.setState({ categories: response.data.data });
+            });
+    }
+    render() {
+        return (
+            <div>
+                {this.state.categories.map(category => (
+                        <div className="card" key={category.Id}>
+
+                            <Card style={{ width: '50rem' }}>
+                                <Card.Body>
+                                    <Card.Title>{category.Name}</Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                ))}
+            </div>
+        );
+    }
+} export default ReturnCategories;
