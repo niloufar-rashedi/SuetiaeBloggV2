@@ -36,7 +36,7 @@ export default class AddPost extends React.Component {
     //state = {
     //    posts: [],
     //};
-
+    
     onChangeTitle(e) {
         this.setState({
             title: e.target.value

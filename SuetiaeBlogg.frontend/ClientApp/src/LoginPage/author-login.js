@@ -13,7 +13,7 @@ function Login(props){
             Password: author.Password
         };
         const apiUrl = "https://localhost:44351/api/Authors/login";
-
+        
         axios.post(apiUrl, data, {   
             headers: {
                 "Authorization": "application/json",
@@ -21,15 +21,13 @@ function Login(props){
             }
         })
             .then((response) => {
+                console.log('This is the response', response)
                 return response;
             })
             .then((result) => {
-                console.log(result);
-                localStorage.setItem('signin', JSON.stringify({
-
-                    login: true,
-                    token: result.token
-                }))
+                console.log('This the result', result)
+                localStorage.setItem('signin', result.data.token)
+                console.log('Token from localStorage', localStorage.getItem('signin'))
                 //    console.log(result.data);
                 //    const serializedState = JSON.stringify(result.data.UserDetails);
                 //    var a = localStorage.setItem('myData', serializedState);
@@ -42,8 +40,12 @@ function Login(props){
                         props.history.push('/authorsdashboarad')
                 }).catch(e => {
                     console.log(e.result);
+                  
                 });
+              
+               
             }
+           
     //return result;
     
 

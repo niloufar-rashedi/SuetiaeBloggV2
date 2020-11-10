@@ -20,6 +20,9 @@ const AddPost = () => {
     };
     const apiURL = 'https://localhost:44351/api/BlogPosts/InsertNewPost';
 
+    let token = localStorage.getItem('signin');
+    console.log('Token retrieved', token);
+    
     const savePost = () => {
         var data = {
             title: post.title,
