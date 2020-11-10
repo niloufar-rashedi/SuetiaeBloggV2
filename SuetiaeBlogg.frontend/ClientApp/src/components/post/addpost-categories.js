@@ -1,193 +1,73 @@
-﻿import React, { Fragment, Button } from 'react';
-//import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
-//import { Editor } from 'react-draft-wysiwyg';
-import ReactQuill from 'react-quill';
+﻿import React, { Fragment, Button, useState } from 'react';
 import axios from 'axios';
-import ReturnCategories from '../post/return-categories'
 
 
-export default class AddPost extends React.Component {
-
+class AddPost extends React.Component {
     constructor(props) {
-        super(props);
-        //ID?
-        this.onChangeTitle = this.onChangeTitle.bind(this);
-        this.onChangeCategory = this.onChangeCategory.bind(this);
-        this.onChangeSummary = this.onChangeSummary.bind(this);
-        this.state = { body: '' }
-        this.onChangeBody = this.onChangeBody.bind(this);
-        this.saveData = this.saveData.bind(this);
-        this.newData = this.newData.bind(this);
-
+        super(props)
         this.state = {
-            id: null,
-            title: "",
-            category: "",
-            summary: "",
-            body: "",
-
-            //published: false,
-
-            //submitted: false
-        };
+            postId: '',
+            title: '',
+            body: '',
+            summary:''
+        }
     }
 
 
-    //state = {
-    //    posts: [],
-    //};
-    
-    onChangeTitle(e) {
-        this.setState({
-            title: e.target.value
-        });
-    }
-    onChangeCategory(e) {
-        this.setState({
-            category: e.target.value
-        });
+    changeHandler = e => {
+        this.setState({[e.target.name]: e.target.value})
     }
 
-    onChangeSummary(e) {
-        this.setState({
-            summary: e.target.value
-        });
-    }
-    onChangeBody(value) {
-        this.setState({
-            body: value
-        });
-    }
+    apiURL = 'https://localhost:44351/api/BlogPosts/InsertNewPost';
+         token = localStorage.getItem('signin');
+//console.log('Token retrieved', token);
 
-    saveData() {
-        var data = {
-            id: this.state.id,
-            title: this.state.title,
-            category: this.state.category,
-            summary: this.state.summary,
-            body: this.state.body
-        };
-    const apiURL = 'https://localhost:44351/api/BlogPosts/InserNewPost';
-
-        axios.post(apiURL, data)
-            .then(response => {
-                this.setState({
-                    id: response.data.id,
-                    title: response.data.title,
-                    body: response.data.body,
-                    summary: response.data.summary,
-
-                    //published: response.data.published,
-
-                    //submitted: true
-                });
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-    newData() {
-        this.setState({
-            id: null,
-            title: "",
-            category: "",
-            summary: "",
-            body: "",
-            ////body: JSON.stringify(convertToRaw(editorState.editorState.getCurrentContent())),
-            //published: false,
-            //submitted: false
+    submitHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post(this.apiURL, this.state, {
+            headers: {
+                'Authorization': `Bearer `+ this.token,
+                'Content-Type': 'application/json'
+            }
 
         })
+            .then(response => {
+                console.log("Response from server: ", response)
+            })
+            .catch(error => {
+                console.log(error);
+                //console.log(this.state.error)
+            })
     }
 
-    handleChange = (value) => {
-        this.setState({ body: value })
-    }
+
 
     render() {
+        const { postId, title, body, summary } = this.state
         return (
-            <div className="submit-form">
-                {this.state.submitted ? (
+            <div>
+                <form onSubmit={this.submitHandler}>
                     <div>
-                        <h4>You submitted successfully!</h4>
-                        <button className="btn btn-success" onClick={this.newTutorial}>
-                            Add
-            </button>
+                        <input type="text" name="postId" value={postId} onChange={ this.changeHandler} />
                     </div>
-                ) : (
-                        <div>
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="title"
-                                    required
-                                    value={this.state.title}
-                                    onChange={this.onChangeTitle}
-                                    name="title"
-                                />
-                            </div>
-
-                            <div className="form-group">
-                                <label htmlFor="title">Category</label>
-                                <ReturnCategories />
-                                { /*<input
-                                    type="text"
-                                    className="form-control"
-                                    id="category"
-                                    required
-                                    value={this.state.category}
-                                    onChange={this.onChangeCategory}
-                                    name="category"
-                                />*/}
-
-                            </div>
-                            
-                            <div className="form-group">
-                                <label htmlFor="description">Summary</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="summary"
-                                    required
-                                    value={this.state.summary}
-                                    onChange={this.onChangeSummary}
-                                    name="description"
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="body">Bod</label>
-                                <ReactQuill
-                                    id="body"
-                                    required
-                                    value={this.state.body}
-                                    onChange={this.onChangeBody}
-                                    name="body" />
-
-                                
-                                { /* <input
-                                    type="text"
-                                    className="form-control"
-                                    id="body"
-                                    required
-                                    value={this.state.body}
-                                    onChange={this.onChangeBody}
-                                    name="body"
-                                />*/}
+                    <div>
+                        <input type="text" name="title" value={title} onChange={this.changeHandler} />
+                    </div>
+                    <div>
+                        <input type="text" name="body" value={body} onChange={this.changeHandler} />
+                    </div>
+                    <div>
+                        <input type="text" name="summary" value={summary} onChange={this.changeHandler} />
+                    </div>
+                    <button type="submit">Submit</button>
 
 
-                            </div>
-                            <br></br>
-                            <button onClick={this.saveData} className="btn btn-success">
-                                Submit
-                            </button>
-                        </div>
-                    )}
+
+                </form>
             </div>
-        );
+            )
     }
 }
-
+export default AddPost;
 {/*<PreviewModal output={getHtml(editorState)} />*/ }

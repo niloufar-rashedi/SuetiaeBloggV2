@@ -130,10 +130,20 @@ export class ReturnCategories extends React.Component {
     state = {
         categories: [],
     }
-         apiUrl = 'https://localhost:44351/api/BlogPosts/categories';
+    apiUrl = 'https://localhost:44351/api/BlogPosts/categories';
+
+        //console.log(('Token retrieved'), token);
 
     async componentDidMount() {
-        await axios.get(this.apiUrl)
+        const token = localStorage.getItem('signin');
+
+        await axios.get(this.apiUrl, {
+            headers: {
+                'Authorization': token
+            }
+        }
+
+        )
             .then(response => {
                 console.log(response);
                 this.setState({ categories: response.data.data });

@@ -43,11 +43,11 @@ export default class App extends Component {
                       <Route path='/authorsdashboarad' component={AuthorsDashboard} />
                       <Route path='/register' component={AuthorRegistration} />
                       <Route path='/login' component={Login} />
-                      <Route path='/addpost' component={AddPostByCategory} />
+                      <Route path='/addpost' component={AddPost} />
                       <Route path='/selectcategories' component={Categories} />
 
 
-                      <Route path='/addposttrial' component={AddPost} />
+                    <Route path='/addposttrial' component={AddPostByCategory} />
                       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                   </Layout>
               </Switch>

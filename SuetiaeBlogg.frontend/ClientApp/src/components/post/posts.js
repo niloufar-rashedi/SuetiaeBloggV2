@@ -8,22 +8,22 @@ import history from './../../history';
 import Card from 'react-bootstrap/Card'
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
-const Block = styled.div`
-        cursor: pointer;
-        background: transparent;
-        font-size:16px;
-        border-radius: 3px;
-        border: 2px solid darkgray;
-        margin: 0 1em;
-        padding: 0.25em 1em;
-        margin-bottom: 3vh;
-        margin-top: 1vh;
-        transition: 0.5s all ease-out;
-     &: hover {
-        background-color: darkgray;
-        color: white;
-        }
-    `;
+//const Block = styled.div`
+//        cursor: pointer;
+//        background: transparent;
+//        font-size:16px;
+//        border-radius: 3px;
+//        border: 2px solid darkgray;
+//        margin: 0 1em;
+//        padding: 0.25em 1em;
+//        margin-bottom: 3vh;
+//        margin-top: 1vh;
+//        transition: 0.5s all ease-out;
+//     &: hover {
+//        background-color: darkgray;
+//        color: white;
+//        }
+//    `;
 export class Posts extends React.Component {
     state = {
         posts: [],
@@ -44,7 +44,7 @@ export class Posts extends React.Component {
         return (
             <div>
                 {this.state.posts.map(post => (
-                <Block>
+                //<Block>
                     <div className="card" key={post.id}>
 
                         <Card style={{ width: '50rem' }}>
@@ -64,7 +64,7 @@ export class Posts extends React.Component {
                             </Card.Body>
                         </Card>
                     </div>
-                    </Block>
+                    //</Block>
                 ))}
             </div>
         );

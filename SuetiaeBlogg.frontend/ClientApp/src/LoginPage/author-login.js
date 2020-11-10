@@ -16,7 +16,7 @@ function Login(props){
         
         axios.post(apiUrl, data, {   
             headers: {
-                "Authorization": "application/json",
+                //'Authorization': token ,
                 'Content-Type': 'application/json'
             }
         })
