@@ -14,10 +14,9 @@ function Login(props){
         };
         const apiUrl = "https://localhost:44351/api/Authors/login";
 
-        axios.post(apiUrl, data, {
-            method: 'GET',
+        axios.post(apiUrl, data, {   
             headers: {
-                "Accept": "application/json",
+                "Authorization": "application/json",
                 'Content-Type': 'application/json'
             }
         })
@@ -45,7 +44,7 @@ function Login(props){
                     console.log(e.result);
                 });
             }
-            //return result;
+    //return result;
     
 
     const onChange = (e) => {
