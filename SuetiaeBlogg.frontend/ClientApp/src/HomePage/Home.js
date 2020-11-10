@@ -1,6 +1,6 @@
 import React, { Component, Link } from 'react';
 import { Posts } from '../components/post/posts';
-import AddPost from '../AuthorPage/Addpost'
+
 
 import { Container, Col, Row, Form, Button } from 'reactstrap';
 

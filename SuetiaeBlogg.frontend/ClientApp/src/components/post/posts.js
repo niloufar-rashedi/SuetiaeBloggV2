@@ -50,10 +50,7 @@ export class Posts extends React.Component {
                         <Card style={{ width: '50rem' }}>
                             
                             <Card.Header>Last modified: <Moment format="YYYY/MM/DD">{post.lastModified}</Moment></Card.Header>
-                            
-
-
-                            <Card.Body>
+                             <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{post.summary}</Card.Subtitle>
                                 <Card.Text>{post.body}
