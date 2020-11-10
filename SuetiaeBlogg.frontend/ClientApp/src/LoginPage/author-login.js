@@ -14,22 +14,40 @@ function Login(props){
         };
         const apiUrl = "https://localhost:44351/api/Authors/login";
 
-        axios.post(apiUrl, data)
+        axios.post(apiUrl, data, {
+            method: 'GET',
+            headers: {
+                "Accept": "application/json",
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => {
+                return response;
+            })
             .then((result) => {
-                console.log(result.data);
-                const serializedState = JSON.stringify(result.data.UserDetails);
-                var a = localStorage.setItem('myData', serializedState);
-                console.log("A:", a)
-                //const author = result.data.UserDetails;
-                console.log(result.data.message);
-                if (result.data.Status == 'Invalid')
-                    alert('Try again!');
-                else
-                    props.history.push('/authorsdashboarad')
-            }).catch(e => {
-                console.log(e.result);
-            });
-    }
+                console.log(result);
+                localStorage.setItem('signin', JSON.stringify({
+
+                    login: true,
+                    token: result.token
+                }))
+                //    console.log(result.data);
+                //    const serializedState = JSON.stringify(result.data.UserDetails);
+                //    var a = localStorage.setItem('myData', serializedState);
+                //    console.log("A:", a)
+                //    //const author = result.data.UserDetails;
+                //    console.log(result.data.message);
+                    if (result.data.Status == 'Invalid')
+                        alert('Try again!');
+                    else
+                        props.history.push('/authorsdashboarad')
+                }).catch(e => {
+                    console.log(e.result);
+                });
+            }
+            //return result;
+    
+
     const onChange = (e) => {
         e.persist();
         //debugger;
