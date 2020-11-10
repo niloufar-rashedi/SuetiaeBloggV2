@@ -30,6 +30,7 @@ namespace SuetiaeBlogg.Services.Services
             {
                 var posts = await _context.Posts
                                 .Where(x => x.Author.AuthorId == authorId)
+                                .Include(a => a.Author)
                                 .Include(c => c.PostCategories)
                                 .ThenInclude(Postcategories => Postcategories.Category)
                                 .Include(t => t.PostTags)

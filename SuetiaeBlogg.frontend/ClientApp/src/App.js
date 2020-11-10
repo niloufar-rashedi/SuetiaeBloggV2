@@ -9,7 +9,6 @@ import posts from './components/post/posts';
 //import { FetchData } from './components/FetchData';
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
-import  AddPost from './AuthorPage/Addpost'
 import AddPostByCategory from '../src/components/post/addpost-categories';
 import Categories from '../src/CategoriesPage/Categories';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
@@ -43,11 +42,10 @@ export default class App extends Component {
                       <Route path='/authorsdashboarad' component={AuthorsDashboard} />
                       <Route path='/register' component={AuthorRegistration} />
                       <Route path='/login' component={Login} />
-                      <Route path='/addpost' component={AddPostByCategory} />
                       <Route path='/selectcategories' component={Categories} />
 
 
-                      <Route path='/addposttrial' component={AddPost} />
+                    <Route path='/addposttrial' component={AddPostByCategory} />
                       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                   </Layout>
               </Switch>
