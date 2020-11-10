@@ -12,7 +12,8 @@ namespace SuetiaeBlogg.Core.Models.Posts
     public class GetPostDto
     {
         public int PostId { get; set; }
-        public GetAuthorDto Author { get; set; }
+        //public GetAuthorDto Author { get; set; }
+        public string FirstName { get; set; }
         public string Title { get; set; } 
         public string Summary { get; set; }
         public List<GetCategoryDto> Categories { get; set; }
