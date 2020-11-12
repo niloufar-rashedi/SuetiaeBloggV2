@@ -1,10 +1,14 @@
 ﻿import React, { useState } from 'react'
 import axios from 'axios';
+import { isEmail } from "validator";
+import { UserContext } from '../components/UserContext'
 
 function Login(props){
 
     const [author, setauthor] =
         useState({ UserName: '', Password: '' });  
+
+    const [user, setUser] = useState(null);
 
     const Signin = (e) => {
         e.preventDefault();
@@ -23,11 +27,15 @@ function Login(props){
             .then((response) => {
                 console.log('This is the response', response)
                 return response;
+                debugger;
             })
             .then((result) => {
                 console.log('This the result', result)
                 localStorage.setItem('signin', result.data.token)
                 console.log('Token from localStorage', localStorage.getItem('signin'))
+                localStorage.setItem('userId', JSON.stringify(result.data.id))
+                console.log('userId from localStorage', localStorage.getItem('userId'))
+
                 //    console.log(result.data);
                 //    const serializedState = JSON.stringify(result.data.UserDetails);
                 //    var a = localStorage.setItem('myData', serializedState);
@@ -35,66 +43,57 @@ function Login(props){
                 //    //const author = result.data.UserDetails;
                 //    console.log(result.data.message);
                     if (result.data.Status == 'Invalid')
-                        alert('Try again!');
+                    alert('Try again!');
+                
                     else
                         props.history.push('/authorsdashboarad')
                 }).catch(e => {
                     console.log(e.result);
                   
-                });
-              
-               
+                });           
             }
-           
-    //return result;
-    
 
     const onChange = (e) => {
         e.persist();
         //debugger;
         setauthor({ ...author, [e.target.name]: e.target.value });
     } 
+    const required = value => {
+        if (!value) {
+            return (
+                <div className="alert alert-danger" role="alert">
+                    This field is required!
+                </div>
+            );
+        }
+    };
+
+    const email = value => {
+        if (!isEmail(value)) {
+            return (
+                <div className="alert alert-danger" role="alert">
+                    This is not a valid email.
+                </div>
+            );
+        }
+    };
     return (
 
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-10 col-lg-12 col-md-9">
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                                <div class="col-lg-6">
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Sign in to your blog dashboard</h1>
-                                        </div>
-                                        <form onSubmit={Signin} class="user">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" value={author.UserName} onChange={onChange} name="UserName" id="UserName" aria-describedby="emailHelp" placeholder="Your username is your Email" />
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control" value={author.Password} onChange={onChange} name="Password" id="Password" placeholder="Password" />
-                                            </div>
-                                            {/* <div class="form-group">  
-                          <div class="custom-control custom-checkbox small">  
-                            <input type="checkbox" class="custom-control-input" id="customCheck"/>  
-                            <label class="custom-control-label" for="customCheck">Remember Me</label>  
-                          </div>  
-                        </div> */}
-                                            <button type="submit" className="btn btn-info mb-1" block><span>Login</span></button>
-                                            <hr />
-                                        </form>
-                                        <hr />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      
+
+            <form onSubmit={Signin} class="user">
+                <h3>Log in</h3>
+                <div class="form-group">
+                    <label>Email</label>
+                <input type="email" class="form-control" value={author.UserName} onChange={onChange} name="UserName" id="UserName" aria-describedby="emailHelp" placeholder="Your username is your Email" validations={[required, email]} />
                 </div>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label>Password</label>
+                <input type="password" class="form-control" value={author.Password} onChange={onChange} name="Password" id="Password" placeholder="Password" validations={[required]} />
+                </div>
+                   <button type="submit" className="btn btn-info mb-1" block><span>Login</span></button>
+                                           
+            </form>                                              
     )  
-
-
 }
 export default Login;
