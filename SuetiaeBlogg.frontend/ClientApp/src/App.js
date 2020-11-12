@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Route } from 'react-router';
 import { Router, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
@@ -20,14 +20,18 @@ import Login from '../src/LoginPage/author-login'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import history from './history';
 import Blogs from './BlogPage/Blogs';
+import { UserContext } from '../src/components/UserContext'
 
 
 import './custom.css'
+import { useMemo } from 'react';
 
-export default class App extends Component {
-    static displayName = App.name;
 
-  render () {
+function App() {
+    //displayName = App.name;
+    const [user, setUser] = useState(null);
+    const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
+
     return (
 
         <Router history={history}>
@@ -39,17 +43,19 @@ export default class App extends Component {
                       <Route path="/blogs" component={Blogs} />
                       <Route path='/counter' component={Counter} />
                       { /*<AuthorizeRoute path='/authosdashboarad' component={AuthorsDashboard} />*/}
-                      <Route path='/authorsdashboarad' component={AuthorsDashboard} />
                       <Route path='/register' component={AuthorRegistration} />
                       <Route path='/login' component={Login} />
-                      <Route path='/selectcategories' component={Categories} />
+                    <Route path='/selectcategories' component={Categories} />
 
-
+                    <UserContext.Provider value={providerValue}>
+                      <Route path='/authorsdashboarad' component={AuthorsDashboard} />
                     <Route path='/addposttrial' component={AddPostByCategory} />
+                    </UserContext.Provider>
                       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                   </Layout>
               </Switch>
           </Router>
         );
-    }
+    
 }
+export default App;
