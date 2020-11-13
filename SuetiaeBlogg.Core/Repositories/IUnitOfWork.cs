@@ -7,8 +7,11 @@ namespace SuetiaeBlogg.Core.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        IPostRepository Posts { get; }
-        ICategoryRepository Categories { get; }
-        Task<int> CommitAsync();
+        public void Save();
+        public void Dispose(bool disposing);
+        public new void Dispose();
+        //Task<int> CommitAsync();
+
+
     }
 }
