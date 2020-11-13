@@ -8,7 +8,8 @@ namespace SuetiaeBlogg.Core.Models.Posts
 {
     public class AddPostDto
     {
-        
+
+        public int AuthorId { get; set; }
         [Required(ErrorMessage = "Title required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Post text required")]

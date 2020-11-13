@@ -216,6 +216,29 @@ namespace SuetiaeBlogg.Services.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Author> FindAuthorById(int authorId)
+        {
+            try
+            {
+                var author = await _context.Authors
+                                    .Where(d => d.AuthorId == authorId)
+                                    .FirstOrDefaultAsync();
+                return author;
+
+
+
+                
+               
+            }
+            catch
+            {
+                throw new ArgumentNullException("Author not found");
+                
+            }
+            
+            
+        }
+
         //void IAuthorService.Update(Author userParam, string password)
         //{
         //    throw new NotImplementedException();

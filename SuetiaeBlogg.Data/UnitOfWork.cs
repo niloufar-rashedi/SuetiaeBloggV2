@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Data.Repositories;
 
@@ -10,10 +7,17 @@ namespace SuetiaeBlogg.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SuetiaeBloggDbContext _context;
-        public IPostRepository Posts { get; }
-        public ICategoryRepository Categories { get; }
 
+        public IPostRepository Posts { get; }
+        public IAuthorRepository Authors { get; }
+        public ICommentRepository Comments { get; }
+        public ICategoryRepository Categories { get; }
+        public ITagRepository Tags { get; }
         public IPostCategoriesRepository PostCategories { get; }
+        public IPostTagsRepository PostTags { get; set; }
+        
+       
+
 
         public UnitOfWork(SuetiaeBloggDbContext context)
         {
