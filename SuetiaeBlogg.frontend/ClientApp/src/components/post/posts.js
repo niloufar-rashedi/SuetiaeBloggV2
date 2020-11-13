@@ -36,14 +36,18 @@ export class Posts extends React.Component {
         await axios.get(this.apiURL)
             .then(response => {
             console.log(response);
-            this.setState({ posts: response.data.data});
+                this.setState({ posts: response.data.data});
         });
     }
 
+    
+
+    
     render() {
         return (
             <div>
-                {this.state.posts.map(post => (
+                            
+                {this.state.posts.sort.map(post => (
                 //<Block>
                     <div className="card" key={post.id}>
 
@@ -55,9 +59,15 @@ export class Posts extends React.Component {
                                 <Card.Subtitle className="mb-2 text-muted">{post.summary}</Card.Subtitle>
                                 <Card.Text>{post.body}
                                 </Card.Text>
+                                
                                 <Card.Link href="#">
                                     <Button variant="btn btn-success" onClick={() => history.push('/Blogs')}>Read more</Button>    
                                 </Card.Link>
+                                {post.categories.map((cat) =>
+
+                                        <Button variant="primary">{cat.name}</Button>
+                                    )
+                                }
                             </Card.Body>
                         </Card>
                     </div>

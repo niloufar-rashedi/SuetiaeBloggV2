@@ -11,55 +11,69 @@ namespace SuetiaeBlogg.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext Context;
+        internal DbContext context;
+        internal DbSet<T> dbSet;
 
         public Repository(DbContext context)
         {
-            this.Context = context;
+            this.context = context;
+            this.dbSet = context.Set<T>();
+
         }
-        public async Task AddAsync(T entity)
+        public virtual IEnumerable<T> Get(string includeProperties = "", Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null         )
         {
-            await Context.Set<T>().AddAsync(entity);
+            IQueryable<T> query = dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            else
+            {
+                return query.ToList();
+            }
         }
 
-        public Task AddAsync(IEnumerable<T> entity)
+
+        public virtual T GetByID(object id)
         {
-            throw new NotImplementedException();
+            return dbSet.Find(id);
+        }
+        public virtual void Insert(T entity)
+        {
+            dbSet.Add(entity);
+        }
+        public virtual void Delete(T entityToDelete)
+        {
+            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToDelete);
+            }
+            dbSet.Remove(entityToDelete);
+        }
+        public virtual void Delete(object id)
+        {
+            T entityToDelete = dbSet.Find(id);
+            Delete(entityToDelete);
+        }
+        public virtual void Update(T entityToUpdate)
+        {
+            dbSet.Attach(entityToUpdate);
+            context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        public async Task AddRangeAsync(IEnumerable<T> entities)
-        {
-            await Context.Set<T>().AddRangeAsync(entities);
-        }
-
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
-        {
-            return Context.Set<T>().Where(predicate);
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await Context.Set<T>().ToListAsync();
-        }
-
-
-        public ValueTask<T> GetByIdAsync(int id)
-        {
-            return Context.Set<T>().FindAsync(id);
-        }
-        public void Remove(T entity)
-        {
-            Context.Set<T>().Remove(entity);
-        }
-
-        public void RemoveRange(IEnumerable<T> entities)
-        {
-            Context.Set<T>().RemoveRange(entities);
-        }
-
-        public Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate)
-        {
-            return Context.Set<T>().SingleOrDefaultAsync(predicate);
-        }
+        
+        
     }
 }

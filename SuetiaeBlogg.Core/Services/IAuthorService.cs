@@ -11,6 +11,7 @@ namespace SuetiaeBlogg.Core.Services
     public interface IAuthorService
     {
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> FindPostsByAuthorId(int authorId);
+        public Task<Author> FindAuthorById(int Id);
         public Task<ServiceResponse<IEnumerable<GetAuthorDto>>> GetAllAuthors();
         Author Authenticate(string username, string password);
         Author Create(Author author, string password);

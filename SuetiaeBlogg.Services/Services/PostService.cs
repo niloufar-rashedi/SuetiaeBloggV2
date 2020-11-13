@@ -25,12 +25,14 @@ namespace SuetiaeBlogg.Services.Services
         private readonly SuetiaeBloggDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
+        private readonly IAuthorService _authorService;
 
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService)
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService, IAuthorService authorService)
         {
             this._context = context;
             this._mapper = mapper;
             this._categoryService = categoryService;
+            this._authorService = authorService;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
@@ -96,8 +98,10 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
             {
+                var author = await _authorService.FindAuthorById(newPost.AuthorId);
                 var post = new Post()
                 {
+                    Author = author,
                     Title = newPost.Title,
                     Summary = newPost.Summary,
                     Body = newPost.Body,
