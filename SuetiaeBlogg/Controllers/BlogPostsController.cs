@@ -38,6 +38,7 @@ namespace SuetiaeBlogg.API.Controllers
             _categoryService = categoryService;
             _tagService = tagService;
             _authorService = authorService;
+            _commentService = commentService;
         }
 
 
