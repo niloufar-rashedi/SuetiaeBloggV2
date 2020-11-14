@@ -13,7 +13,7 @@ class AddPost extends React.Component {
             body: '',
             summary: '',
             category: '',
-            author: ''
+            authorId: ''
         }
         //this.changeHandler = this.changeHandler.bind(this)
     }
@@ -34,7 +34,7 @@ class AddPost extends React.Component {
 
     submitHandler = e => {
         e.preventDefault()
-        this.state.author = localStorage.getItem('userId');
+        this.state.authorId = localStorage.getItem('userId');
         
         //var form = document.querySelector('form');
         //var body = document.querySelector('input[name=body]');
@@ -75,7 +75,7 @@ class AddPost extends React.Component {
 
 
     render() {
-        const { postId, title, body, summary, category } = this.state
+        const { title, body, summary, category, authorId } = this.state
         const toolbarOptions = [
             ['bold', 'italic', 'underline'],       
             [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],

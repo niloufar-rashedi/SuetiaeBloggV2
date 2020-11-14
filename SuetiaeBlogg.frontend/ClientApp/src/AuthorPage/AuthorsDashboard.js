@@ -68,12 +68,7 @@ function PostsList(props) {
                                         })}
                                 </tbody>
                                 <br>
-
                                 </br>
-                                <tbody>
-                                    <a href='/addposttrial' class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add a new post</a>
-
-                                </tbody>
                             </Table>
                         </CardBody>
                         <div>
