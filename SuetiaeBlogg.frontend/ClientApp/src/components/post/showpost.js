@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import axios from 'axios';
-
+import Moment from 'react-moment';
+import Card from 'react-bootstrap/Card'
 
 class ShowPost extends React.Component {
     constructor(props) {
@@ -28,8 +29,12 @@ class ShowPost extends React.Component {
 
     render() {
         return (<div>
-            <p>Content for post details to go here!!!!!</p>
-        <p>Post Id {this.$postId}</p>
+            <p>Title {this.state.post.title}</p>
+            <p>Summary {this.state.post.summary}</p>
+            <p>Body </p>
+            <p>Author {this.state.post.firstname}</p>
+            <p>Comments </p>
+            
         </div>);
     }
 }

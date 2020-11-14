@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Moment from 'react-moment';
+import Card from 'react-bootstrap/Card'
 import posts from './posts';
 import showpost from './posts';
 import history from './../../history';
-import Card from 'react-bootstrap/Card'
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 //const Block = styled.div`
@@ -41,15 +41,10 @@ export class Posts extends React.Component {
                 this.setState({ posts: response.data.data});
         });
     }
-
-    
-
-    
     render() {
         return (
             <div>
-                            
-                {this.state.posts.map(post => (
+               {this.state.posts.map(post => (
                 //<Block>
                     <div className="card" key={post.id}>
 
@@ -64,14 +59,12 @@ export class Posts extends React.Component {
                                 <Card.Link href="#">
                                 <Link to={{pathname: `/showpost/${post.postId}`, query: { id: post.postId }}}><Button variant="btn btn-success" >Read more</Button></Link>
                                 </Card.Link>
-
-                                
-                                
                             </Card.Body>
                         </Card>
                     </div>
                     //</Block>
-                ))}
+                ))}             
+               
             </div>
         );
     }
