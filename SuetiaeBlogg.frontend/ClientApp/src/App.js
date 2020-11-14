@@ -36,7 +36,6 @@ export default class App extends Component {
                   <Layout>
                       <Route exact path='/' component={Home} />
                       <Route path='/showpost/:id' component = {showpost}/>
-            
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />
