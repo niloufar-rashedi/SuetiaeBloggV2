@@ -16,6 +16,7 @@ namespace SuetiaeBlogg.Core.Models.Posts
         public string FirstName { get; set; }
         public string Title { get; set; } 
         public string Summary { get; set; }
+        public string Body { get; set; }
         public List<GetCategoryDto> Categories { get; set; }
         public List<GetTagDto> Tags { get; set; }
         public List<GetCommentDto> Comments { get; set; }

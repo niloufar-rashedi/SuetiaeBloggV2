@@ -12,6 +12,7 @@ using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Authors;
 using SuetiaeBlogg.Core.Models.Categories;
+using SuetiaeBlogg.Core.Models.Comments;
 using SuetiaeBlogg.Core.Models.PostCategory;
 using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
@@ -28,8 +29,10 @@ namespace SuetiaeBlogg.API.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
         private readonly IAuthorService _authorService;
+        private readonly ICommentService _commentService;
 
-        public BlogPostsController(IPostService postService, ICategoryService categoryService, ITagService tagService, IAuthorService authorService)
+        public BlogPostsController(IPostService postService, ICategoryService categoryService, 
+            ITagService tagService, IAuthorService authorService, ICommentService commentService)
         {
             _postService = postService;
             _categoryService = categoryService;
@@ -152,6 +155,16 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("InsertNewComment")]
+        public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
+        {
+            await _commentService.CreateComment(comment);
+            return Ok();
+
+        }
+
         // PUT: api/Posts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -186,7 +199,7 @@ namespace SuetiaeBlogg.API.Controllers
 
 
 
-       // DELETE: api/Posts/5
+        // DELETE: api/Posts/5
         //[HttpDelete("{id}")]
         //public async Task<ActionResult<Post>> DeletePost(int id)
         //{

@@ -31,8 +31,9 @@ class ShowPost extends React.Component {
         return (<div>
             <p>Title {this.state.post.title}</p>
             <p>Summary {this.state.post.summary}</p>
-            <p>Body </p>
-            <p>Author {this.state.post.firstname}</p>
+            <p>Author {this.state.post.firstName}</p>
+            <p>Last modified {this.state.post.lastModified} </p>
+            <p>Author {this.state.post.firstName}</p>
             <p>Comments </p>
             
         </div>);
