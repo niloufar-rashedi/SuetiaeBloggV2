@@ -57,9 +57,9 @@ namespace SuetiaeBlogg
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<IPostService, PostService>();
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             //services.AddScoped<ICategoryService, CategoryService>();
             services.AddTransient<ICategoryService, CategoryService>();
-
             services.AddTransient<ITagService, TagService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddTransient<IAuthorService, AuthorService>();

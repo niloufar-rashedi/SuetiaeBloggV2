@@ -1,11 +1,13 @@
 ﻿import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Moment from 'react-moment';
-import posts from './posts';
-import history from './../../history';
 import Card from 'react-bootstrap/Card'
+import posts from './posts';
+import showpost from './posts';
+import history from './../../history';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 //const Block = styled.div`
@@ -39,15 +41,10 @@ export class Posts extends React.Component {
                 this.setState({ posts: response.data.data});
         });
     }
-
-    
-
-    
     render() {
         return (
             <div>
-                            
-                {this.state.posts.sort.map(post => (
+               {this.state.posts.map(post => (
                 //<Block>
                     <div className="card" key={post.id}>
 
@@ -57,22 +54,15 @@ export class Posts extends React.Component {
                              <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{post.summary}</Card.Subtitle>
-                                <Card.Text>{post.body}
-                                </Card.Text>
-                                
                                 <Card.Link href="#">
-                                    <Button variant="btn btn-success" onClick={() => history.push('/Blogs')}>Read more</Button>    
+                                <Link to={{pathname: `/showpost/${post.postId}`, query: { id: post.postId }}}><Button variant="btn btn-success" >Read more</Button></Link>
                                 </Card.Link>
-                                {post.categories.map((cat) =>
-
-                                        <Button variant="primary">{cat.name}</Button>
-                                    )
-                                }
                             </Card.Body>
                         </Card>
                     </div>
                     //</Block>
-                ))}
+                ))}             
+               
             </div>
         );
     }

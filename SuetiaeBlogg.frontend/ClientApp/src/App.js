@@ -6,6 +6,7 @@ import { Home } from './HomePage/Home';
 import { About } from './AboutPage/About';
 import { Contact } from './ContactPage/Contact';
 import posts from './components/post/posts';
+import showpost from './components/post/showpost';
 //import { FetchData } from './components/FetchData';
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
@@ -34,6 +35,7 @@ export default class App extends Component {
               <Switch>
                   <Layout>
                       <Route exact path='/' component={Home} />
+                      <Route path='/showpost/:id' component = {showpost}/>
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />
