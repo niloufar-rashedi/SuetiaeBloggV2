@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,22 @@ namespace SuetiaeBlogg.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public void Delete(Author entityToDelete)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(object id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Author> Find(Expression<Func<Author, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Author> Get(string includeProperties, Expression<Func<Author, bool>> filter = null, Func<IQueryable<Author>, IOrderedQueryable<Author>> orderBy = null)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +46,17 @@ namespace SuetiaeBlogg.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public Author GetByID(object id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ValueTask<Author> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(Author entity)
         {
             throw new NotImplementedException();
         }
@@ -46,6 +72,11 @@ namespace SuetiaeBlogg.Data.Repositories
         }
 
         public Task<Author> SingleOrDefaultAsync(Expression<Func<Author, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Author entityToUpdate)
         {
             throw new NotImplementedException();
         }

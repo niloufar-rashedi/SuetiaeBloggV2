@@ -1,8 +1,8 @@
-import React, { Component, Link } from 'react';
+import React, { Component} from 'react';
 import { Posts } from '../components/post/posts';
 
 
-import { Container, Col, Row, Form, Button } from 'reactstrap';
+import { Form} from 'reactstrap';
 
 export class Home extends Component {
   static displayName = Home.name;
