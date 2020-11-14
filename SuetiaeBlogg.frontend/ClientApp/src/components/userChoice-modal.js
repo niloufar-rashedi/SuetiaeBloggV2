@@ -20,7 +20,7 @@ function UserChoice(props) {
                 <Button onClick={props.onHide} href='/addposttrial'>Write a new blog post</Button>
 
             </Modal.Footer>
-        </Modal>
+        </Modal> 
     );
 }
 export default UserChoice;

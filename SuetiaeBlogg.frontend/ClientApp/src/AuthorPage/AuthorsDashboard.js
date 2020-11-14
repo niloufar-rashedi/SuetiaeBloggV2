@@ -51,7 +51,7 @@ function PostsList(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
+                                    { 
                                         [data].map((item, idx) => {
                                             return <tr>
                                                 <td>{item.Title}</td>

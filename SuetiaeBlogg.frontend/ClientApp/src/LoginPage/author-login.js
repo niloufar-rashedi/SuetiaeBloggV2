@@ -93,7 +93,7 @@ function Login(props){
                 </div>
                 <button type="submit" className="btn btn-info mb-1" block onClick={() => setModalShow(true)}><span>Login</span></button>
             </form>                <UserChoice show={modalShow}
-                    onHide={() => setModalShow(false)}/>
+                    onHide={() => setModalShow(false)}/> 
 
         </div>
     )  

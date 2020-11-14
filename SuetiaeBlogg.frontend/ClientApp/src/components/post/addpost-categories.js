@@ -14,6 +14,7 @@ class AddPost extends React.Component {
             summary: '',
             category: '',
             authorId: ''
+
         }
         //this.changeHandler = this.changeHandler.bind(this)
     }
