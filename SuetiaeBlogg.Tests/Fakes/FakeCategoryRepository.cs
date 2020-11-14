@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,36 @@ namespace SuetiaeBlogg.Tests.Fakes
         }
 
         public Task<Category> SingleOrDefaultAsync(Expression<Func<Category, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Category>.Delete(Category entityToDelete)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Category>.Delete(object id)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Category> IRepository<Category>.Get(string includeProperties, Expression<Func<Category, bool>> filter, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy)
+        {
+            throw new NotImplementedException();
+        }
+
+        Category IRepository<Category>.GetByID(object id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Category>.Insert(Category entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Category>.Update(Category entityToUpdate)
         {
             throw new NotImplementedException();
         }

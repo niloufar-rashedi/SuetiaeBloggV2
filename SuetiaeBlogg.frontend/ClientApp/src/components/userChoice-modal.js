@@ -15,10 +15,6 @@ function UserChoice(props) {
                    Welcome to your profile
         </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <h4>Choose your path:</h4>
-
-            </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide} href='/authorsdashboarad'>Go to the dashboard</Button>
                 <Button onClick={props.onHide} href='/addposttrial'>Write a new blog post</Button>

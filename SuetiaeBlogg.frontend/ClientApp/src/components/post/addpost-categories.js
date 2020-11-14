@@ -96,15 +96,21 @@ class AddPost extends React.Component {
 
 
                     <div>
-                        <h3>
-                            Category tests
-                        </h3>
+                        <p>
+                            Available categories
+                        </p>
                         <ReturnCategories/>
                     </div>
                     <div class="row form-group">
                         <label for="Category">Category</label>
                         <input type="text" name="category" value={category} onChange={this.changeHandler} />
                     </div>
+
+                    <div class="row form-group">
+                        <label for="Summary">Summary</label>
+                        <input type="text" name="summary" value={summary} onChange={this.changeHandler} />
+                    </div>
+
 
 
                     <div class="row form-group">
@@ -121,12 +127,7 @@ class AddPost extends React.Component {
 
 
 
-                    <div class="row form-group">
-                        <label for="Summary">Summary</label>
-                        <input type="text" name="summary" value={summary} onChange={this.changeHandler} />
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary mt-5" type="submit">Submit</button>
                     
 
 

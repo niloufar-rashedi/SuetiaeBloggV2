@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { isEmail } from "validator";
 import { UserContext } from '../components/UserContext'
+import  UserChoice  from '../components/userChoice-modal'
 
 function Login(props){
 
@@ -9,6 +10,7 @@ function Login(props){
         useState({ UserName: '', Password: '' });  
 
     const [user, setUser] = useState(null);
+    const [modalShow, setModalShow] = useState(false);
 
     const Signin = (e) => {
         e.preventDefault();
@@ -42,11 +44,11 @@ function Login(props){
                 //    console.log("A:", a)
                 //    //const author = result.data.UserDetails;
                 //    console.log(result.data.message);
-                    if (result.data.Status == 'Invalid')
-                    alert('Try again!');
+                    //if (result.data.Status == 'Invalid')
+                    //alert('Try again!');
                 
-                    else
-                        props.history.push('/authorsdashboarad')
+                    //else
+                    //    props.history.push('/authorsdashboarad')
                 }).catch(e => {
                     console.log(e.result);
                   
@@ -78,10 +80,8 @@ function Login(props){
         }
     };
     return (
-
-      
-
-            <form onSubmit={Signin} class="user">
+        <div class="bg-img-login">
+            <form onSubmit={Signin} class="login-container">
                 <h3>Log in</h3>
                 <div class="form-group">
                     <label>Email</label>
@@ -91,9 +91,11 @@ function Login(props){
                     <label>Password</label>
                 <input type="password" class="form-control" value={author.Password} onChange={onChange} name="Password" id="Password" placeholder="Password" validations={[required]} />
                 </div>
-                   <button type="submit" className="btn btn-info mb-1" block><span>Login</span></button>
-                                           
-            </form>                                              
+                <button type="submit" className="btn btn-info mb-1" block onClick={() => setModalShow(true)}><span>Login</span></button>
+            </form>                <UserChoice show={modalShow}
+                    onHide={() => setModalShow(false)}/>
+
+        </div>
     )  
 }
 export default Login;

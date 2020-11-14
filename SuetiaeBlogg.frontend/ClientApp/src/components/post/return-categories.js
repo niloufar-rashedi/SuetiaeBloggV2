@@ -51,11 +51,13 @@ export class ReturnCategories extends React.Component {
     render() {
         return (
             <div>
-                <ul>
+                <ul class="no-bullets-categories">
                     {this.state.categories.map(category => (
-                        <li key={category.id}>
+                        <span>
+                        <li class="add-space-categories-list" key={category.id}>
                             {category.name}
-                        </li>
+                            </li>
+                        </span>
                     ))}
                 </ul>
             </div>
