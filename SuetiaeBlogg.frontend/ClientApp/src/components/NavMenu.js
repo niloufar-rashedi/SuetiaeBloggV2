@@ -14,7 +14,8 @@ export class NavMenu extends Component {
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            collapsed: true
+            collapsed: true, 
+            userId: ''
         };
     }
 
@@ -23,8 +24,17 @@ export class NavMenu extends Component {
             collapsed: !this.state.collapsed
         });
     }
+           // this.state.authorId = 
+    logout() {
+        this.setState({
+            userId: localStorage.removeItem('userId')
+        })
+        
+    };
+
 
     render() {
+        const userId = localStorage.getItem('userId');
         return (
 
 
@@ -50,14 +60,24 @@ export class NavMenu extends Component {
                                         <NavLink tag={Link} className="text-dark" to="/contact">Contact Us</NavLink>
                                     </NavItem>
 
-                                    <NavItem>
+                                    {userId ? (
+                                        <div>
+                                            <NavItem>
+                                                <NavLink tag={Link} className="text-dark" to="/" onClick={this.logout}>Sign Out</NavLink>
+                                            </NavItem>
+                                        </div>
+                                    ) : (
+                                            <div>
+                                        <NavItem>
+                                           
                                         <NavLink tag={Link} className="text-dark" to="/register">Sign Up</NavLink>
                                     </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} className="text-dark" to="/login">Sign In</NavLink>
-                                    </NavItem>
-                                    { /*<LoginMenu>
-                                    </LoginMenu>*/}
+                                                </NavItem>
+                                            </div>
+                                    )}
+                                    
                                 </ul>
                             </Collapse>
                         </Container>
