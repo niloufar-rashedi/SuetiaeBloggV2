@@ -29,16 +29,16 @@ namespace SuetiaeBlogg.API.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
         private readonly IAuthorService _authorService;
-        private readonly ICommentService _commentService;
+        //private readonly ICommentService _commentService;
 
         public BlogPostsController(IPostService postService, ICategoryService categoryService, 
-            ITagService tagService, IAuthorService authorService, ICommentService commentService)
+            ITagService tagService, IAuthorService authorService)
         {
             _postService = postService;
             _categoryService = categoryService;
             _tagService = tagService;
             _authorService = authorService;
-            _commentService = commentService;
+            
         }
 
 
@@ -156,15 +156,15 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
-        [HttpPost]
-        [Authorize]
-        [Route("InsertNewComment")]
-        public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
-        {
-            await _commentService.CreateComment(comment);
-            return Ok();
+        //[HttpPost]
+        //[Authorize]
+        //[Route("InsertNewComment")]
+        //public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
+        //{
+        //    await _commentService.CreateComment(comment);
+        //    return Ok();
 
-        }
+        //}
 
         // PUT: api/Posts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
