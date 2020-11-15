@@ -2,6 +2,8 @@ import React, { useContext} from 'react'
 import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import Button from 'react-bootstrap/Button';
+
 import { UserContext } from '../components/UserContext';
 
 function PostsList(props) {
@@ -69,6 +71,7 @@ function PostsList(props) {
                                 </tbody>
                                 <br>
                                 </br>
+                                <Button href='/addposttrial'> Add new post </Button>
                             </Table>
                         </CardBody>
                         <div>
