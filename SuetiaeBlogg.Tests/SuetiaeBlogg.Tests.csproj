@@ -20,4 +20,8 @@
     <ProjectReference Include="..\SuetiaeBlogg\SuetiaeBlogg.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fakes\" />
+  </ItemGroup>
+
 </Project>

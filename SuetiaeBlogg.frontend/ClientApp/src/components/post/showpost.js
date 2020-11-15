@@ -39,7 +39,10 @@ class ShowPost extends React.Component {
             <p>Comments</p>
                 {this.state.post.comments && this.state.post.comments.map(comment => {
                     return (
-                        <p>{comment.body}</p>
+                        <div>
+                    <p>{comment.pubDate} by {comment.firstName}</p>
+                    <p>{comment.body}</p>
+                     </div>
 
                     );
 
