@@ -2,7 +2,10 @@
 import  ReturnCategories   from '../../components/post/return-categories';
 import axios from 'axios';
 import { UserContext } from '../UserContext'
-import ReactQuill from 'react-quill'; 
+import ReactQuill from 'react-quill';
+import  Snackbar  from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+
 
 class AddPost extends React.Component {
     constructor(props) {
@@ -13,13 +16,16 @@ class AddPost extends React.Component {
             body: '',
             summary: '',
             category: '',
-            authorId: ''
-
+            authorId: '',
+            snackbaropen: false,
+            snackbarmsg:''
         }
         //this.changeHandler = this.changeHandler.bind(this)
     }
     //use = useContext(UserContext)
-
+    snackbarClose = e => {
+        this.setState({ snackbaropen:false })
+    };
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
         //this.setState({ body: e.target.value })
@@ -30,19 +36,11 @@ class AddPost extends React.Component {
 
     apiURL = 'https://localhost:44351/api/BlogPosts/InsertNewPost';
          token = localStorage.getItem('signin');
-         //userId = localStorage.getItem('userId');
         
 
     submitHandler = e => {
         e.preventDefault()
         this.state.authorId = localStorage.getItem('userId');
-        
-        //var form = document.querySelector('form');
-        //var body = document.querySelector('input[name=body]');
-        //body.value = JSON.stringify(quill.getContents());
-        //console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-
         console.log(this.state)
         axios.post(this.apiURL, this.state, {
             headers: {
@@ -51,12 +49,19 @@ class AddPost extends React.Component {
             }
         })
             .then(response => {
-                console.log("Response from server: ", response)
+                console.log("Response from server: ", response);
+                alert('Post was sent successfully!');
+                //this.setState({ snackbaropen: true, snackbarmsg: response })
+                
+
             })
             .catch(error => {
                 console.log(error);
                 //console.log(this.state.error)
+                //this.setState({ snackbaropen: true, snackbarmsg: 'Posting failed! try again later' })
+
             })
+        
     }
 
 
@@ -85,6 +90,21 @@ class AddPost extends React.Component {
         ];
         return (
             <div>
+                { /* <Snackbar
+                    anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+                    open={this.state.snackbaropen}
+                    autoHideDuration={3000}
+                    //onClose={this.state.snackbarClose}
+                    message={<span id="message-id">{this.state.snackbarmsg}</span>}
+                    action={[<IconButton
+                        key="close"
+                        aria-label="close"
+                        color="inherit"
+                        onClick={this.state.snackbarClose}
+                    >
+
+                    </IconButton>]}
+                />*/}
                 <form onSubmit={this.submitHandler}>
                     { /*<div>
                         <label for="Title">Title</label>
@@ -130,7 +150,7 @@ class AddPost extends React.Component {
 
                     <button class="btn btn-primary mt-5" type="submit">Submit</button>
                     
-
+                    
 
                 </form>
             </div>
