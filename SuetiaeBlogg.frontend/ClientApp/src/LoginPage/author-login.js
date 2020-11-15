@@ -70,6 +70,7 @@ function Login(props){
         }
     };
 
+
     const email = value => {
         if (!isEmail(value)) {
             return (
