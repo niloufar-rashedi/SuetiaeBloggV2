@@ -28,16 +28,22 @@ class ShowPost extends React.Component {
     
 
     render() {
-        return (<div>
+        return (
+            
+            <div>
             <p>Title     {this.state.post.title}</p>
             <p>Summary   {this.state.post.summary}</p>
             <p>Body     {this.state.post.body}</p>
             <p>Last modified    {this.state.post.lastModified} </p>
             <p>Author       {this.state.post.firstName}</p>
             <p>Comments</p>
-            
-           
-            
+                {this.state.post.comments && this.state.post.comments.map(comment => {
+                    return (
+                        <p>{comment.body}</p>
+
+                    );
+
+                })};
                 
             
         </div>);
