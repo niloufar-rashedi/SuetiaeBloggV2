@@ -25,12 +25,12 @@ export class NavMenu extends Component {
         });
     }
            // this.state.authorId = 
-    logout() {
-        this.setState({
-            userId: localStorage.removeItem('userId')
-        })
+    //logout() {
+    //    this.setState({
+    //        userId: localStorage.removeItem('userId')
+    //    })
         
-    };
+    //};
 
 
     render() {
@@ -63,7 +63,7 @@ export class NavMenu extends Component {
                                     {userId ? (
                                         <div>
                                             <NavItem>
-                                                <NavLink tag={Link} className="text-dark" to="/" onClick={this.logout}>Sign Out</NavLink>
+                                                <NavLink tag={Link} className="text-dark" to="/">Sign Out</NavLink>
                                             </NavItem>
                                         </div>
                                     ) : (
