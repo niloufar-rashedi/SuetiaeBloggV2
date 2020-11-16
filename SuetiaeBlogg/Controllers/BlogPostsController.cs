@@ -18,6 +18,8 @@ using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
+
+
 namespace SuetiaeBlogg.API.Controllers
 {
     [Route("api/[controller]")]
@@ -159,15 +161,15 @@ namespace SuetiaeBlogg.API.Controllers
         // PUT: api/BlogPosts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //[Authorize]
-        //public async Task<ActionResult<GetPostDto>> PutPost([FromBody] int postId, AddPostDto post)
-        //{
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<GetPostDto>> PutPost(int id, [FromBody] AddPostDto post)
+        {
             
 
-        //    await _postService.UpdatePost(postId, post);
-        //    return NoContent();
-        //}
+            await _postService.UpdatePost(id, post);
+            return Ok();
+        }
 
         //[HttpPost]
         //[Authorize]

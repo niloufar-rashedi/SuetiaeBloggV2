@@ -26,6 +26,7 @@ using SuetiaeBlogg.Core.Helpers;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using SuetiaeBlogg.Data.Repositories;
 
 namespace SuetiaeBlogg
 {
@@ -63,6 +64,7 @@ namespace SuetiaeBlogg
             services.AddTransient<ITagService, TagService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<IPostRepository, PostRepository>();
 
 
             services.AddSwaggerGen(c =>

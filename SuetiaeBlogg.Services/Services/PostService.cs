@@ -26,15 +26,15 @@ namespace SuetiaeBlogg.Services.Services
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
         private readonly IAuthorService _authorService;
-        //private readonly IPostRepository _postRepository;
+        private readonly IPostRepository _postRepository;
 
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService, IAuthorService authorService)
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, IPostRepository postRepository, ICategoryService categoryService, IAuthorService authorService)
         {
             this._context = context;
             this._mapper = mapper;
             this._categoryService = categoryService;
             this._authorService = authorService;
-            //this._postRepository = postRepository;
+            this._postRepository = postRepository;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
@@ -151,31 +151,32 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        //public async Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated)
-        //{
-        //    ServiceResponse<Post> response = new ServiceResponse<Post>();
-        //    try
-        //    {
-        //        var post =  _postRepository.GetByID(postId);
-        //        if (post == null)
-        //        {
-        //            response.Message = "Post not found";
-        //        }
+        public async Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated)
+        {
+            ServiceResponse<Post> response = new ServiceResponse<Post>();
+            try
+            {
+                var post = _postRepository.GetByID(postId);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
 
-        //        post.Title = postToBeUpdated.Title;
-        //        post.Summary = postToBeUpdated.Summary;
-        //        post.Body = postToBeUpdated.Body;
-        //        post.LastModified = postToBeUpdated.LastModified;
-                
-        //        response.Data = _mapper.Map<Post>(newPost);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.Success = false;
-        //        response.Message = ex.Message;
-        //    }
-        //    return response;
-        //}
+                post.Title = postToBeUpdated.Title;
+                post.Summary = postToBeUpdated.Summary;
+                post.Body = postToBeUpdated.Body;
+                post.LastModified = postToBeUpdated.LastModified;
+
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<Post>(post);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
         public ServiceResponse<Task> DeletePost(Post post)
         {
             throw new NotImplementedException();
@@ -190,9 +191,6 @@ namespace SuetiaeBlogg.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
