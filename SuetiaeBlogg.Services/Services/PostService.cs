@@ -110,14 +110,14 @@ namespace SuetiaeBlogg.Services.Services
                     LastModified = newPost.LastModified
                 };
                 _context.SaveChanges();
-                //now check if the new post as a category specified
-                var categoryName = newPost.Categories.FirstOrDefault().Name;
-                if (!string.IsNullOrEmpty(categoryName))
+                //now check which category has been specified
+                
+                if (!string.IsNullOrEmpty(newPost.Category))
                 {
-                    //finds the category object that corresponds to the category name received
-                    //just one category is added from the frontend
-                    var query = await _categoryService.FindCategoryByName(categoryName);
-                    if (!query.Success)
+            //        //finds the category object that corresponds to the category name received
+            //        //just one category is added from the frontend
+                     var query = await _categoryService.FindCategoryByName(newPost.Category);
+                     if (!query.Success)
                     {
                         response.Message = "There has been a problem retrieving the category";
                     }
@@ -127,12 +127,12 @@ namespace SuetiaeBlogg.Services.Services
                         Post = post,
                         Category = category
                     };
-                    _context.PostCategories.Add(postCategory);
+                   _context.PostCategories.Add(postCategory);
                 }
                 else
                 {
-                    //assign the default category as General that is the category with Id 1
-                    var category = await _context.Categories.Where(c => c.CategoryId == 1)
+            //        //assign the default category as General that is the category with Id 1
+                   var category = await _context.Categories.Where(c => c.CategoryId == 1)
                                             .ToListAsync();
                     var postCategory = new PostCategories
                     {

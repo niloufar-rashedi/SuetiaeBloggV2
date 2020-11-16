@@ -27,7 +27,8 @@ namespace SuetiaeBlogg.API.Mapping
             .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName))
             .ForMember(dto => dto.Categories, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category)))
             .ForMember(dto => dto.Tags, c => c.MapFrom(c => c.PostTags.Select(cs => cs.Tag)));
-
+            CreateMap<Post, AddPostDto>()
+            .ForMember(dto => dto.Category, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category.Name)));
 
             CreateMap<GetCommentsCountDto, GetPostHeadlineDto>();
 
