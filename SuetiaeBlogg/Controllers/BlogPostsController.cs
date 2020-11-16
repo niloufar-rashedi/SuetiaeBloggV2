@@ -165,9 +165,16 @@ namespace SuetiaeBlogg.API.Controllers
         [Authorize]
         public async Task<ActionResult<GetPostDto>> PutPost(int id, [FromBody] AddPostDto post)
         {
-            
-
             await _postService.UpdatePost(id, post);
+            return Ok();
+        }
+
+        // DELETE: api/Posts/5
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<GetPostDto>> DeletePost(int id)
+        {
+            await _postService.DeletePost(id);
             return Ok();
         }
 
@@ -185,21 +192,7 @@ namespace SuetiaeBlogg.API.Controllers
 
 
 
-        // DELETE: api/Posts/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Post>> DeletePost(int id)
-        //{
-        //    var post = await _postService.DeletePost(id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    _postService.Posts.Remove(post);
-        //    await _postService.SaveChangesAsync();
-
-        //    return post;
-        //}
 
         //private bool PostExists(int id)
         //{

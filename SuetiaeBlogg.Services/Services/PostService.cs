@@ -167,6 +167,9 @@ namespace SuetiaeBlogg.Services.Services
                 post.Body = postToBeUpdated.Body;
                 post.LastModified = postToBeUpdated.LastModified;
 
+                
+               // _context.PostCategories.Update(postCategory);
+
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<Post>(post);
             }
@@ -177,20 +180,35 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        public ServiceResponse<Task> DeletePost(Post post)
-        {
-            throw new NotImplementedException();
-        }
+        
         public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
         {
             throw new NotImplementedException();
         }
 
-        ServiceResponse<Task> IPostService.DeletePost(int Id)
+        public async Task<ServiceResponse<Task>> DeletePost(int Id)
         {
-            throw new NotImplementedException();
+            ServiceResponse<Task> response = new ServiceResponse<Task>();
+            try
+            {
+                var post = _postRepository.GetByID(Id);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
+                _context.Remove(post);
+                
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+           
         }
 
-        
+
     }
 }
