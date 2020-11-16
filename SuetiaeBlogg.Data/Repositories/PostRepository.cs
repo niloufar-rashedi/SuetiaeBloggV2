@@ -31,6 +31,15 @@ namespace SuetiaeBlogg.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<Post>> GetPostByIdAsync(int postId)
+        {
+            return await _context.Posts
+                 .Where(d => d.PostId == postId)
+                .Include(p => p.PostCategories)
+                .ThenInclude(e => e.Category)
+                .ToListAsync();
+        }
+
         public Task<Post> GetWithCategoryByIdAsync(int id)
         {
             throw new NotImplementedException();

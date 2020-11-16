@@ -28,6 +28,7 @@ class AddPost extends React.Component {
     };
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
+        console.log('Value from the addpost', e.target.value)
         //this.setState({ body: e.target.value })
     }
     onContentChange = (content) => {
@@ -125,7 +126,8 @@ class AddPost extends React.Component {
                     <div class="row form-group">
                         <label for="Category">Category</label>
                         <input type="text" name="category" value={category} onChange={this.changeHandler} />
-                    </div>
+                        
+                        </div>
 
                     <div class="row form-group">
                         <label for="Summary">Summary</label>

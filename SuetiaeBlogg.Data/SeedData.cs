@@ -40,24 +40,19 @@ namespace SuetiaeBlogg.Data
                 var author2 = new Author { FirstName = "Evelyn" };
                 var author3 = new Author { FirstName = "Niloufar" };
 
-                context.Authors.AddRange(author1, author2, author3);
+                
 
+                context.Authors.AddRange(author1, author2, author3);
+                
+                
                 var post1 = new Post
                 {
-                    
+
                     Author = author1,
                     Title = "This is the first post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
                     Body = "Write something here!",
-                    Comments = new List<Comment> {
-                        new Comment {
-                            Body = "my first comment",
-                            Author = new Author {
-                                FirstName = "anna77"
-                            }
-                        }
-                    },
-                    UrlSlug = "/Blogs"
+                    
                 };
                 var post2 = new Post
                 {
@@ -67,13 +62,10 @@ namespace SuetiaeBlogg.Data
                     Title = "This is the first post with complete model and author",
                     Summary = "This is what I want to see in the homepage",
                     Body = "Write something here!",
-                    UrlSlug = "/Blogs"
+                    
+
                 };
-                var comment = new Comment { 
-                    Body = "my first comment", 
-                    Author = new Author {
-                        FirstName = "anna77" }, 
-                    Post = post1 };
+                
                 var postCategory1 = new PostCategories { 
                     Post = post1, 
                     Category = category1 };
@@ -95,15 +87,9 @@ namespace SuetiaeBlogg.Data
                     "Förändringar som inte tas emot väl av alla."+
                     "– Det känns som ett misslyckande i planeringen"+
                     "säger Anna Andrén som är en av dem som drabbas.!",
-                    UrlSlug = "/Blogs",
-                    //Comments = new List<Comment>{
-                    //        new Comment {
-                    //            Body = "I write a comment here",
-                    //            Author = author1
-                               
-                    //    }
-                    //}
                     
+
+
                 };
                 var post4 = new Post
                 {
@@ -113,17 +99,32 @@ namespace SuetiaeBlogg.Data
                     Body = "Flera av stadens anställda varnar för att smittspridningen åter tagit fart inom stadens verksamheter" +
                     ". Även fast antalet smittade fortfarande är lågt jämfört med sommarens siffror, så uppmanar nu Babbs Edberg, " +
                     "stadsdelsdirektör i Majorna-Linné och Centrum, till att ta riskerna på allvar.",
-                    //Comments = new List<Comment> {
-                    //    new Comment {
-                    //        Body = "I want to comment something",
-                    //        Author = author1
-                    //    },
-                    //    new Comment {
-                    //        Body = "here another comment",
-                    //        Author = author2
-                            
-                    //    }
-                    //}
+                    
+                };
+
+                var comment1 = new Comment
+                {
+                    Body = "I would like to write something mre original but anyway this a comment in the first post",
+                    Author = author3,
+                    Post = post1
+                };
+                var comment2 = new Comment
+                {
+                    Body = "I think the comment goes with every post.",
+                    Author = author1,
+                    Post = post1
+                };
+                var comment3 = new Comment
+                {
+                    Body = "I completely disagree, it is a complotto!",
+                    Author = author2,
+                    Post = post3
+                };
+                var comment4 = new Comment
+                {
+                    Body = "ok, loooks nice. Where is the author name for the comment?",
+                    Author = author1,
+                    Post = post4
                 };
 
 
@@ -135,16 +136,20 @@ namespace SuetiaeBlogg.Data
                 var postCategory7 = new PostCategories { Post = post3, Category = category4 };
                 var postCategory8 = new PostCategories { Post = post3, Category = category2 };
                 var postCategory9 = new PostCategories { Post = post3, Category = category3 };
+                var postCategory10 = new PostCategories { Post = post4, Category = category1 };
 
                 var postTag3 = new PostTags {Post = post2, Tag = tag2 };
                 var postTag4 = new PostTags {Post = post3, Tag = tag3 };
                 var postTag5 = new PostTags { Post = post3, Tag = tag2 };
 
+                context.Comments.AddRange(comment1, comment2, comment3, comment4);
+
                 context.PostCategories.AddRange(postCategory1, postCategory2, postCategory3);
                 context.PostCategories.AddRange(postCategory4, postCategory5, postCategory6);
-                context.PostCategories.AddRange(postCategory7, postCategory8, postCategory9);
+                context.PostCategories.AddRange(postCategory7, postCategory8, postCategory9, postCategory10);
                 context.PostTags.AddRange(postTag1, postTag2, postTag3, postTag4, postTag5);
-                context.AddRange(post1, post2, post3);
+                context.AddRange(post1, post2, post3, post4);
+                
                 context.SaveChanges();
                 
             }

@@ -16,7 +16,9 @@ namespace SuetiaeBlogg.Core.Models.Posts
         public string Body { get; set; }
         [MaxLength(140)]
         public string Summary { get; set; }
-        public List<GetCategoryDto> Categories { get; set; }
+        
+        //public List<GetCategoryDto> Categories { get; set; }
+        public string Category { get; set; }
 
         public DateTimeOffset LastModified { get; set; } = DateTimeOffset.Now;
         

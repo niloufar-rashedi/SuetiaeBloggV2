@@ -18,6 +18,8 @@ using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
+
+
 namespace SuetiaeBlogg.API.Controllers
 {
     [Route("api/[controller]")]
@@ -156,6 +158,26 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
+        // PUT: api/BlogPosts/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<ActionResult<GetPostDto>> PutPost(int id, [FromBody] AddPostDto post)
+        {
+            await _postService.UpdatePost(id, post);
+            return Ok();
+        }
+
+        // DELETE: api/Posts/5
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<GetPostDto>> DeletePost(int id)
+        {
+            await _postService.DeletePost(id);
+            return Ok();
+        }
+
         //[HttpPost]
         //[Authorize]
         //[Route("InsertNewComment")]
@@ -166,55 +188,11 @@ namespace SuetiaeBlogg.API.Controllers
 
         //}
 
-        // PUT: api/Posts/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPost(int id, Post post)
-        //{
-        //    if (id != post.PostId)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _postService.Entry(post).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _postService.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PostExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
 
 
 
-        // DELETE: api/Posts/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Post>> DeletePost(int id)
-        //{
-        //    var post = await _postService.DeletePost(id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    _postService.Posts.Remove(post);
-        //    await _postService.SaveChangesAsync();
 
-        //    return post;
-        //}
 
         //private bool PostExists(int id)
         //{
