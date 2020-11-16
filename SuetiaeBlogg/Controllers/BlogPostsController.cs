@@ -156,6 +156,19 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
+        // PUT: api/BlogPosts/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{id}")]
+        //[Authorize]
+        //public async Task<ActionResult<GetPostDto>> PutPost([FromBody] int postId, AddPostDto post)
+        //{
+            
+
+        //    await _postService.UpdatePost(postId, post);
+        //    return NoContent();
+        //}
+
         //[HttpPost]
         //[Authorize]
         //[Route("InsertNewComment")]
@@ -166,37 +179,7 @@ namespace SuetiaeBlogg.API.Controllers
 
         //}
 
-        // PUT: api/Posts/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutPost(int id, Post post)
-        //{
-        //    if (id != post.PostId)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _postService.Entry(post).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _postService.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!PostExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
 
 
 
