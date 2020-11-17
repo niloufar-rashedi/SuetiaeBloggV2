@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import  ReturnCategories   from '../../components/post/return-categories';
+import  ReturnCategories   from './return-categories-addpost';
 import axios from 'axios';
 import { UserContext } from '../UserContext'
 import ReactQuill from 'react-quill';
@@ -15,7 +15,11 @@ class AddPost extends React.Component {
             title: '',
             body: '',
             summary: '',
-            category: '',
+            category:
+            {
+                categoryname: '',
+            }
+            ,
             authorId: '',
             snackbaropen: false,
             snackbarmsg:''
@@ -84,7 +88,8 @@ class AddPost extends React.Component {
     render() {
         const { title, body, summary, category, authorId } = this.state
         const toolbarOptions = [
-            ['bold', 'italic', 'underline'],       
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],       
             [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
             ['link', 'image', 'video'],
             ['clean']
@@ -141,6 +146,7 @@ class AddPost extends React.Component {
                         { /*<input type="text" name="body" value={body} onChange={this.changeHandler} />*/}
                         <ReactQuill
                             modules={{ toolbar: toolbarOptions }}
+                            theme="snow"
                             name="body"
                             value={body}
                             onChange={this.onContentChange}

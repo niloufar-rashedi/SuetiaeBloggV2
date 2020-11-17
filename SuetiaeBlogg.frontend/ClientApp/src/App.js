@@ -7,6 +7,7 @@ import { About } from './AboutPage/About';
 import { Contact } from './ContactPage/Contact';
 import posts from './components/post/posts';
 import showpost from './components/post/showpost';
+import editpost from '../src/components/post/editpost'
 //import { FetchData } from './components/FetchData';
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
@@ -39,7 +40,9 @@ function App() {
               <Switch>
                   <Layout>
                       <Route exact path='/' component={Home} />
-                      <Route path='/showpost/:id' component = {showpost}/>
+                    <Route path='/showpost/:id' component={showpost} />
+                    <Route path='/editpost/:id' component={editpost} />
+
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />

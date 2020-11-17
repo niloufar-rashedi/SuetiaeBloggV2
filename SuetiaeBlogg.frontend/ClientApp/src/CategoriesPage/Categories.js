@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import ReturnCategories from '../components/post/return-categories';
+import ReturnCategories from '../components/post/return-categories-addpost';
 
 export default class Categories extends Component {
 
