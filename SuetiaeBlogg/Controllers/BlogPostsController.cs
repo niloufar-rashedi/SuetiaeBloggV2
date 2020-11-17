@@ -178,15 +178,15 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok();
         }
 
-        //[HttpPost]
-        //[Authorize]
-        //[Route("InsertNewComment")]
-        //public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
-        //{
-        //    await _commentService.CreateComment(comment);
-        //    return Ok();
+        [HttpPut("{id}")]
+        [Authorize]
+        [Route("InsertNewComment")]
+        public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
+        {
+            await _postService.CreateComment(comment);
+            return Ok();
 
-        //}
+        }
 
 
 

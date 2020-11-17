@@ -180,18 +180,16 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        
         public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
         {
             throw new NotImplementedException();
         }
-
-        public async Task<ServiceResponse<Task>> DeletePost(int Id)
+        public async Task<ServiceResponse<Task>> DeletePost(int postId)
         {
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = _postRepository.GetByID(Id);
+                var post = _postRepository.GetByID(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -208,7 +206,26 @@ namespace SuetiaeBlogg.Services.Services
             return response;
            
         }
+        public async Task<ServiceResponse<Task>> CreateComment(int postId, AddCommentDto newComment)
+        {
+            ServiceResponse<Task> response = new ServiceResponse<Task>();
+            try
+            {
+                var post = _postRepository.GetByID(postId);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
+                
 
-
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
     }
 }
