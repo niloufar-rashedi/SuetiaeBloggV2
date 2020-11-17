@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { LoginMenu } from './api-authorization/LoginMenu';
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './NavMenu.css';
@@ -39,11 +38,11 @@ export class NavMenu extends Component {
         return (
 
 
-            <div class="sticky-top bg-light">
-                <header class="text-center">
+            <div className="sticky-top bg-light">
+                <header className="text-center">
                     <section className="text-center text-md-right">
-                        <h1 class="text-center font-weight-bold">S   u   e   t   i   a   e</h1>
-                        <h5 class="text-center">A latin word for Sweden. Sounds strange? Let's discover it together</h5>
+                        <h1 className="text-center font-weight-bold">S   u   e   t   i   a   e</h1>
+                        <h5 className="text-center">A latin word for Sweden. Sounds strange? Let's discover it together</h5>
                     </section>
                     <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
                         <Container>

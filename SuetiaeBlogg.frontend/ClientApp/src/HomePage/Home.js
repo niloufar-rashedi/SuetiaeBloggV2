@@ -10,8 +10,8 @@ export class Home extends Component {
 
   render () {
     return (
-        <div class="Container">
-                <div class="row">
+        <div className="Container">
+                <div className="row">
                 <Carousel>
                     <Carousel.Item interval={1000}>
                         <img
@@ -63,37 +63,37 @@ export class Home extends Component {
 
                 
                 
-                <div class="input-group mb-3 mt-5">
-                    <div class="input-group-prepend">
-                        <button type="button" class="btn btn-danger">Search among posts</button>
+                <div className="input-group mb-3 mt-5">
+                    <div className="input-group-prepend">
+                        <button type="button" className="btn btn-danger">Search among posts</button>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Author, Subject, Publication date, ..." />
+                    <input type="text" className="form-control" aria-label="Text input with segmented dropdown button" placeholder="Author, Subject, Publication date, ..." />
                 </div>
-                <div class="row">
+                <div className="row">
                     <div>
                         <Posts />
                         </div>
                     
-                    <div class="col">
-                        <div class="row">
-                            <div class="col">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item font-weight-bold">Archive</li>
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac</li>
-                                    <li class="list-group-item">Morbi leo risus</li>
-                                    <li class="list-group-item">Consectetur ac</li>
-                                    <li class="list-group-item">Vestibulum at</li>
+                    <div className="col">
+                        <div className="row">
+                            <div className="col">
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item font-weight-bold">Archive</li>
+                                    <li className="list-group-item">Cras justo odio</li>
+                                    <li className="list-group-item">Dapibus ac</li>
+                                    <li className="list-group-item">Morbi leo risus</li>
+                                    <li className="list-group-item">Consectetur ac</li>
+                                    <li className="list-group-item">Vestibulum at</li>
                                 </ul>
                             </div>
-                            <div class="col">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item font-weight-bold">Categories</li>
-                                    <li class="list-group-item">General</li>
-                                    <li class="list-group-item">Event</li>
-                                    <li class="list-group-item">Sverige</li>
-                                    <li class="list-group-item">Nationaldag</li>
-                                    <li class="list-group-item">Historia</li>
+                            <div className="col">
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item font-weight-bold">Categories</li>
+                                    <li className="list-group-item">General</li>
+                                    <li className="list-group-item">Event</li>
+                                    <li className="list-group-item">Sverige</li>
+                                    <li className="list-group-item">Nationaldag</li>
+                                    <li className="list-group-item">Historia</li>
                                 </ul>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ export class Home extends Component {
 
 
 
-            <div class="row">
+            <div className="row">
                 <Card className="text-dark d-flex justify-content-center">
                     <Card.Img src="https://images.unsplash.com/photo-1483288578299-bdb6421dee2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1310&q=80" alt="Card image" />
                     <Card.ImgOverlay>
@@ -116,17 +116,17 @@ export class Home extends Component {
                 </Card>
 
             </div>
-            <div class="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center">
                 <h1>Our Background</h1>
-                <p class="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                <p className="text-justify">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
                 magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                            magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,<a href="#" class="text-info"> read more </a>
+                            magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,<a href="#" className="text-info"> read more </a>
 
                 </p>
             </div>
 
 
-            <div class="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center">
                 <Card className="text-center">
                     <Card.Header>subscription</Card.Header>
                     <Card.Body>
