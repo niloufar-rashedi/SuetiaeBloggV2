@@ -74,7 +74,7 @@ class AuthorsDashboard extends Component {
 
                                             <td>
                                                 <div class="btn-group">
-                                                    <Link to={{ pathname: `/editpost/${postbyauthorid.id}`, query: { id: postbyauthorid.id } }}><Button variant="btn btn-success" >Edit</Button></Link>
+                                                    <Link to={{ pathname: `/editpost/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
                                                     { /* <Link to={{ pathname: `/editpost/${postbyauthorid.id}`, query: { id: postbyauthorid.id } }}><Button variant="btn btn-success" >Edit</Button></Link>
                                                        <button className="btn btn-warning" onClick={() => { this.editPosts(this.state.post.id) }}>Edit</button>
                                                     <button className="btn btn-warning" onClick={() => { this.deletePosts(this.state.post.id) }}>Delete</button>

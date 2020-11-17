@@ -8,40 +8,49 @@ class EditPost extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            //postId: '',
-            //title: '',
-            //body: '',
-            //summary: '',
-            //category:
-            //{
-            //    categoryname: '',
-            //}
+            post: [],
+            newPost: {
+            
+            postId: '',
+            title: '',
+            body: '',
+            summary: '',
+            category:
+            {
+                categoryname: '',
+            }
             //,
-            //authorId: '',
+            //authorId: ''
             //snackbaropen: false,
             //snackbarmsg: ''
-            post: []
-        };
+        }};
     }
     snackbarClose = e => {
         this.setState({ snackbaropen: false })
     };
-    changeHandler = e => {
-        this.setState({ [e.target.name]: e.target.value })
-        console.log('Value from the addpost', e.target.value)
+    changeHandler = event => {
+        const { target } = event;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const { name } = target;
+
+        this.setState({ [event.target.name]: event.target.value })
+        console.log('Value from the addpost', event.target.value)
         //this.setState({ body: e.target.value })
     }
     onContentChange = (content) => {
         this.setState({ body: content });
+        //this.setState({ [content.target.name]: content.target.value })
+
+
     };
 
     //ADD relevant methods to get posts by ID, similar to showpost. Now I am returning all the posts
-    apiURL = `https://localhost:44351/api/BlogPosts/authors`;
+    apiURL = `https://localhost:44351/api/BlogPosts`;
     token = localStorage.getItem('signin');
     authorId = localStorage.getItem('userId');
 
     async componentDidMount() {
-        await axios.get(`${this.apiURL}/${this.props.match.params.id}/posts`, {
+        await axios.get(`${this.apiURL}/${this.props.match.params.id}`, {
             headers: {
                 'Authorization': `Bearer ` + this.token,
                 'Content-Type': 'application/json'
@@ -53,6 +62,31 @@ class EditPost extends React.Component {
 
                 this.setState({ post: response.data.data });
             });
+    }
+    editHandler = e => {
+        e.preventDefault()
+        //this.state.authorId = localStorage.getItem('userId');
+        console.log(this.state)
+        axios.put(`${this.apiURL}/${this.props.match.params.id}`, this.state, {
+            headers: {
+                'Authorization': `Bearer ` + this.token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                console.log("Response from server: ", response);
+                alert('Post was edited successfully!');
+                //this.setState({ snackbaropen: true, snackbarmsg: response })
+
+
+            })
+            .catch(error => {
+                console.log(error);
+                //console.log(this.state.error)
+                //this.setState({ snackbaropen: true, snackbarmsg: 'Posting failed! try again later' })
+
+            })
+
     }
 
 
@@ -84,13 +118,13 @@ class EditPost extends React.Component {
 
                     </IconButton>]}
                 />*/}
-                <form>
-                   // onSubmit={this.editHandler}
+                <form onSubmit={this.editHandler}>
+                    
                 
 
                     <div class="row form-group">
                         <label for="Title">Title</label>
-                        <input type="text" name="title" value={this.state.post.title} onChange={this.changeHandler}/>
+                        <input type="text" name="title" defaultValue={this.state.post.title} onChange={this.changeHandler} />
                     </div>
 
 
@@ -102,12 +136,12 @@ class EditPost extends React.Component {
                     </div>
                     <div class="row form-group">
                         <label for="Category">Category</label>
-                        <input type="text" name="category" value={this.state.post.category} onChange={this.changeHandler} />
+                        <input type="text" name="category" defaultValue={this.state.post.category} onChange={this.changeHandler} />
                     </div>
 
                     <div class="row form-group">
                         <label for="Summary">Summary</label>
-                        <input type="text" name="summary" value={this.state.post.summary} onChange={this.changeHandler} />
+                        <input type="text" name="summary" defaultValue={this.state.post.summary} onChange={this.changeHandler} />
                     </div>
 
 
@@ -119,7 +153,7 @@ class EditPost extends React.Component {
                             modules={{ toolbar: toolbarOptions }}
                             theme="snow"
                             name="body"
-                            value={this.state.post.body}
+                            defaultValue={body}
                             onChange={this.onContentChange}
                             placeholder="Content"
                         />
