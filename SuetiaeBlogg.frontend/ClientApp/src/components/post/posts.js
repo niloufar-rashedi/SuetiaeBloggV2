@@ -29,8 +29,7 @@ import { faComments } from '@fortawesome/free-solid-svg-icons';
 export class Posts extends React.Component {
     state = {
         posts: [],
-        isOldestFirst: true
-    }
+        }
     apiURL = 'https://localhost:44351/api/BlogPosts';
 
     
@@ -43,24 +42,19 @@ export class Posts extends React.Component {
         });
     }
 
-    sortByDate (){
-        const {posts} = this.state
-        let newPosts = posts
-        if (this.state.isOldestFirst){
-            newPosts = posts.sort((a, b) => a.lastModified > b.lastModified)
-        } else {
-            newPosts = posts.sort((a, b) => a.lastModified < b.lastModified)
-        }
-        this.setState({
-            isOldestFirst: !this.state.isOldestFirst,
-            posts: newPosts
-        })
-    }
+    
+    
     render() {
         return (
             <div>
-                {this.state.posts.sortByDate}
-               {this.state.posts.map(post => (
+               
+               {this.state.posts
+               .sort((a,b) => {
+                return new Date(a.lastModified).getTime() - 
+                    new Date(b.lastModified).getTime()
+                })
+                .reverse()
+               .map(post => (
                 //<Block>
                     <div className="card" key={post.lastModified}>
                         <Card style={{ width: '50rem' }}>
