@@ -212,11 +212,18 @@ namespace SuetiaeBlogg.Services.Services
             try
             {
                 var post = _postRepository.GetByID(postId);
+                var author = await _authorService.FindAuthorById(newComment.AuthorId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
                 }
-                
+                var comment = new Comment
+                {
+                    Author = author,
+                    Body = newComment.Body,
+                    PubDate = newComment.PubDate,
+                    Post = post
+                };
 
                 await _context.SaveChangesAsync();
             }

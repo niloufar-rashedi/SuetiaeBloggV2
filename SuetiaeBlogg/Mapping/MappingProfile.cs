@@ -31,15 +31,6 @@ namespace SuetiaeBlogg.API.Mapping
             CreateMap<Comment, GetCommentDto>()
              .ForMember(dto => dto.Author, c => c.MapFrom(c => c.Author.AuthorId));
             CreateMap<GetCommentsCountDto, GetPostHeadlineDto>();
-
-
-
-
-
-
-
-
-
         }
     }
 }
