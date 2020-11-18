@@ -21,7 +21,6 @@ namespace SuetiaeBlogg.Services.Services
 {
     public class PostService : IPostService
     {
-        //private readonly IUnitOfWork _unitOfWork;
         private readonly SuetiaeBloggDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
@@ -44,17 +43,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
             {
-                var posts = await _context.Posts
-                                    .Include(a => a.Author)
-                                    .Include(c => c.PostCategories)
-                                    .ThenInclude(Postcategories => Postcategories.Category)
-                                    .Include(t => t.PostTags)
-                                    .ThenInclude(PostTags => PostTags.Tag)
-                                    .Include(t => t.Comments)
-                                    .AsNoTracking()
-                                    .ToListAsync();
-
-
+                var posts = await _postRepository.GetAllAsync();
                 response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
             }
             catch (Exception ex)

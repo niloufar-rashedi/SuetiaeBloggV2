@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using SuetiaeBlogg.Data;
 
 namespace SuetiaeBlogg
@@ -15,6 +16,10 @@ namespace SuetiaeBlogg
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.File("d://_SuetiaeBloggLog//log.txt")
+                .CreateLogger();
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {

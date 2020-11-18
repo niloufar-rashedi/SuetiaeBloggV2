@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Authors;
@@ -31,14 +32,16 @@ namespace SuetiaeBlogg.API.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
         private readonly IAuthorService _authorService;
+        private readonly ILogger<BlogPostsController> _logger;
         
         public BlogPostsController(IPostService postService, ICategoryService categoryService, 
-            ITagService tagService, IAuthorService authorService)
+            ITagService tagService, IAuthorService authorService, ILogger<BlogPostsController> logger)
         {
             _postService = postService;
             _categoryService = categoryService;
             _tagService = tagService;
             _authorService = authorService;
+            _logger = logger;
         }
 
         // <summary>
@@ -47,8 +50,8 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
+            _logger.LogInformation("Called GetAllPOsts");
             var posts = await _postService.GetPosts();
-
             return Ok(posts);
         }
 

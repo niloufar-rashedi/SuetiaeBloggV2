@@ -18,13 +18,18 @@ namespace SuetiaeBlogg.Data.Repositories
         }
 
     
-        public async Task<IEnumerable<Post>> GetAllWithCategoryAsync()
+        public async Task<IEnumerable<Post>> GetAllAsync()
         {
             return await _context.Posts
-                .Include(p => p.PostCategories)
-                .ThenInclude(e => e.Category)
-                .ToListAsync();
-                    
+                                 .Include(a => a.Author)
+                                 .Include(t => t.Comments)
+                                 .Include(c => c.PostCategories)
+                                 .ThenInclude(Postcategories => Postcategories.Category)
+                                 .Include(t => t.PostTags)
+                                 .ThenInclude(PostTags => PostTags.Tag)
+                                 .AsNoTracking()
+                                 .ToListAsync();
+
         }
         public Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
         {
@@ -38,6 +43,10 @@ namespace SuetiaeBlogg.Data.Repositories
                 .Include(p => p.PostCategories)
                 .ThenInclude(e => e.Category)
                 .ToListAsync();
+
+
+
+
         }
 
         public Task<Post> GetWithCategoryByIdAsync(int id)

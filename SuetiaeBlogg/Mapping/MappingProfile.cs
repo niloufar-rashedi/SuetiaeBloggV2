@@ -28,8 +28,10 @@ namespace SuetiaeBlogg.API.Mapping
             .ForMember(dto => dto.Tags, c => c.MapFrom(c => c.PostTags.Select(cs => cs.Tag)));
             CreateMap<Post, AddPostDto>()
             .ForMember(dto => dto.Category, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category.Name)));
+            CreateMap<Comment, AddCommentDto>()
+             .ForMember(dto => dto.AuthorId, c => c.MapFrom(c => c.Author.AuthorId));
             CreateMap<Comment, GetCommentDto>()
-             .ForMember(dto => dto.Author, c => c.MapFrom(c => c.Author.AuthorId));
+             .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName));
             CreateMap<GetCommentsCountDto, GetPostHeadlineDto>();
         }
     }
