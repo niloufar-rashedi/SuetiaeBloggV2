@@ -173,7 +173,6 @@ namespace SuetiaeBlogg.API.Controllers
         {
             await _postService.CreateComment(postId, comment);
             return Ok();
-
         }
 
         /// <summary>
@@ -186,25 +185,5 @@ namespace SuetiaeBlogg.API.Controllers
             await _postService.DeletePost(id);
             return Ok();
         }
-
-
-
-
-
-
-
-        //private bool PostExists(int id)
-        //{
-        //    return _postService.Posts.Any(e => e.PostId == id);
-        //}
-
-        ///// <summary>
-        ///// Add a category to an existing post
-        ///// </summary>
-        //[HttpPost]
-        //public async Task<IActionResult> AddPostCategory(AddPostCategoryDto newPostCategory)
-        //{
-        //    return Ok(await _categoryService.AddCategoryToAPost(newPostCategory));
-        //}
     }
 }

@@ -11,5 +11,6 @@ namespace SuetiaeBlogg.Core.Repositories
         Task<IEnumerable<PostCategories>> GetAllWithCategoryAsync();
         Task<PostCategories> GetWithCategoryByIdAsync(int id);
         Task<IEnumerable<PostCategories>> GetAllWithCategoryByCategoryIdAsync(int categoryId);
+        Task<PostCategories> GetPostCategoryByCategoryNameAsync(string categoryName);
     }
 }

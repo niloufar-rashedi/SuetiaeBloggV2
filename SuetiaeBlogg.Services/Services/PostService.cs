@@ -27,14 +27,17 @@ namespace SuetiaeBlogg.Services.Services
         private readonly ICategoryService _categoryService;
         private readonly IAuthorService _authorService;
         private readonly IPostRepository _postRepository;
+        private readonly IPostCategoriesRepository _postcategoriesRepository;
 
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper, IPostRepository postRepository, ICategoryService categoryService, IAuthorService authorService)
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, 
+            IPostRepository postRepository, IPostCategoriesRepository postCategoriesRepository, ICategoryService categoryService, IAuthorService authorService)
         {
             this._context = context;
             this._mapper = mapper;
             this._categoryService = categoryService;
             this._authorService = authorService;
             this._postRepository = postRepository;
+            this._postcategoriesRepository = postCategoriesRepository;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
@@ -95,7 +98,6 @@ namespace SuetiaeBlogg.Services.Services
             return response;
         }
         public async Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost)
-
         {
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
@@ -110,12 +112,12 @@ namespace SuetiaeBlogg.Services.Services
                     LastModified = newPost.LastModified
                 };
                 _context.SaveChanges();
-                //now check which category has been specified
-                
+
+                //now checks which category has been specified
                 if (!string.IsNullOrEmpty(newPost.Category))
                 {
-            //        //finds the category object that corresponds to the category name received
-            //        //just one category is added from the frontend
+                ////finds the category object that corresponds to the category name received
+                ////just one category is added from the frontend
                      var query = await _categoryService.FindCategoryByName(newPost.Category);
                      if (!query.Success)
                     {
@@ -166,9 +168,14 @@ namespace SuetiaeBlogg.Services.Services
                 post.Summary = postToBeUpdated.Summary;
                 post.Body = postToBeUpdated.Body;
                 post.LastModified = postToBeUpdated.LastModified;
+                
+                
+                //var postCategory =  await _postcategoriesRepository.GetPostCategoryByCategoryNameAsync(postToBeUpdated.Category);
+                //post.PostCategories = category;
+                
+                 
 
                 
-               // _context.PostCategories.Update(postCategory);
 
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<Post>(post);
@@ -224,7 +231,7 @@ namespace SuetiaeBlogg.Services.Services
                     PubDate = newComment.PubDate,
                     Post = post
                 };
-
+                await _context.AddAsync(comment);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
