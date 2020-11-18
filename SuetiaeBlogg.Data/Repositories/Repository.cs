@@ -9,71 +9,35 @@ using SuetiaeBlogg.Core.Repositories;
 
 namespace SuetiaeBlogg.Data.Repositories
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
-        internal DbContext context;
-        internal DbSet<T> dbSet;
-
-        public Repository(DbContext context)
+        protected SuetiaeBloggDbContext Context { get; set; }
+        public Repository(SuetiaeBloggDbContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<T>();
-
+            this.Context = context;
         }
-        public virtual IEnumerable<T> Get(string includeProperties = "", Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null         )
+        public IQueryable<T> FindAll()
         {
-            IQueryable<T> query = dbSet;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties.Split
-                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                query = query.Include(includeProperty);
-            }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-            else
-            {
-                return query.ToList();
-            }
+            return this.Context.Set<T>().AsNoTracking();
         }
-
-
-        public virtual T GetByID(object id)
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
-            return dbSet.Find(id);
+            return this.Context.Set<T>().Where(expression).AsNoTracking();
         }
-        public virtual void Insert(T entity)
+        public void Create(T entity)
         {
-            dbSet.Add(entity);
+            this.Context.Set<T>().Add(entity);
         }
-        public virtual void Delete(T entityToDelete)
+        public void Update(T entity)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
-            {
-                dbSet.Attach(entityToDelete);
-            }
-            dbSet.Remove(entityToDelete);
+            this.Context.Set<T>().Update(entity);
         }
-        public virtual void Delete(object id)
+        public void Delete(T entity)
         {
-            T entityToDelete = dbSet.Find(id);
-            Delete(entityToDelete);
+            this.Context.Set<T>().Remove(entity);
         }
-        public virtual void Update(T entityToUpdate)
-        {
-            dbSet.Attach(entityToUpdate);
-            context.Entry(entityToUpdate).State = EntityState.Modified;
-        }
-
-        
-        
     }
+
+
+}
 }

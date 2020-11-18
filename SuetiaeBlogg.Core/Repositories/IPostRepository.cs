@@ -9,8 +9,12 @@ namespace SuetiaeBlogg.Core.Repositories
     public interface IPostRepository : IRepository<Post>
     {
         Task<IEnumerable<Post>> GetAllAsync();
+        Task<Post> GetPostByIdAsync(int postId);
+        Task DeletePost(int postId);
+
+
         Task<Post> GetWithCategoryByIdAsync(int id);
         Task<IEnumerable<Post>> GetAllWithCategoryByCategoryIdAsync(int categoryId);
-        Task<IEnumerable<Post>> GetPostByIdAsync(int postId);
+        
     }
 }

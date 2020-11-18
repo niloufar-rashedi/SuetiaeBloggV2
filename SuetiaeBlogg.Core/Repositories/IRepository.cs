@@ -9,12 +9,17 @@ namespace SuetiaeBlogg.Core.Repositories
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> Get(string includeProperties, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+        IEnumerable<T> FindAll();
         T GetByID(object id);
         void Insert(T entity);
-        void Delete(T entityToDelete);
         void Delete(object id);
         void Update(T entityToUpdate);
-        
+
+        IQueryable<T> FindAll();
+        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
+        void Create(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+
     }
 }

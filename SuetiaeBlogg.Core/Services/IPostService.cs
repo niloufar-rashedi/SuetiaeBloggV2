@@ -12,19 +12,12 @@ namespace SuetiaeBlogg.Core.Services
 {
     public interface IPostService
     {
-        
-
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts();
+        public Task<ServiceResponse<GetPostDto>> FindPostById(int Id);
         public Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost);
         public Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated);
         public Task<ServiceResponse<Task>> CreateComment(int postId, AddCommentDto newComment);
-        //public ServiceResponse<Task> DeletePost(int Id);
         public Task<ServiceResponse<Task>> DeletePost(int Id);
-        public Task<ServiceResponse<GetPostDto>> FindPostById(int Id);
-        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate);
-
-
-
-
+       
     }
 }

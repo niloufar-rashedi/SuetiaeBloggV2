@@ -59,18 +59,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var post = await _context.Posts
-                                    .Where(d => d.PostId == postId)
-                                    .Include(a => a.Author)
-                                    .Include(c => c.PostCategories)
-                                    .ThenInclude(Postcategories => Postcategories.Category)
-                                    .Include(t => t.PostTags)
-                                    .ThenInclude(PostTags => PostTags.Tag)
-                                    .Include(t => t.Comments)
-                                    .FirstOrDefaultAsync();
-                                     
-
-
+                var post = await _postRepository.GetPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -176,23 +165,13 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
-        {
-            throw new NotImplementedException();
-        }
+        
         public async Task<ServiceResponse<Task>> DeletePost(int postId)
         {
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = _postRepository.GetByID(postId);
-                if (post == null)
-                {
-                    response.Message = "Post not found";
-                }
-                _context.Remove(post);
-                
-                await _context.SaveChangesAsync();
+                _postRepository.Delete(postId);
             }
             catch (Exception ex)
             {
