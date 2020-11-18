@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 import { UserContext } from '../components/UserContext';
+//import { post } from 'jquery';
 
 class AuthorsDashboard extends Component {
     constructor(props) {
@@ -30,15 +31,26 @@ class AuthorsDashboard extends Component {
                 this.setState({ post: response.data.data });
             });
     }
-    // deletePosts = (id) => {
-    //    debugger;
-    //    axios.delete('https://localhost:44351/api/BlogPosts' + id)
-    //        .then((result) => {
-    //            //props.history.push('/authorsdahboard')
-    //            console.log('Object deleted', result)
+    token = localStorage.getItem('signin');
+    authorId = localStorage.getItem('userId');
 
-    //        });
-    //};
+    //postId = this.state.post.postId;
+    apiURLDelete = `https://localhost:44351/api/BlogPosts`;
+    deletePosts = (id) => {
+        //e.preventDefault()
+        //debugger;
+        axios.delete(`${this.apiURLDelete}/${id}`, {
+            headers: {
+                'Authorization': `Bearer ` + this.token,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((result) => {
+                //props.history.push('/authorsdahboard')
+                console.log('Object deleted', result)
+
+            });
+    };
     // editPosts = (id) => {
     //    props.history.push({
     //        pathname: '/edit/' + id
@@ -76,9 +88,9 @@ class AuthorsDashboard extends Component {
                                                 <div class="btn-group">
                                                     <Link to={{ pathname: `/editpost/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
                                                     { /* <Link to={{ pathname: `/editpost/${postbyauthorid.id}`, query: { id: postbyauthorid.id } }}><Button variant="btn btn-success" >Edit</Button></Link>
-                                                       <button className="btn btn-warning" onClick={() => { this.editPosts(this.state.post.id) }}>Edit</button>
-                                                    <button className="btn btn-warning" onClick={() => { this.deletePosts(this.state.post.id) }}>Delete</button>
-                                               */}
+                                                       <button className="btn btn-warning" onClick={() => { this.editPosts(this.state.post.id) }}>Edit</button>*/}
+                                                    <button className="btn btn-warning" onClick={() => this.deletePosts(postbyauthorid.postId)}>Delete</button>
+                                               
                                                 </div>
                                             </td>
                                         </tr>
