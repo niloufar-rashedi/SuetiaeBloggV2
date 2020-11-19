@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuetiaeBlogg.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class SecondMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,11 +87,13 @@ namespace SuetiaeBlogg.Data.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    CommentId = table.Column<int>(nullable: false),
+                    CommentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AuthorId = table.Column<int>(nullable: true),
                     Body = table.Column<string>(nullable: false),
                     PubDate = table.Column<DateTimeOffset>(nullable: false),
-                    IsPublic = table.Column<bool>(nullable: false)
+                    IsPublic = table.Column<bool>(nullable: false),
+                    PostId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,8 +105,8 @@ namespace SuetiaeBlogg.Data.Migrations
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_Posts_CommentId",
-                        column: x => x.CommentId,
+                        name: "FK_Comments_Posts_PostId",
+                        column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "PostId",
                         onDelete: ReferentialAction.Cascade);
@@ -162,6 +164,11 @@ namespace SuetiaeBlogg.Data.Migrations
                 name: "IX_Comments_AuthorId",
                 table: "Comments",
                 column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_PostId",
+                table: "Comments",
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostCategories_CategoryId",

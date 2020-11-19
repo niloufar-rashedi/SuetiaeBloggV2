@@ -6,7 +6,7 @@ using SuetiaeBlogg.Core.Models;
 
 namespace SuetiaeBlogg.Core.Repositories
 {
-    public interface IPostRepository : IRepository<Post>
+    public interface IPostRepository 
     {
         Task<IEnumerable<Post>> GetAllAsync();
         Task<Post> GetPostByIdAsync(int postId);

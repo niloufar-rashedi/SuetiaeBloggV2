@@ -25,25 +25,29 @@ namespace SuetiaeBlogg.Services.Services
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
         private readonly IAuthorService _authorService;
-        private readonly IPostRepository _postRepository;
-        private readonly IPostCategoriesRepository _postcategoriesRepository;
-
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper, 
-            IPostRepository postRepository, IPostCategoriesRepository postCategoriesRepository, ICategoryService categoryService, IAuthorService authorService)
+        
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService, IAuthorService authorService)
         {
             this._context = context;
             this._mapper = mapper;
             this._categoryService = categoryService;
             this._authorService = authorService;
-            this._postRepository = postRepository;
-            this._postcategoriesRepository = postCategoriesRepository;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
             {
-                var posts = await _postRepository.GetAllAsync();
+                var posts = await _context.Posts
+                                 .Include(a => a.Author)
+                                 .Include(t => t.Comments)
+                                 .Include(c => c.PostCategories)
+                                 .ThenInclude(Postcategories => Postcategories.Category)
+                                 .Include(t => t.PostTags)
+                                 .ThenInclude(PostTags => PostTags.Tag)
+                                 .AsNoTracking()
+                                 .ToListAsync();
+
                 response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
             }
             catch (Exception ex)
@@ -59,7 +63,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var post = await _postRepository.GetPostByIdAsync(postId);
+                var post = await GetPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -136,7 +140,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
             {
-                var post = _postRepository.GetByID(postId);
+                var post = await GetPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -165,13 +169,13 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        
         public async Task<ServiceResponse<Task>> DeletePost(int postId)
         {
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                _postRepository.Delete(postId);
+                var post = await GetPostByIdAsync(postId);
+                _context.Remove(post);
             }
             catch (Exception ex)
             {
@@ -186,7 +190,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = _postRepository.GetByID(postId);
+                var post = await GetPostByIdAsync(postId);
                 var author = await _authorService.FindAuthorById(newComment.AuthorId);
                 if (post == null)
                 {
@@ -194,13 +198,17 @@ namespace SuetiaeBlogg.Services.Services
                 }
                 var comment = new Comment
                 {
-                    Author = author,
+                    //Author = author,
                     Body = newComment.Body,
                     PubDate = newComment.PubDate,
                     Post = post
                 };
-                await _context.AddAsync(comment);
+                 _context.Comments.Add(comment);
+               
                 await _context.SaveChangesAsync();
+                //post.Comments.Add(comment);
+                //_context.Entry(post).State = EntityState.Modified;
+                
             }
             catch (Exception ex)
             {
@@ -208,6 +216,19 @@ namespace SuetiaeBlogg.Services.Services
                 response.Message = ex.Message;
             }
             return response;
+        }
+        public async Task<Post> GetPostByIdAsync(int postId)
+        {
+            return await _context.Posts
+                                    .Where(d => d.PostId == postId)
+                                    .Include(a => a.Author)
+                                    .Include(c => c.PostCategories)
+                                    .ThenInclude(Postcategories => Postcategories.Category)
+                                    .Include(t => t.PostTags)
+                                    .ThenInclude(PostTags => PostTags.Tag)
+                                    .Include(t => t.Comments)
+                                    .FirstOrDefaultAsync();
+                                    
         }
     }
 }

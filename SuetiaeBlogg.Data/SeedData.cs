@@ -142,7 +142,7 @@ namespace SuetiaeBlogg.Data
                 var postTag4 = new PostTags {Post = post3, Tag = tag3 };
                 var postTag5 = new PostTags { Post = post3, Tag = tag2 };
 
-                context.Comments.AddRange(comment1, comment2, comment3, comment4);
+                //context.Comments.AddRange(comment1, comment2, comment3, comment4);
 
                 context.PostCategories.AddRange(postCategory1, postCategory2, postCategory3);
                 context.PostCategories.AddRange(postCategory4, postCategory5, postCategory6);

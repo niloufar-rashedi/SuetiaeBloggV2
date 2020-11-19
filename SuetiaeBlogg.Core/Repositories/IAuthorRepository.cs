@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SuetiaeBlogg.Core.Repositories
 {
-    public interface IAuthorRepository : IRepository<Author>
+    public interface IAuthorRepository 
     {
     }
 }

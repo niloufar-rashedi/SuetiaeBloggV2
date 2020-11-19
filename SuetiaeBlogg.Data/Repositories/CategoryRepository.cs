@@ -8,19 +8,19 @@ using SuetiaeBlogg.Core.Repositories;
 
 namespace SuetiaeBlogg.Data.Repositories
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository 
     {
-        public CategoryRepository(SuetiaeBloggDbContext context)
-            : base(context)
-        { }
-        public Task<IEnumerable<Category>> GetAllWithPostsAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //public CategoryRepository(SuetiaeBloggDbContext context)
+        //    : base(context)
+        //{ }
+        //public Task<IEnumerable<Category>> GetAllWithPostsAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<Category> GetWithPostssByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<Category> GetWithPostssByIdAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

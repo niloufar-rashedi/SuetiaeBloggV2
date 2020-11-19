@@ -9,41 +9,41 @@ using SuetiaeBlogg.Core.Repositories;
 
 namespace SuetiaeBlogg.Data.Repositories
 {
-    public class PostCategoriesRepository : Repository<PostCategories>, IPostCategoriesRepository
+    public class PostCategoriesRepository 
     {
-        private SuetiaeBloggDbContext _context;
-        public PostCategoriesRepository(SuetiaeBloggDbContext context)
-            : base(context)
-        {
-            this._context = context;
-        }
+        //private SuetiaeBloggDbContext _context;
+        //public PostCategoriesRepository(SuetiaeBloggDbContext context)
+        //    : base(context)
+        //{
+        //    this._context = context;
+        //}
         
-        public Task<IEnumerable<PostCategories>> GetAllWithCategoryAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IEnumerable<PostCategories>> GetAllWithCategoryAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<IEnumerable<PostCategories>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<IEnumerable<PostCategories>> GetAllWithCategoryByCategoryIdAsync(int categoryId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<PostCategories> GetPostCategoryByCategoryNameAsync(string categoryName)
-        {
-            var category = await _context.Categories
-                                         .Where(c => c.Name == categoryName)
-                                         .ToListAsync();
+        //public async Task<PostCategories> GetPostCategoryByCategoryNameAsync(string categoryName)
+        //{
+        //    var category = await _context.Categories
+        //                                 .Where(c => c.Name == categoryName)
+        //                                 .ToListAsync();
 
-            var postcategory = await _context.PostCategories
-                                         .Where(c => c.CategoryId == category.FirstOrDefault().CategoryId)
-                                         .ToListAsync();
+        //    var postcategory = await _context.PostCategories
+        //                                 .Where(c => c.CategoryId == category.FirstOrDefault().CategoryId)
+        //                                 .ToListAsync();
 
-            return postcategory.FirstOrDefault();
-        }
+        //    return postcategory.FirstOrDefault();
+        //}
 
-        public Task<PostCategories> GetWithCategoryByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<PostCategories> GetWithCategoryByIdAsync(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

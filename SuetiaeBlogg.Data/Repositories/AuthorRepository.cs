@@ -56,29 +56,29 @@ namespace SuetiaeBlogg.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public void Insert(Author entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Insert(Author entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Remove(Author entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Remove(Author entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void RemoveRange(IEnumerable<Author> entities)
-        {
-            throw new NotImplementedException();
-        }
+        //public void RemoveRange(IEnumerable<Author> entities)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<Author> SingleOrDefaultAsync(Expression<Func<Author, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<Author> SingleOrDefaultAsync(Expression<Func<Author, bool>> predicate)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public void Update(Author entityToUpdate)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Update(Author entityToUpdate)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

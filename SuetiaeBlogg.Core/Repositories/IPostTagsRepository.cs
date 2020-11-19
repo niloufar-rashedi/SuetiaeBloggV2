@@ -5,7 +5,7 @@ using SuetiaeBlogg.Core.Models;
 
 namespace SuetiaeBlogg.Core.Repositories
 {
-    public interface IPostTagsRepository : IRepository<PostTags> 
+    public interface IPostTagsRepository 
     {
     }
 }
