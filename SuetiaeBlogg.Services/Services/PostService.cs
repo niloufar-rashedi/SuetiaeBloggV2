@@ -87,13 +87,15 @@ namespace SuetiaeBlogg.Services.Services
                 var author = await _authorService.FindAuthorById(newPost.AuthorId);
                 var post = new Post()
                 {
-                    Author = author,
                     Title = newPost.Title,
                     Summary = newPost.Summary,
                     Body = newPost.Body,
                     LastModified = newPost.LastModified
                 };
-                _context.SaveChanges();
+                
+                _context.Posts.Add(post);
+                post.Author = author;
+                await _context.SaveChangesAsync();
 
                 //now checks which category has been specified
                 if (!string.IsNullOrEmpty(newPost.Category))
@@ -198,12 +200,12 @@ namespace SuetiaeBlogg.Services.Services
                 }
                 var comment = new Comment
                 {
-                    //Author = author,
                     Body = newComment.Body,
                     PubDate = newComment.PubDate,
                     Post = post
                 };
                  _context.Comments.Add(comment);
+                comment.Author = author;
                
                 await _context.SaveChangesAsync();
                 //post.Comments.Add(comment);
@@ -227,6 +229,7 @@ namespace SuetiaeBlogg.Services.Services
                                     .Include(t => t.PostTags)
                                     .ThenInclude(PostTags => PostTags.Tag)
                                     .Include(t => t.Comments)
+                                    .ThenInclude(c => c.Author)
                                     .FirstOrDefaultAsync();
                                     
         }

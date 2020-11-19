@@ -11,8 +11,8 @@ namespace SuetiaeBlogg.Core.Models
     public class Post
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PostId { get; set; }
-       
         public IList<PostCategories> PostCategories { get; set; }
         public IList<PostTags> PostTags { get; set; }
         public IList<Comment> Comments { get; set; } = new List<Comment>();

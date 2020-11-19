@@ -8,7 +8,6 @@ namespace SuetiaeBlogg.Core.Models.Comments
     {
         public int CommentId { get; set; }
         public string Body { get; set; }
-        //public Author Author { get; set; }
         public string FirstName { get; set; }
         public DateTimeOffset PubDate { get; set; } 
         

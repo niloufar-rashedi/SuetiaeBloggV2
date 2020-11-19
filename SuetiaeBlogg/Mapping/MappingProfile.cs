@@ -20,19 +20,26 @@ namespace SuetiaeBlogg.API.Mapping
             
             CreateMap<Category, GetCategoryDto>();
             CreateMap<Tag, GetTagDto>();
-            CreateMap<Author, GetAuthorDto>();
-            CreateMap<GetAuthorDto, Author>();
+            CreateMap<Author, GetAuthorDto>()
+                .ForMember(x => x.Password, opt => opt.Ignore()); ;
+            CreateMap<GetAuthorDto, Author>()
+                .ForMember(x => x.PasswordHash, opt => opt.Ignore())
+                .ForMember(x => x.PasswordSalt, opt => opt.Ignore());
+            CreateMap<Comment, GetCommentDto>()
+            .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName));
             CreateMap<Post, GetPostDto>()
-            .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName))
+             .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName))
             .ForMember(dto => dto.Categories, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category)))
-            .ForMember(dto => dto.Tags, c => c.MapFrom(c => c.PostTags.Select(cs => cs.Tag)));
+            .ForMember(dto => dto.Tags, c => c.MapFrom(c => c.PostTags.Select(cs => cs.Tag)))
+            .ForMember(dto => dto.Comments, opt => opt.MapFrom(src => src.Comments));
             CreateMap<Post, AddPostDto>()
-            .ForMember(dto => dto.Category, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category.Name)));
+            .ForMember(dto => dto.Category, c => c.MapFrom(c => c.PostCategories.Select(cs => cs.Category.Name)))
+             .ForMember(x => x.AuthorId, opt => opt.Ignore());
             CreateMap<Comment, AddCommentDto>()
              .ForMember(dto => dto.AuthorId, c => c.MapFrom(c => c.Author.AuthorId));
-            CreateMap<Comment, GetCommentDto>()
-             .ForMember(dto => dto.FirstName, c => c.MapFrom(c => c.Author.FirstName));
-            CreateMap<GetCommentsCountDto, GetPostHeadlineDto>();
+            
+
+
         }
     }
 }
