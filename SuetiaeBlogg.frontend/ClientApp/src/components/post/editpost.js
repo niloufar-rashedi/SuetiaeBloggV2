@@ -10,20 +10,21 @@ class EditPost extends React.Component {
         this.state = {
             post: [],
             newPost: {
-            
-            postId: '',
-            title: '',
-            body: '',
-            summary: '',
-            category:
-            {
-                categoryname: '',
+
+                postId: '',
+                title: '',
+                body: '',
+                summary: '',
+                category:
+                {
+                    categoryname: '',
+                }
+                //,
+                //authorId: ''
+                //snackbaropen: false,
+                //snackbarmsg: ''
             }
-            //,
-            //authorId: ''
-            //snackbaropen: false,
-            //snackbarmsg: ''
-        }};
+        };
     }
     snackbarClose = e => {
         this.setState({ snackbaropen: false })
@@ -35,16 +36,10 @@ class EditPost extends React.Component {
 
         this.setState({ [event.target.name]: event.target.value })
         console.log('Value from the addpost', event.target.value)
-        //this.setState({ body: e.target.value })
     }
     onContentChange = (content) => {
         this.setState({ body: content });
-        //this.setState({ [content.target.name]: content.target.value })
-
-
     };
-
-    //ADD relevant methods to get posts by ID, similar to showpost. Now I am returning all the posts
     apiURL = `https://localhost:44351/api/BlogPosts`;
     token = localStorage.getItem('signin');
     authorId = localStorage.getItem('userId');
@@ -65,7 +60,6 @@ class EditPost extends React.Component {
     }
     editHandler = e => {
         e.preventDefault()
-        //this.state.authorId = localStorage.getItem('userId');
         console.log(this.state)
         axios.put(`${this.apiURL}/${this.props.match.params.id}`, this.state, {
             headers: {
@@ -76,20 +70,12 @@ class EditPost extends React.Component {
             .then(response => {
                 console.log("Response from server: ", response);
                 alert('Post was edited successfully!');
-                //this.setState({ snackbaropen: true, snackbarmsg: response })
-
-
             })
             .catch(error => {
                 console.log(error);
-                //console.log(this.state.error)
-                //this.setState({ snackbaropen: true, snackbarmsg: 'Posting failed! try again later' })
-
             })
 
     }
-
-
     render() {
         const { title, body, summary, category, authorId } = this.state
         const toolbarOptions = [
@@ -101,8 +87,8 @@ class EditPost extends React.Component {
         ];
         return (
             <div>
-                
-                
+
+
                 { /* <Snackbar
                     anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
                     open={this.state.snackbaropen}
@@ -115,12 +101,11 @@ class EditPost extends React.Component {
                         color="inherit"
                         onClick={this.state.snackbarClose}
                     >
-
                     </IconButton>]}
                 />*/}
                 <form onSubmit={this.editHandler}>
-                    
-                
+
+
 
                     <div class="row form-group">
                         <label for="Title">Title</label>
@@ -148,7 +133,6 @@ class EditPost extends React.Component {
 
                     <div class="row form-group">
                         <label for="Body">Body</label>
-                        { /*<input type="text" name="body" value={body} onChange={this.changeHandler} />*/}
                         <ReactQuill
                             modules={{ toolbar: toolbarOptions }}
                             theme="snow"
@@ -158,7 +142,7 @@ class EditPost extends React.Component {
                             placeholder="Content"
                         />
                     </div>
-            
+
 
 
                     <button class="btn btn-primary mt-5" type="submit">Edit</button>

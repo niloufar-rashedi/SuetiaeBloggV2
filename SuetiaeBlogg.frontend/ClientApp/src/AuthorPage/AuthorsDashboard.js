@@ -1,13 +1,9 @@
-import React, { Component, useContext} from 'react'
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import React, { Component} from 'react'
+import {Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import axios from 'axios';
-import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-
-
-import { UserContext } from '../components/UserContext';
-//import { post } from 'jquery';
+import history from '../../src/history'
 
 class AuthorsDashboard extends Component {
     constructor(props) {
@@ -18,12 +14,9 @@ class AuthorsDashboard extends Component {
         }
     }
 
-            authorId = localStorage.getItem('userId');
-
+    authorId = localStorage.getItem('userId');
     apiURL = `https://localhost:44351/api/BlogPosts/authors`;
-
     async componentDidMount() {
-        //this.state.authorId = localStorage.getItem('userId');
         await axios.get(`${this.apiURL}/${this.authorId}/posts`)
             .then(response => {
                 console.log('Rasponse from postByAuthorId', response)
@@ -33,12 +26,9 @@ class AuthorsDashboard extends Component {
     }
     token = localStorage.getItem('signin');
     authorId = localStorage.getItem('userId');
-
-    //postId = this.state.post.postId;
     apiURLDelete = `https://localhost:44351/api/BlogPosts`;
+
     deletePosts = (id) => {
-        //e.preventDefault()
-        //debugger;
         axios.delete(`${this.apiURLDelete}/${id}`, {
             headers: {
                 'Authorization': `Bearer ` + this.token,
@@ -46,17 +36,11 @@ class AuthorsDashboard extends Component {
             }
         })
             .then((result) => {
-                //props.history.push('/authorsdahboard')
-                console.log('Object deleted', result)
-
+                console.log('Object deleted', result);
+                window.location.reload();
+                history.push('/authorsdashboarad');
             });
     };
-    // editPosts = (id) => {
-    //    props.history.push({
-    //        pathname: '/edit/' + id
-    //    });
-    //};
-   // const msg = useContext(UserContext);
     render() {
     return (
         <div className="Container animated fadeIn">
@@ -76,7 +60,6 @@ class AuthorsDashboard extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/**/}
                                     {this.state.post.map(postbyauthorid => (
                                         <tr key={postbyauthorid.id}>
                                             <td>{postbyauthorid.title}</td>
@@ -87,10 +70,27 @@ class AuthorsDashboard extends Component {
                                             <td>
                                                 <div class="btn-group">
                                                     <Link to={{ pathname: `/editpost/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
-                                                    { /* <Link to={{ pathname: `/editpost/${postbyauthorid.id}`, query: { id: postbyauthorid.id } }}><Button variant="btn btn-success" >Edit</Button></Link>
-                                                       <button className="btn btn-warning" onClick={() => { this.editPosts(this.state.post.id) }}>Edit</button>*/}
-                                                    <button className="btn btn-warning" onClick={() => this.deletePosts(postbyauthorid.postId)}>Delete</button>
-                                               
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
+                                                        Delete</button>
+                                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    This accetion is irreversible! are you sure you want to delete " {postbyauthorid.title} " forever?
+                                                                  </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal"> I regret </button>
+                                                                    <button type="button" class="btn btn-light" onClick={() => this.deletePosts(postbyauthorid.postId)}>Confirm & delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -103,9 +103,6 @@ class AuthorsDashboard extends Component {
                         </CardBody>
                         <div>
                         </div>
-
-
-
                     </Card>
                 </Col>
             </Row>

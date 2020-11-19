@@ -1,10 +1,8 @@
-﻿import React, { useContext } from 'react';
+﻿import React from 'react';
 import  ReturnCategories   from './return-categories-addpost';
 import axios from 'axios';
-import { UserContext } from '../UserContext'
 import ReactQuill from 'react-quill';
-import  Snackbar  from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
+
 
 
 class AddPost extends React.Component {
@@ -24,16 +22,14 @@ class AddPost extends React.Component {
             snackbaropen: false,
             snackbarmsg:''
         }
-        //this.changeHandler = this.changeHandler.bind(this)
     }
-    //use = useContext(UserContext)
+
     snackbarClose = e => {
         this.setState({ snackbaropen:false })
     };
     changeHandler = e => {
         this.setState({ [e.target.name]: e.target.value })
         console.log('Value from the addpost', e.target.value)
-        //this.setState({ body: e.target.value })
     }
     onContentChange = (content) => {
         this.setState({ body: content });
@@ -42,7 +38,6 @@ class AddPost extends React.Component {
     apiURL = 'https://localhost:44351/api/BlogPosts/InsertNewPost';
          token = localStorage.getItem('signin');
         
-
     submitHandler = e => {
         e.preventDefault()
         this.state.authorId = localStorage.getItem('userId');
@@ -56,34 +51,11 @@ class AddPost extends React.Component {
             .then(response => {
                 console.log("Response from server: ", response);
                 alert('Post was sent successfully!');
-                //this.setState({ snackbaropen: true, snackbarmsg: response })
-                
-
             })
             .catch(error => {
                 console.log(error);
-                //console.log(this.state.error)
-                //this.setState({ snackbaropen: true, snackbarmsg: 'Posting failed! try again later' })
-
             })
-        
     }
-
-
-    //form = document.querySelector('form');
-    //form. = function () {
-        // Populate hidden form on submit
-        //var about = document.querySelector('input[name=about]');
-        //about.value = JSON.stringify(quill.getContents());
-        //console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-        // No back end to actually submit to!
-    //    alert('Open the console to see the submit data!')
-    //    return false;
-    //};
-
-
-
 
     render() {
         const { title, body, summary, category, authorId } = this.state
@@ -120,8 +92,6 @@ class AddPost extends React.Component {
                         <label for="Title">Title</label>
                         <input type="text" name="title" value={title} onChange={this.changeHandler} />
                     </div>
-
-
                     <div>
                         <p>
                             Available categories
@@ -139,8 +109,6 @@ class AddPost extends React.Component {
                         <input type="text" name="summary" value={summary} onChange={this.changeHandler} />
                     </div>
 
-
-
                     <div class="row form-group">
                         <label for="Body">Body</label>
                         { /*<input type="text" name="body" value={body} onChange={this.changeHandler} />*/}
@@ -153,13 +121,7 @@ class AddPost extends React.Component {
                             placeholder="Content"
                         />
                     </div>
-
-
-
                     <button class="btn btn-primary mt-5" type="submit">Submit</button>
-                    
-                    
-
                 </form>
             </div>
             )
