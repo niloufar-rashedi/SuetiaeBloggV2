@@ -41,6 +41,7 @@ namespace SuetiaeBlogg.Services.Services
                 var posts = await _context.Posts
                                  .Include(a => a.Author)
                                  .Include(t => t.Comments)
+                                 .ThenInclude(t =>t.Author)
                                  .Include(c => c.PostCategories)
                                  .ThenInclude(Postcategories => Postcategories.Category)
                                  .Include(t => t.PostTags)

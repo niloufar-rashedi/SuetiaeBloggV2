@@ -30,11 +30,12 @@ namespace SuetiaeBlogg.Tests
             };
             var mapper = config.CreateMapper();
             var commentDto = mapper.Map<Comment, GetCommentDto>(comment);
-            var postDto = mapper.Map<Post, GetPostDto>(post);
+            var postDto = mapper.Map<GetPostDto>(post);
 
 
             Assert.Equal("Anna", commentDto.FirstName);
-            
+            //Assert.Equal("Anna", postDto.Comments.FindIndex
+
 
 
         }

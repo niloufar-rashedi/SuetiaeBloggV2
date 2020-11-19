@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -16,30 +17,49 @@ namespace SuetiaeBlogg
     {
         public static void Main(string[] args)
         {
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            var logPath = Path.Combine(basePath, "_SuetiaBloggLogs");
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmm");
+            var logFile = Path.Combine(logPath, $"SuetiaBloggLog{timestamp}.txt");
+
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.File("d://_SuetiaeBloggLog//log.txt")
+                .WriteTo.File(logFile)
                 .CreateLogger();
-            var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    SeedData.Initialize(services);
 
-                }
-                catch (Exception ex)
+            try
+            {
+                Log.Information("Starting up");
+                var host = CreateHostBuilder(args).Build();
+                using (var scope = host.Services.CreateScope())
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        SeedData.Initialize(services);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred seeding the DB.");
+                    }
                 }
+                host.Run();
             }
-            host.Run();
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application start-up failed");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
