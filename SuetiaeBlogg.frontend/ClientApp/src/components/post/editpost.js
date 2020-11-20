@@ -137,10 +137,10 @@ class EditPost extends React.Component {
                             modules={{ toolbar: toolbarOptions }}
                             theme="snow"
                             name="body"
-                            defaultValue={body}
-                            onChange={this.onContentChange}
+                            value={this.onContentChange || ''}
+                                onChange={this.editHandler}
                             placeholder="Content"
-                        />
+                            />
                     </div>
 
 

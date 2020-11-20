@@ -116,6 +116,7 @@ class AddPost extends React.Component {
                             modules={{ toolbar: toolbarOptions }}
                             theme="snow"
                             name="body"
+                            defaultValue=''
                             value={body}
                             onChange={this.onContentChange}
                             placeholder="Content"

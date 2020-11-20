@@ -69,7 +69,7 @@ class AuthorsDashboard extends Component {
 
                                             <td>
                                                 <div class="btn-group">
-                                                    <Link to={{ pathname: `/editpost/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
+                                                    <Link to={{ pathname: `/editpostv2/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
                                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
                                                         Delete</button>
                                                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -99,6 +99,8 @@ class AuthorsDashboard extends Component {
                                 <br>
                                 </br>
                                 <Button href='/addposttrial'> Add new post </Button>
+                                <Button href='/addposttrialV2'> Add new post by CKeditor </Button>
+
                             </Table>
                         </CardBody>
                         <div>

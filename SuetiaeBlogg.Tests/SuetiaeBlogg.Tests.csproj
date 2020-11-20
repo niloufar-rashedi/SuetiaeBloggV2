@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.10" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.14.7" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.6.3" />
@@ -17,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuetiaeBlogg.Core\SuetiaeBlogg.Core.csproj" />
+    <ProjectReference Include="..\SuetiaeBlogg.Data\SuetiaeBlogg.Data.csproj" />
+    <ProjectReference Include="..\SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj" />
     <ProjectReference Include="..\SuetiaeBlogg\SuetiaeBlogg.API.csproj" />
   </ItemGroup>
 

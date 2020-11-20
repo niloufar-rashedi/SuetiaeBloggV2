@@ -17,7 +17,7 @@ function UserChoice(props) {
             </Modal.Header>
             <Modal.Footer>
                 <Button onClick={props.onHide} href='/authorsdashboarad'>Go to the dashboard</Button>
-                <Button onClick={props.onHide} href='/addposttrial'>Write a new blog post</Button>
+                <Button onClick={props.onHide} href='/addposttrialv2'>Write a new blog post</Button>
 
             </Modal.Footer>
         </Modal> 
