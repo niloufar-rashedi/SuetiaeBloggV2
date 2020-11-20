@@ -7,6 +7,9 @@ import axios from 'axios';
 //https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/react.html
 //To add image in editor: https://www.youtube.com/watch?v=qjrKVJjTLDc&list=PLC9HTNsJgxkQbbkbF_CX43Qk6tiDRfWL8&index=4
 
+//https://github.com/ckeditor/ckeditor5-react/issues/20#issuecomment-409227841
+//https://ckeditor.com/docs/ckeditor4/latest/guide/dev_react.html
+
 class EditPostV2 extends React.Component {
     constructor(props) {
         super(props);
@@ -105,15 +108,18 @@ class EditPostV2 extends React.Component {
                                 {/*<textarea type="text" name="content" cols="25" rows="14" value={this.state.content} onChange={this.handleChange} className="form-control" placeholder="Enter Message" />*/}
                                 <CKEditor
                                     name="body"
-                                    //body={this.state.body}
+                                    data={this.state.post.body}
                                     onChange={this.onEditorChange}
-                                    //editor={ClassicEditor}
+                                    editor={ClassicEditor}
                                     onInit={editor => {
                                         editor.getData();
-                                    }} />
+                                    }}
+                                
+                                    />
                                 <label>
                                     Change value:
                                     <textarea defaultValue={this.state.post.body} onChange={this.handleChange} />
+                                    CKEDITOR.
                                 </label>
 
                             </div>
