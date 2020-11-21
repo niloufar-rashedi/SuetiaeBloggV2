@@ -7,6 +7,9 @@ export class ReturnCategories extends React.Component {
     }
     apiURL = 'https://localhost:44351/api/BlogPosts/categories';
 
+    onChangeCategories(event) {
+        console.log(event.target.value);
+    }
 
 
     async componentDidMount() {
@@ -18,17 +21,22 @@ export class ReturnCategories extends React.Component {
     }
 
     render() {
+        const { categories } = this.state;
+
         return (
             <div>
-                <ul class="no-bullets-categories">
-                    {this.state.categories.map(category => (
-                        <span>
-                        <li class="add-space-categories-list" key={category.id}>
-                            {category.name}
-                            </li>
-                        </span>
-                    ))}
-                </ul>
+
+                <span>Select a category</span>
+                <div>
+                    <select onChange={this.onChangeCategories}>
+                {categories.map((category, index) => {
+                    return <option>{category.name}</option>
+
+                            
+
+                            })}
+                </select>
+                    </div>
             </div>
         );
     }
