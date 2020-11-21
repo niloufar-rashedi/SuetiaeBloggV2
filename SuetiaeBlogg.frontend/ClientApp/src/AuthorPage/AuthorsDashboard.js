@@ -63,17 +63,17 @@ class AuthorsDashboard extends Component {
                                     </tr>
                                 </thead>
                                     <tbody>
-                                        <div>
+                                        
                                             {
                                                 this.state.post.map((postbyauthorid, i) =>
-                                                    <div>
+                                                    
                                                         <tr key={postbyauthorid.id}>
 
                                                             {<td>{postbyauthorid.title}</td>}
                                                             {<td>{postbyauthorid.summary}</td>}
                                                             {
                                                                 (typeof (postbyauthorid.categories) == 'object') ?
-                                                                    <div>
+                                                                    <td>
 
                                                                         {postbyauthorid.categories.map((catNames, k) =>
                                                                             <td>
@@ -81,13 +81,9 @@ class AuthorsDashboard extends Component {
                                                                             </td>
                                                                         )
                                                                         }
-                                                                        <ul>
-                                                                            {postbyauthorid.categories.map((names) =>
-                                                                                <li>{names.name}</li>
-                                                                            )}
-                                                                        </ul>
+                                                                        
 
-                                                                    </div> : null}
+                                                                    </td> : null}
 
                                                             <td>
 
@@ -106,11 +102,11 @@ class AuthorsDashboard extends Component {
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     { /*This accetion is irreversible! are you sure you want to delete " {postbyauthorid.title} " forever?" {this.state.post.title} " forever?*/}
-                                                                    This accetion is irreversible! are you sure you want to delete the post?
+                                                                    This action is irreversible! are you sure you want to delete the post?
                                                                     </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal"> I regret </button>
-                                                                                    <button type="button" class="btn btn-light" onClick={() => this.deletePosts(postbyauthorid.id)}>Confirm & delete</button>
+                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal"> I regret </button>
+                                                                                <button type="submit" class="btn btn-light" onClick={() => this.deletePosts(postbyauthorid.postId)}>Confirm & delete</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -119,9 +115,9 @@ class AuthorsDashboard extends Component {
                                                             </td>
 
                                                         </tr>
-                                                    </div>
+                                                    
                                          )}
-                                        </div>
+                                        
                                         
                                     )
                                 </tbody>

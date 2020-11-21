@@ -21,7 +21,8 @@ class EditPostV2 extends React.Component {
             body: '',
             summary: '',
             category: '',
-            authorId: ''
+            authorId: '',
+            categories: []
         }
     }
     apiURL = `https://localhost:44351/api/BlogPosts`;
@@ -48,8 +49,7 @@ class EditPostV2 extends React.Component {
 
     handleChange = (event) => {
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const { name} = target;
+        const { name, value } = target;
         //By setting state we access the elements of our form
         this.setState({
             [name]: value
@@ -83,6 +83,7 @@ class EditPostV2 extends React.Component {
     }
     render() {
         console.log('STATE_', this.state)
+        const { categories } = this.state;
 
         return (
             <div className="AddPost">
@@ -94,10 +95,45 @@ class EditPostV2 extends React.Component {
                                 <label>Title</label>
                                 <input type="text" name="title" defaultValue={this.state.post.title} onChange={this.handleChange} placeholder="Title of your post" className="form-control" />
                             </div>
+
+                            {/* <div className="form-group">
+
+                                <label>Select a category, otherwise it will be post as "General"</label>
+                                <div>
+                                    <select name="category" onChange={this.handleChange} defaultValue={this.state.post.category}>
+                                        {categories.map((category, index) => {
+                                            return <option>{category.name}</option>
+                                        })}
+                                    </select>
+                                </div>
+                               <input type="text" value={this.state.category.name} onChange={this.handleChange} className="form-control" />
+                            </div>
+<input type="text" name="category" value={selectedCategory.name} onChange={this.handleChange} placeholder="pick a category" className="form-control" />
+                            
+                            
+                            
+
                             <div className="form-group">
                                 <label>Category</label>
-                                <input type="text" name="category" defaultValue={this.state.post.category} onChange={this.handleChange} placeholder="pick a category" className="form-control" />
-                            </div>
+
+                                {
+                                    this.state.post.map((editablepost, i) => {
+                                        // (typeof (editablepost.categories) == 'object') ?
+                                        <div key={editablepost.id}>
+                                                {
+                                                    editablepost.categories.map((selectedCategory, k) =>
+
+                                                        <p>{selectedCategory.name}</p>
+                                                    )
+                                                }
+                                            </div> 
+                                    }
+                                            )
+                                    }
+                                    
+                               
+                            </div>*/}
+
                             <div className="form-group">
                                 <label>Summary</label>
                                 <input type="text" name="summary" defaultValue={this.state.post.summary} onChange={this.handleChange} placeholder="140 character..." className="form-control" />
