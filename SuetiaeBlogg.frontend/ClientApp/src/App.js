@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, {useState } from 'react';
 import { Route } from 'react-router';
 import { Router, Switch } from 'react-router-dom';
 import { Layout } from './components/Layout';
@@ -7,7 +7,6 @@ import { About } from './AboutPage/About';
 import { Contact } from './ContactPage/Contact';
 import posts from './components/post/posts';
 import showpost from './components/post/showpost';
-//import { FetchData } from './components/FetchData';
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
 import AddPostByCategory from '../src/components/post/addpost-categories';

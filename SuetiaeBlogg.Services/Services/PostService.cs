@@ -13,7 +13,6 @@ using SuetiaeBlogg.Core.Models.Categories;
 using SuetiaeBlogg.Core.Models.Comments;
 using SuetiaeBlogg.Core.Models.PostCategory;
 using SuetiaeBlogg.Core.Models.Posts;
-using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 
@@ -21,20 +20,17 @@ namespace SuetiaeBlogg.Services.Services
 {
     public class PostService : IPostService
     {
-        //private readonly IUnitOfWork _unitOfWork;
         private readonly SuetiaeBloggDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
         private readonly IAuthorService _authorService;
-        private readonly IPostRepository _postRepository;
-
-        public PostService(SuetiaeBloggDbContext context, IMapper mapper, IPostRepository postRepository, ICategoryService categoryService, IAuthorService authorService)
+        
+        public PostService(SuetiaeBloggDbContext context, IMapper mapper, ICategoryService categoryService, IAuthorService authorService)
         {
             this._context = context;
             this._mapper = mapper;
             this._categoryService = categoryService;
             this._authorService = authorService;
-            this._postRepository = postRepository;
         }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
@@ -42,15 +38,15 @@ namespace SuetiaeBlogg.Services.Services
             try
             {
                 var posts = await _context.Posts
-                                    .Include(a => a.Author)
-                                    .Include(c => c.PostCategories)
-                                    .ThenInclude(Postcategories => Postcategories.Category)
-                                    .Include(t => t.PostTags)
-                                    .ThenInclude(PostTags => PostTags.Tag)
-                                    .Include(t => t.Comments)
-                                    .AsNoTracking()
-                                    .ToListAsync();
-
+                                 .Include(a => a.Author)
+                                 .Include(t => t.Comments)
+                                 .ThenInclude(t =>t.Author)
+                                 .Include(c => c.PostCategories)
+                                 .ThenInclude(Postcategories => Postcategories.Category)
+                                 .Include(t => t.PostTags)
+                                 .ThenInclude(PostTags => PostTags.Tag)
+                                 .AsNoTracking()
+                                 .ToListAsync();
 
                 response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
             }
@@ -67,18 +63,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var post = await _context.Posts
-                                    .Where(d => d.PostId == postId)
-                                    .Include(a => a.Author)
-                                    .Include(c => c.PostCategories)
-                                    .ThenInclude(Postcategories => Postcategories.Category)
-                                    .Include(t => t.PostTags)
-                                    .ThenInclude(PostTags => PostTags.Tag)
-                                    .Include(t => t.Comments)
-                                    .FirstOrDefaultAsync();
-                                     
-
-
+                var post = await GetPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -95,7 +80,6 @@ namespace SuetiaeBlogg.Services.Services
             return response;
         }
         public async Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost)
-
         {
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
@@ -103,19 +87,21 @@ namespace SuetiaeBlogg.Services.Services
                 var author = await _authorService.FindAuthorById(newPost.AuthorId);
                 var post = new Post()
                 {
-                    Author = author,
                     Title = newPost.Title,
                     Summary = newPost.Summary,
                     Body = newPost.Body,
                     LastModified = newPost.LastModified
                 };
-                _context.SaveChanges();
-                //now check which category has been specified
                 
+                _context.Posts.Add(post);
+                post.Author = author;
+                await _context.SaveChangesAsync();
+
+                //now checks which category has been specified
                 if (!string.IsNullOrEmpty(newPost.Category))
                 {
-            //        //finds the category object that corresponds to the category name received
-            //        //just one category is added from the frontend
+                ////finds the category object that corresponds to the category name received
+                ////just one category is added from the frontend
                      var query = await _categoryService.FindCategoryByName(newPost.Category);
                      if (!query.Success)
                     {
@@ -156,7 +142,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
             {
-                var post = _postRepository.GetByID(postId);
+                var post = await GetPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -166,9 +152,14 @@ namespace SuetiaeBlogg.Services.Services
                 post.Summary = postToBeUpdated.Summary;
                 post.Body = postToBeUpdated.Body;
                 post.LastModified = postToBeUpdated.LastModified;
+                
+                
+                //var postCategory =  await _postcategoriesRepository.GetPostCategoryByCategoryNameAsync(postToBeUpdated.Category);
+                //post.PostCategories = category;
+                
+                 
 
                 
-               // _context.PostCategories.Update(postCategory);
 
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<Post>(post);
@@ -180,25 +171,13 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        
-        public Task<ServiceResponse<GetPostDto>> FindPostByDate(DateTime pubdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<ServiceResponse<Task>> DeletePost(int Id)
+        public async Task<ServiceResponse<Task>> DeletePost(int postId)
         {
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = _postRepository.GetByID(Id);
-                if (post == null)
-                {
-                    response.Message = "Post not found";
-                }
+                var post = await GetPostByIdAsync(postId);
                 _context.Remove(post);
-                
-                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -208,7 +187,51 @@ namespace SuetiaeBlogg.Services.Services
             return response;
            
         }
-
-
+        public async Task<ServiceResponse<Task>> CreateComment(int postId, AddCommentDto newComment)
+        {
+            ServiceResponse<Task> response = new ServiceResponse<Task>();
+            try
+            {
+                var post = await GetPostByIdAsync(postId);
+                var author = await _authorService.FindAuthorById(newComment.AuthorId);
+                if (post == null)
+                {
+                    response.Message = "Post not found";
+                }
+                var comment = new Comment
+                {
+                    Body = newComment.Body,
+                    PubDate = newComment.PubDate,
+                    Post = post
+                };
+                 _context.Comments.Add(comment);
+                comment.Author = author;
+               
+                await _context.SaveChangesAsync();
+                //post.Comments.Add(comment);
+                //_context.Entry(post).State = EntityState.Modified;
+                
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
+        public async Task<Post> GetPostByIdAsync(int postId)
+        {
+            return await _context.Posts
+                                    .Where(d => d.PostId == postId)
+                                    .Include(a => a.Author)
+                                    .Include(c => c.PostCategories)
+                                    .ThenInclude(Postcategories => Postcategories.Category)
+                                    .Include(t => t.PostTags)
+                                    .ThenInclude(PostTags => PostTags.Tag)
+                                    .Include(t => t.Comments)
+                                    .ThenInclude(c => c.Author)
+                                    .FirstOrDefaultAsync();
+                                    
+        }
     }
 }

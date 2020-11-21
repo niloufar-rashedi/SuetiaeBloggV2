@@ -36,6 +36,7 @@ namespace SuetiaeBlogg.Services.Services
                                 .Include(t => t.PostTags)
                                 .ThenInclude(PostTags => PostTags.Tag)
                                 .Include(t => t.Comments)
+                                .AsNoTracking()
                                 .ToListAsync();
 
                 if (posts.Count() == 0)
@@ -222,6 +223,7 @@ namespace SuetiaeBlogg.Services.Services
             {
                 var author = await _context.Authors
                                     .Where(d => d.AuthorId == authorId)
+                                    .AsNoTracking()
                                     .FirstOrDefaultAsync();
                 return author;
 

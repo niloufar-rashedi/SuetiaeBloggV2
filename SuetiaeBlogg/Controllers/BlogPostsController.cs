@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SuetiaeBlogg.API.Resources;
 using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Authors;
@@ -31,19 +32,17 @@ namespace SuetiaeBlogg.API.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
         private readonly IAuthorService _authorService;
-        //private readonly ICommentService _commentService;
-
+        private readonly ILogger<BlogPostsController> _logger;
+        
         public BlogPostsController(IPostService postService, ICategoryService categoryService, 
-            ITagService tagService, IAuthorService authorService)
+            ITagService tagService, IAuthorService authorService, ILogger<BlogPostsController> logger)
         {
             _postService = postService;
             _categoryService = categoryService;
             _tagService = tagService;
             _authorService = authorService;
-            
+            _logger = logger;
         }
-
-
 
         // <summary>
         // Retrieves all posts with details
@@ -51,13 +50,13 @@ namespace SuetiaeBlogg.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetPostDto>>> GetAllPosts()
         {
+            _logger.LogInformation("Called GetAllPOsts");
             var posts = await _postService.GetPosts();
-
             return Ok(posts);
         }
 
         // <summary>
-        // Retrieves a post by Id
+        // Retrieves a post by postId
         // </summary>
         [HttpGet("/api/[controller]/{Id}")]
         public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
@@ -106,7 +105,6 @@ namespace SuetiaeBlogg.API.Controllers
         // <summary>
         // Retrieves all categories
         // </summary>
-
         [HttpGet("~/api/[controller]/categories")]
         public async Task<ActionResult<IEnumerable<GetCategoryDto>>> GetCategories()
         {
@@ -140,10 +138,9 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
-        // POST: api/BlogPosts
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-
+        /// <summary>
+        /// Inserts a new post
+        /// </summary>
         [HttpPost]
         [Authorize]
         [Route("InsertNewPost")]
@@ -158,9 +155,9 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
-        // PUT: api/BlogPosts/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        /// <summary>
+        /// Modifies an existing post
+        /// </summary>
         [HttpPut("{id}")]
         [Authorize]
         public async Task<ActionResult<GetPostDto>> PutPost(int id, [FromBody] AddPostDto post)
@@ -169,7 +166,21 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok();
         }
 
-        // DELETE: api/Posts/5
+        /// <summary>
+        /// Inserts a comment within a post
+        /// </summary>
+        [HttpPut]
+        [Authorize]
+        [Route("{postId}/InsertNewComment/")]
+        public async Task<ActionResult<GetPostDto>> AddComment(int postId, [FromBody] AddCommentDto comment)
+        {
+            await _postService.CreateComment(postId, comment);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Deletes a post
+        /// </summary>
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<ActionResult<GetPostDto>> DeletePost(int id)
@@ -177,35 +188,5 @@ namespace SuetiaeBlogg.API.Controllers
             await _postService.DeletePost(id);
             return Ok();
         }
-
-        //[HttpPost]
-        //[Authorize]
-        //[Route("InsertNewComment")]
-        //public async Task<ActionResult<GetPostDto>> AddComment([FromBody] AddCommentDto comment)
-        //{
-        //    await _commentService.CreateComment(comment);
-        //    return Ok();
-
-        //}
-
-
-
-
-
-
-
-        //private bool PostExists(int id)
-        //{
-        //    return _postService.Posts.Any(e => e.PostId == id);
-        //}
-
-        ///// <summary>
-        ///// Add a category to an existing post
-        ///// </summary>
-        //[HttpPost]
-        //public async Task<IActionResult> AddPostCategory(AddPostCategoryDto newPostCategory)
-        //{
-        //    return Ok(await _categoryService.AddCategoryToAPost(newPostCategory));
-        //}
     }
 }

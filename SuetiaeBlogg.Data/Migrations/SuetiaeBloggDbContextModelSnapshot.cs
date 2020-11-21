@@ -71,7 +71,9 @@ namespace SuetiaeBlogg.Data.Migrations
             modelBuilder.Entity("SuetiaeBlogg.Core.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AuthorId")
                         .HasColumnType("int");
@@ -83,12 +85,17 @@ namespace SuetiaeBlogg.Data.Migrations
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
 
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("PubDate")
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -202,7 +209,7 @@ namespace SuetiaeBlogg.Data.Migrations
 
                     b.HasOne("SuetiaeBlogg.Core.Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("CommentId")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -25,7 +25,7 @@ namespace SuetiaeBlogg.Data
             modelBuilder.Entity<Post>()
             .HasMany(c => c.Comments)
             .WithOne(p => p.Post)
-            .HasForeignKey(bc => bc.CommentId);
+            .IsRequired();
 
             modelBuilder.Entity<PostCategories>()
             .HasKey(bc => new { bc.PostId, bc.CategoryId });
@@ -53,7 +53,8 @@ namespace SuetiaeBlogg.Data
             .WithMany(c => c.PostTags)
             .HasForeignKey(bc => bc.TagId);
 
-
+            //modelBuilder.Entity<Comment>()
+            //.Property(p => p.CommentId).ValueGeneratedOnAdd();
 
 
         }
