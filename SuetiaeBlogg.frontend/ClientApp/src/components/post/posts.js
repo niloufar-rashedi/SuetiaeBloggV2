@@ -48,7 +48,7 @@ export class Posts extends React.Component {
         return (
             <div>
                
-               {this.state.posts
+               {this.state.posts && this.state.posts
                .sort((a,b) => {
                 return new Date(a.lastModified).getTime() - 
                     new Date(b.lastModified).getTime()
