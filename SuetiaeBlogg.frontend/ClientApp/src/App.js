@@ -10,6 +10,10 @@ import showpost from './components/post/showpost';
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
 import AddPostByCategory from '../src/components/post/addpost-categories';
+import AddPostByCategoryV2 from '../src/components/post/addpost-categoriesV2';
+import editpost from '../src/components/post/editpost'
+import editpostv2 from '../src/components/post/editpostV2'
+
 import Categories from '../src/CategoriesPage/Categories';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
@@ -38,7 +42,8 @@ function App() {
               <Switch>
                   <Layout>
                       <Route exact path='/' component={Home} />
-                      <Route path='/showpost/:id' component = {showpost}/>
+                    <Route path='/showpost/:id' component={showpost} />
+
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />
@@ -50,7 +55,11 @@ function App() {
 
                     <UserContext.Provider value={providerValue}>
                       <Route path='/authorsdashboarad' component={AuthorsDashboard} />
-                    <Route path='/addposttrial' component={AddPostByCategory} />
+                        <Route path='/addposttrial' component={AddPostByCategory} />
+                        <Route path='/addposttrialV2' component={AddPostByCategoryV2} />
+                        { /*<Route path='/editpost/:id' component={editpost} />*/}
+                        <Route path='/editpostv2/:id' component={editpostv2} />
+
                     </UserContext.Provider>
                       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                   </Layout>

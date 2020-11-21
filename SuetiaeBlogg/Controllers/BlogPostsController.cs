@@ -102,6 +102,19 @@ namespace SuetiaeBlogg.API.Controllers
 
         }
 
+        //TODO:
+        //Retrieve posts by authorId then return specific post ID
+        //[HttpGet("~/api/[controller]/authors/{authorId:int}/posts")]
+        //public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostByAuthor(int authorId)
+        //{
+        //    var posts = await _authorService.FindPostsByAuthorId(authorId);
+
+        //    return Ok(posts);
+
+        //}
+
+
+
         // <summary>
         // Retrieves all categories
         // </summary>
