@@ -9,7 +9,6 @@ using SuetiaeBlogg.Core.Models;
 using SuetiaeBlogg.Core.Models.Categories;
 using SuetiaeBlogg.Core.Models.PostCategory;
 using SuetiaeBlogg.Core.Models.Posts;
-using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 

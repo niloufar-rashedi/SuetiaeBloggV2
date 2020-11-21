@@ -15,7 +15,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
-using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 using SuetiaeBlogg.Services.Services;
@@ -26,7 +25,7 @@ using SuetiaeBlogg.Core.Helpers;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using SuetiaeBlogg.Data.Repositories;
+
 
 namespace SuetiaeBlogg
 {
