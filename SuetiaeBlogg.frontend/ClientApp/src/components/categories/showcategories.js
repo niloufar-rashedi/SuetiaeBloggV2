@@ -5,13 +5,14 @@ import {Link} from 'react-router-dom';
 export class ShowCategories extends React.Component{ 
 constructor(props) {
     super(props);
+    
   }
     state = {
         categories: [],
     }
     apiURL = 'https://localhost:44351/api/BlogPosts/categories';
 
-
+    
 
     async componentDidMount() {
         await axios.get(this.apiURL)
@@ -29,9 +30,11 @@ constructor(props) {
                     {this.state.categories.map(category => (
                         <span>
                         <li className="list-group-item" key={category.categoryId}>
-                        <Link to={{pathname: `/${category.name}` }} activeClassName="active">{category.name}</Link>
-                            
-                            </li>
+                    <Link to={{pathname: `/${category.name}` , 
+                   myCustomProps: category,  
+                    query: { id: category.categoryId }, 
+                    }}>{category.name}</Link>
+                        </li>
                         </span>
                     ))}
                 </ul>

@@ -14,7 +14,7 @@ class ShowPost extends React.Component {
         
     }
     
-    postId = this.props.match.params.postId;
+    
     apiURL = `https://localhost:44351/api/BlogPosts`;
 
     async componentDidMount() {
