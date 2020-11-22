@@ -10,6 +10,8 @@ import { post } from 'jquery';
 //last try: https://codesource.io/build-simple-blog-using-axios-with-react/
 //https://stackoverflow.com/questions/52694011/how-to-delete-a-single-item-using-axios-in-react 
 //https://stackoverflow.com/questions/42079896/update-a-component-list-after-deleting-record
+//USe later for snackbar:
+        //https://www.youtube.com/watch?v=UAJpKl5gg6A
 
 class AuthorsDashboard extends Component {
     constructor(props) {
