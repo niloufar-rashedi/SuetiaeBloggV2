@@ -20,7 +20,9 @@ class EditPostV2 extends React.Component {
             title: '',
             body: '',
             summary: '',
-            category: '',
+            category: {
+                name: ''
+            },
             authorId: '',
             categories: []
         }
@@ -90,49 +92,11 @@ class EditPostV2 extends React.Component {
                 <div className="container">
                     <div className="wrapper">
                         <form onSubmit={this.handleEdit} className="form-group" >
-                            <h1>Contact Us</h1>
+                            <h1>Edit your post here</h1>
                             <div className="form-group">
                                 <label>Title</label>
                                 <input type="text" name="title" defaultValue={this.state.post.title} onChange={this.handleChange} placeholder="Title of your post" className="form-control" />
                             </div>
-
-                            {/* <div className="form-group">
-
-                                <label>Select a category, otherwise it will be post as "General"</label>
-                                <div>
-                                    <select name="category" onChange={this.handleChange} defaultValue={this.state.post.category}>
-                                        {categories.map((category, index) => {
-                                            return <option>{category.name}</option>
-                                        })}
-                                    </select>
-                                </div>
-                               <input type="text" value={this.state.category.name} onChange={this.handleChange} className="form-control" />
-                            </div>
-<input type="text" name="category" value={selectedCategory.name} onChange={this.handleChange} placeholder="pick a category" className="form-control" />
-                            
-                            
-                            
-
-                            <div className="form-group">
-                                <label>Category</label>
-
-                                {
-                                    this.state.post.map((editablepost, i) => {
-                                        // (typeof (editablepost.categories) == 'object') ?
-                                        <div key={editablepost.id}>
-                                                {
-                                                    editablepost.categories.map((selectedCategory, k) =>
-
-                                                        <p>{selectedCategory.name}</p>
-                                                    )
-                                                }
-                                            </div> 
-                                    }
-                                            )
-                                    }
-                                    
-                               
-                            </div>*/}
 
                             <div className="form-group">
                                 <label>Summary</label>

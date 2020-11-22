@@ -4,6 +4,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import history from '../../src/history'
+import { post } from 'jquery';
 
 class AuthorsDashboard extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class AuthorsDashboard extends Component {
             authorId: '',
             isLoaded: false
         }
+        this.deletePosts = this.deletePosts.bind(this);
     }
 
     authorId = localStorage.getItem('userId');
@@ -30,17 +32,29 @@ class AuthorsDashboard extends Component {
     authorId = localStorage.getItem('userId');
     apiURLDelete = `https://localhost:44351/api/BlogPosts`;
 
-    deletePosts = (id) => {
-        axios.delete(`${this.apiURLDelete}/${id}`, {
+    deletePosts(id) {
+        const apiURLDelete = `https://localhost:44351/api/BlogPosts`;
+        const token = localStorage.getItem('signin');
+        const authorId = localStorage.getItem('userId');
+
+        axios.delete(`${apiURLDelete}/${id}`, {
             headers: {
-                'Authorization': `Bearer ` + this.token,
+                'Authorization': `Bearer ` + token,
                 'Content-Type': 'application/json'
-            }
+            },
+            data: id
         })
             .then((result) => {
                 console.log('Object deleted', result);
+                alert('Post was deleted successfully! Press OK to refresh the tables of posts');
+
+                this.setState({
+
+                    post: this.state.post.filter(postbyauthorid => postbyauthorid.postId !== id)
+                })
+                this.setState({ post: this.state.post });
                 window.location.reload();
-                //history.push('/authorsdashboarad');
+
             });
     };
     render() {
@@ -89,43 +103,16 @@ class AuthorsDashboard extends Component {
 
                                                                 <div class="btn-group">
                                                                     <Link to={{ pathname: `/editpostv2/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
-                                                                        Delete</button>
-                                                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    { /*This accetion is irreversible! are you sure you want to delete " {postbyauthorid.title} " forever?" {this.state.post.title} " forever?*/}
-                                                                    This action is irreversible! are you sure you want to delete the post?
-                                                                    </div>
-                                                                                <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal"> I regret </button>
-                                                                                <button type="submit" class="btn btn-light" onClick={() => this.deletePosts(postbyauthorid.postId)}>Confirm & delete</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                <button type="submit" class="btn btn-danger" onClick={this.deletePosts.bind(this, postbyauthorid.postId)}>delete directly</button>
                                                                 </div>
                                                             </td>
 
                                                         </tr>
-                                                    
                                          )}
-                                        
-                                        
                                     )
                                 </tbody>
                                 <br>
                                 </br>
-                                { /* <Button href='/addposttrial'> Add new post </Button>
-                                <Button href='/addposttrialV2'> Add new post by CKeditor </Button>*/}
-
                             </Table>
                         </CardBody>
                         ): (

@@ -151,7 +151,7 @@ namespace SuetiaeBlogg.Services.Services
                 post.Title = postToBeUpdated.Title;
                 post.Summary = postToBeUpdated.Summary;
                 post.Body = postToBeUpdated.Body;
-                post.LastModified = postToBeUpdated.LastModified;
+               post.LastModified = postToBeUpdated.LastModified;
                 
                 
                 //var postCategory =  await _postcategoriesRepository.GetPostCategoryByCategoryNameAsync(postToBeUpdated.Category);
@@ -178,6 +178,8 @@ namespace SuetiaeBlogg.Services.Services
             {
                 var post = await GetPostByIdAsync(postId);
                 _context.Remove(post);
+                await _context.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {

@@ -7,7 +7,6 @@ using Moq;
 using SuetiaeBlogg.API.Controllers;
 using SuetiaeBlogg.API.Mapping;
 using SuetiaeBlogg.Core.Models;
-using SuetiaeBlogg.Core.Repositories;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 using SuetiaeBlogg.Services.Services;
