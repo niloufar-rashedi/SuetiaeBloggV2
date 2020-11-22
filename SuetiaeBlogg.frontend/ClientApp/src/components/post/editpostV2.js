@@ -20,7 +20,7 @@ class EditPostV2 extends React.Component {
             title: '',
             body: '',
             summary: '',
-            category: '',
+            //category: '',
             authorId: '',
             categories: []
         }
@@ -65,7 +65,7 @@ class EditPostV2 extends React.Component {
 
     handleEdit = e => {
         e.preventDefault()
-        console.log(this.state)
+        console.log('What I am editing is: ', this.state)
         axios.put(`${this.apiURL}/${this.props.match.params.id}`, this.state, {
             headers: {
                 'Authorization': `Bearer ` + this.token,
@@ -86,7 +86,7 @@ class EditPostV2 extends React.Component {
         const { categories } = this.state;
 
         return (
-            <div className="AddPost">
+            <div className="EditPostV2">
                 <div className="container">
                     <div className="wrapper">
                         <form onSubmit={this.handleEdit} className="form-group" >

@@ -4,19 +4,70 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import history from '../../src/history'
+import { post } from 'jquery';
+
+
+//last try: https://codesource.io/build-simple-blog-using-axios-with-react/
+//https://stackoverflow.com/questions/52694011/how-to-delete-a-single-item-using-axios-in-react 
+//https://stackoverflow.com/questions/42079896/update-a-component-list-after-deleting-record
 
 class AuthorsDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            //postId: '',
+            //title: '',
+            //summary: '',
+            //categories: [],
+            //body: '',
             post: [],
             authorId: '',
             isLoaded: false
         }
+        this.deletePosts = this.deletePosts.bind(this);
     }
+
+
+    deletePosts (id) {
+        const apiURLDelete = `https://localhost:44351/api/BlogPosts`;
+        const token = localStorage.getItem('signin');
+        const authorId = localStorage.getItem('userId');
+
+        axios.delete(`${apiURLDelete}/${id}`, {
+            headers: {
+                'Authorization': `Bearer ` + token,
+                'Content-Type': 'application/json'
+            },
+            data: id
+        })
+            .then((result) => {
+                //let newPost = [...this.state.post];
+                //console.log('id is: ', id);
+                console.log('Object deleted', result);
+                this.setState({
+
+                    post: this.state.post.filter(postbyauthorid => postbyauthorid.postId !== id)
+                })
+                this.setState({ post: this.state.post });
+                //this.setState({ post: result.data.data });
+                //this.setState({
+                //    postId: newPost.length + 1,
+                //    title: '',
+                //    summary: '',
+                //    categories: [],
+                //    body: '',
+                //    post: newPost
+                //})
+
+                // this.componentDidMount();
+                //window.location.reload();
+                //history.push('/authorsdashboarad');
+            });
+    };
 
     authorId = localStorage.getItem('userId');
     apiURL = `https://localhost:44351/api/BlogPosts/authors`;
+
     async componentDidMount() {
         await axios.get(`${this.apiURL}/${this.authorId}/posts`)
             .then(response => {
@@ -26,23 +77,8 @@ class AuthorsDashboard extends Component {
 
             });
     }
-    token = localStorage.getItem('signin');
-    authorId = localStorage.getItem('userId');
-    apiURLDelete = `https://localhost:44351/api/BlogPosts`;
+    
 
-    deletePosts = (id) => {
-        axios.delete(`${this.apiURLDelete}/${id}`, {
-            headers: {
-                'Authorization': `Bearer ` + this.token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((result) => {
-                console.log('Object deleted', result);
-                window.location.reload();
-                //history.push('/authorsdashboarad');
-            });
-    };
     render() {
     return (
         <div className="Container animated fadeIn">
@@ -88,29 +124,10 @@ class AuthorsDashboard extends Component {
                                                             <td>
 
                                                                 <div class="btn-group">
-                                                                    <Link to={{ pathname: `/editpostv2/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop">
-                                                                        Delete</button>
-                                                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    { /*This accetion is irreversible! are you sure you want to delete " {postbyauthorid.title} " forever?" {this.state.post.title} " forever?*/}
-                                                                    This action is irreversible! are you sure you want to delete the post?
-                                                                    </div>
-                                                                                <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal"> I regret </button>
-                                                                                <button type="submit" class="btn btn-light" onClick={() => this.deletePosts(postbyauthorid.postId)}>Confirm & delete</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                <Link to={{ pathname: `/editpostv2/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-success" >Edit</Button></Link>
+                                                                <button type="submit" class="btn btn-danger" onClick={this.deletePosts.bind(this, postbyauthorid.postId)}>delete directly</button>
+
+                                                                <Link to={{ pathname: `/deletepost/${postbyauthorid.postId}`, query: { id: postbyauthorid.postId } }}><Button variant="btn btn-warning" >Delete in the next page</Button></Link>
                                                                 </div>
                                                             </td>
 

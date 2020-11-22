@@ -13,6 +13,8 @@ import AddPostByCategory from '../src/components/post/addpost-categories';
 import AddPostByCategoryV2 from '../src/components/post/addpost-categoriesV2';
 import editpost from '../src/components/post/editpost'
 import editpostv2 from '../src/components/post/editpostV2'
+import deletepost from '../src/components/post/deletepost'
+
 
 import Categories from '../src/CategoriesPage/Categories';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
@@ -59,6 +61,8 @@ function App() {
                         <Route path='/addposttrialV2' component={AddPostByCategoryV2} />
                         { /*<Route path='/editpost/:id' component={editpost} />*/}
                         <Route path='/editpostv2/:id' component={editpostv2} />
+                        <Route path='/deletepost/:id' component={deletepost} />
+
 
                     </UserContext.Provider>
                       <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
