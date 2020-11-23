@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Moment from 'react-moment';
 import Card from 'react-bootstrap/Card'
+import AddComment from './addcomment';
 
 class ShowPost extends React.Component {
     constructor(props) {
@@ -48,7 +49,7 @@ class ShowPost extends React.Component {
                     );
 
                 })};
-                
+                < AddComment />
             
         </div>);
     }
