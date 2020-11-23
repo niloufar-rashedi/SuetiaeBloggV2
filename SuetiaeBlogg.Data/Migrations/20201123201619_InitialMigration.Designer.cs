@@ -10,8 +10,8 @@ using SuetiaeBlogg.Data;
 namespace SuetiaeBlogg.Data.Migrations
 {
     [DbContext(typeof(SuetiaeBloggDbContext))]
-    [Migration("20201119100434_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20201123201619_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

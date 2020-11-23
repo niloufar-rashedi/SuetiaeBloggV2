@@ -17,13 +17,22 @@ class AddComment extends React.Component {
             [name]: value
         });
     }
+    onSubmitHandler = (e) => {
+        e.preventDefault();
+       this.props.history.push(`/showpost/${this.props.postId}`)
+      }
 
-    apiURL = 'https://localhost:44351/api/BlogPosts/';
+    apiURL = 'https://localhost:44351/api/BlogPosts';
+    token = localStorage.getItem('signin');
+
     handleSubmit = e => {
         e.preventDefault()
         this.state.authorId = localStorage.getItem('userId');
-        console.log(this.state)
-        axios.post(`${this.apiURL}/${this.props.match.params.id}/InsertNewComment`, this.state, {
+        console.log('Current logged user:', this.state)
+        console.log('POstId', this.props.postId)
+        console.log('Current state:', this.state)
+        console.log('Current token:', this.token)
+        axios.put(`${this.apiURL}/${this.props.postId}/InsertNewComment`, this.state, {
             headers: {
                 'Authorization': `Bearer ` + this.token,
                 'Content-Type': 'application/json'
@@ -33,7 +42,7 @@ class AddComment extends React.Component {
                 console.log("Response from server: ", response);
                 alert('Comment was added successfully!');
 
-                window.location.assign('https://localhost:44301/showpost/' + this.props.match.params.id);
+               
             })
             .catch(error => {
                 console.log(error);
@@ -44,14 +53,19 @@ class AddComment extends React.Component {
     render() {
         return (
             <div>
-                <div className="form-group">
-                <div>
-                    <label>Please write your comment here: </label>
-                        <input type="text" name="body" onChange={this.handleChange} value={this.state.body} />
-                </div>
-                <button type="submit" name="submit" placeholder="Enter Message" className="btn btn-secondary">Submit</button>
-                </div>
-            </div>
+                <form onSubmit={this.handleSubmit}>
+                        <label>Please write your comment here: 
+                        <input type="text" name="body"  value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                </form>
+            </div>   
+            
+
+
+
+  
+
         )
 
     }

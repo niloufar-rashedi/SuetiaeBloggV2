@@ -44,7 +44,7 @@ function App() {
                   <Layout>
                       <Route exact path='/' component={Home} />
                       <Route path='/showpost/:id' component={showpost} />
-                      
+                      <Route path='/showbycategory/:name' component={ShowPostsByCategory}/>
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />

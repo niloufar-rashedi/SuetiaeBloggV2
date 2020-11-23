@@ -30,9 +30,9 @@ constructor(props) {
                     {this.state.categories.map(category => (
                         <span>
                         <li className="list-group-item" key={category.categoryId}>
-                    <Link to={{pathname: `/${category.name}` , 
+                    <Link to={{pathname: `/showbycategory/${category.name}` , 
                    myCustomProps: category,  
-                    query: { id: category.categoryId }, 
+                    query: { name: category.name }, 
                     }}>{category.name}</Link>
                         </li>
                         </span>
