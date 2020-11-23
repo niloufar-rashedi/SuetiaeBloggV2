@@ -30,26 +30,45 @@ class ShowPost extends React.Component {
 
     render() {
         return (
-            
-            <div>
-            <p>Title     {this.state.post.title}</p>
-                <p>Summary   {this.state.post.summary}</p>
-                <h3>Body </h3>
-                <p dangerouslySetInnerHTML={{ __html: this.state.post.body }}></p>
-            <p>Last modified    {this.state.post.lastModified} </p>
-            <p>Author       {this.state.post.firstName}</p>
-            <p>Comments</p>
-                {this.state.post.comments && this.state.post.comments.map(comment => {
-                    return (
-                        <div>
-                    <p>{comment.pubDate} by {comment.firstName}</p>
-                    <p>{comment.body}</p>
-                     </div>
 
-                    );
+            <div className="container justify-content-md-center">
+                <div className="row">
+                    <label>Title </label>
+                    <div>{this.state.post.title}</div>
+                </div>
+                <div className="row">
+                    <p>Summary   {this.state.post.summary}</p>
+                </div>
+                <div className="row">
+                    <h3>Body </h3>
+                    <p dangerouslySetInnerHTML={{ __html: this.state.post.body }}></p>
+                </div>
+                <div className="row">
+                    <p>Last modified    {this.state.post.lastModified} </p>
+                </div>
+                <div className="row">
+                    <p>Author       {this.state.post.firstName}</p>
+                </div>
+                <div className="row">
+                    <p>Comments</p>
+                        {this.state.post.comments && this.state.post.comments.map(comment => {
+                            return (
+                                <div>
+                            <p>{comment.pubDate} by {comment.firstName}</p>
+                            <p>{comment.body}</p>
+                             </div>
 
-                })};
-                < AddComment />
+                            );
+
+                        })};
+
+                </div>
+                <div className="row">
+                    < AddComment />
+                </div>
+
+
+                
             
         </div>);
     }
