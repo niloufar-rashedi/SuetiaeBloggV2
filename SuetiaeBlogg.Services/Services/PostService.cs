@@ -205,9 +205,8 @@ namespace SuetiaeBlogg.Services.Services
                     Body = newComment.Body,
                     PubDate = newComment.PubDate,
                     Post = post
-                    
-                    
-               };
+                   
+            };
                 _context.Comments.Add(comment);
                 comment.Author = author;
                 await _context.SaveChangesAsync();

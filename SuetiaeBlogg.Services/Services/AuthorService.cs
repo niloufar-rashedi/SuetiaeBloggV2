@@ -172,7 +172,6 @@ namespace SuetiaeBlogg.Services.Services
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) throw new ArgumentNullException("password");
@@ -223,7 +222,6 @@ namespace SuetiaeBlogg.Services.Services
             {
                 var author = await _context.Authors
                                     .Where(d => d.AuthorId == authorId)
-                                    .AsNoTracking()
                                     .FirstOrDefaultAsync();
                 return author;
 

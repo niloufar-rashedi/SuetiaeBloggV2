@@ -4,12 +4,13 @@ import axios from 'axios';
 class AddComment extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             authorId: '',
             body: ''
+    
         }
     }
+    
     handleChange = (event) => {
         const target = event.target;
         const { name, value } = target;
@@ -17,11 +18,7 @@ class AddComment extends React.Component {
             [name]: value
         });
     }
-    onSubmitHandler = (e) => {
-        e.preventDefault();
-       this.props.history.push(`/showpost/${this.props.postId}`)
-      }
-
+    
     apiURL = 'https://localhost:44351/api/BlogPosts';
     token = localStorage.getItem('signin');
 
@@ -41,6 +38,8 @@ class AddComment extends React.Component {
             .then(response => {
                 console.log("Response from server: ", response);
                 alert('Comment was added successfully!');
+                window.scrollTo(0, 0);
+                window.location.reload();
 
                
             })
@@ -49,13 +48,13 @@ class AddComment extends React.Component {
             })
     }
 
-
+    
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form  onSubmit={this.handleSubmit}>
                         <label>Please write your comment here: 
-                        <input type="text" name="body"  value={this.state.value} onChange={this.handleChange} />
+                        <input type="text" input type="text" required name="body"  value={this.state.body} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Submit" />
                 </form>
