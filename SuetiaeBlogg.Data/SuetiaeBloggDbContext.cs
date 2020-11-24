@@ -56,7 +56,6 @@ namespace SuetiaeBlogg.Data
             //modelBuilder.Entity<Comment>()
             //.Property(p => p.CommentId).ValueGeneratedOnAdd();
 
-
         }
     }
 }
