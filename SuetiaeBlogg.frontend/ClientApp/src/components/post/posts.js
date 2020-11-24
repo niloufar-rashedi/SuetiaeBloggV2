@@ -4,28 +4,26 @@ import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import Moment from 'react-moment';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 import posts from './posts';
-import showpost from './posts';
-import history from './../../history';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
 
-//const Block = styled.div`
-//        cursor: pointer;
-//        background: transparent;
-//        font-size:16px;
-//        border-radius: 3px;
-//        border: 2px solid darkgray;
-//        margin: 0 1em;
-//        padding: 0.25em 1em;
-//        margin-bottom: 3vh;
-//        margin-top: 1vh;
-//        transition: 0.5s all ease-out;
-//     &: hover {
-//        background-color: darkgray;
-//        color: white;
-//        }
-//    `;
+
+const Block = styled.div`
+      cursor: pointer;
+      background: transparent;
+      font-size:16px;
+      border-radius: 3px;
+      border: 2px solid darkgray;
+      margin: 0 1em;
+      padding: 0.25em 1em;
+      margin-bottom: 3vh;
+      margin-top: 1vh;
+      transition: 0.5s all ease-out;
+   &: hover {
+      background-color: darkgray;
+      color: white;
+      }
+  `;
 export class Posts extends React.Component {
     state = {
         posts: [],
@@ -55,7 +53,7 @@ export class Posts extends React.Component {
                 })
                 .reverse()
                .map(post => (
-                //<Block>
+                <Block>
                     <div className="card" key={post.lastModified}>
                         <Card style={{ width: '50rem' }}>
                 <Card.Header>Last modified: <Moment format="YYYY/MM/DD">{post.lastModified}</Moment> by {post.firstName}</Card.Header>
@@ -68,7 +66,7 @@ export class Posts extends React.Component {
                             </Card.Body>
                         </Card>
                     </div>
-                    //</Block>
+                    </Block>
                 ))
                 }             
                

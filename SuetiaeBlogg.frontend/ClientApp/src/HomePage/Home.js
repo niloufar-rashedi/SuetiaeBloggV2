@@ -31,7 +31,7 @@ export class Home extends Component {
                             alt="Third slide"
                         />
                         <Carousel.Caption>
-                            <h3>Getout of your comfort zone</h3>
+                            <h3>Get out of your comfort zone</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -79,11 +79,11 @@ export class Home extends Component {
                             <div className="col">
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item font-weight-bold">Archive</li>
-                                    <li className="list-group-item">Cras justo odio</li>
-                                    <li className="list-group-item">Dapibus ac</li>
-                                    <li className="list-group-item">Morbi leo risus</li>
-                                    <li className="list-group-item">Consectetur ac</li>
-                                    <li className="list-group-item">Vestibulum at</li>
+                                    <li className="list-group-item">General</li>
+                                    <li className="list-group-item">Holiday</li>
+                                    <li className="list-group-item">Leasure activities</li>
+                                    <li className="list-group-item">Events</li>
+                                    <li className="list-group-item">Finding job</li>
                                 </ul>
                             </div>
                             <div className="col">

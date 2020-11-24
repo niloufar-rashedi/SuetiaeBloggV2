@@ -1,8 +1,7 @@
 ﻿import React from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
-import Card from 'react-bootstrap/Card'
-import AddComment from './addcomment';
+//import AddComment from './addcomment';
 
 class ShowPost extends React.Component {
     constructor(props) {
@@ -32,45 +31,36 @@ class ShowPost extends React.Component {
         return (
 
             <div className="container justify-content-md-center">
-                <div className="row">
-                    <label>Title </label>
-                    <div>{this.state.post.title}</div>
+                <div className="row d-flex justify-content-center">
+                    <div><h1>{this.state.post.title}</h1></div>
                 </div>
-                <div className="row">
-                    <p>Summary   {this.state.post.summary}</p>
+                <div style={{ display: "flex" }}>
+                    <p>Published: <Moment format="MM/DD/YYYY"></Moment> by {this.state.post.firstName}</p>
                 </div>
+
                 <div className="row">
-                    <h3>Body </h3>
                     <p dangerouslySetInnerHTML={{ __html: this.state.post.body }}></p>
                 </div>
                 <div className="row">
                     <p>Last modified    {this.state.post.lastModified} </p>
                 </div>
-                <div className="row">
-                    <p>Author       {this.state.post.firstName}</p>
-                </div>
-                <div className="row">
-                    <p>Comments</p>
+
+                <div class="form-group">
+                    <div class="ui comments"><h3 class="ui dividing header">Comments</h3><div class="comment">
                         {this.state.post.comments && this.state.post.comments.map(comment => {
                             return (
-                                <div>
-                            <p>{comment.pubDate} by {comment.firstName}</p>
-                            <p>{comment.body}</p>
-                             </div>
-
-                            );
-
-                        })};
-
+                                <div class="content"><a class="author">{comment.firstName}</a><div class="metadata"><div>{comment.pubDate}</div></div>
+                                <div class="text">{comment.body}</div>
+                                <div class="actions"><a class="">Reply</a></div>
+                                </div>       
+                         );
+                         })}
+                            
+                    </div>
                 </div>
-                <div className="row">
-                    < AddComment />
                 </div>
-
-
-                
-            
-        </div>);
+             </div>
+                )
     }
 }
 
