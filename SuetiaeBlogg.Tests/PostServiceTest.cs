@@ -13,6 +13,7 @@ using SuetiaeBlogg.Data;
 using SuetiaeBlogg.Services.Services;
 using Xunit;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuetiaeBlogg.Tests.Service
 {
@@ -20,7 +21,7 @@ namespace SuetiaeBlogg.Tests.Service
     {
         private IEnumerable<Post> GetFakeData()
         {
-            var i = 7;
+            var i = 1;
             var posts = A.ListOf<Post>(3);
             posts.ForEach(x => x.PostId = i++);
             return posts.Select(_ => _);
@@ -43,6 +44,35 @@ namespace SuetiaeBlogg.Tests.Service
 
             // Assert
             Assert.Equal(count, 3);
+        }
+
+        private Mock<SuetiaeBloggDbContext> CreateDbContext()
+        {
+            var posts = GetFakeData().AsQueryable();
+
+            var dbSet = new Mock<DbSet<Post>>();
+            dbSet.As<IQueryable<Post>>().Setup(m => m.Provider).Returns(posts.Provider);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.Expression).Returns(posts.Expression);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.ElementType).Returns(posts.ElementType);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.GetEnumerator()).Returns(posts.GetEnumerator());
+
+            var context = new Mock<SuetiaeBloggDbContext>();
+            context.Setup(c => c.Posts).Returns(dbSet.Object);
+            return context;
+        }
+        [Fact]
+        public void FindPostTest()
+        {
+            // arrange
+            var context = CreateDbContext();
+
+            var service = new PostService(context.Object);
+
+            // act
+            var post = service.FindPostById(1);
+
+            // assert
+            Assert.Equal(1, post.Id);
         }
 
 

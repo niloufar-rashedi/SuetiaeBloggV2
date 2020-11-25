@@ -32,6 +32,10 @@ namespace SuetiaeBlogg.Services.Services
             this._categoryService = categoryService;
             this._authorService = authorService;
         }
+        public PostService(SuetiaeBloggDbContext context)
+        {
+            _context = context;
+        }
         public async Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts()
         {
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
