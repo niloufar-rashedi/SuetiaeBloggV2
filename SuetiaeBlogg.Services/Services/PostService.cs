@@ -37,17 +37,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<IEnumerable<GetPostDto>> response = new ServiceResponse<IEnumerable<GetPostDto>>();
             try
             {
-                var posts = await _context.Posts
-                                 .Include(a => a.Author)
-                                 .Include(t => t.Comments)
-                                 .ThenInclude(t =>t.Author)
-                                 .Include(c => c.PostCategories)
-                                 .ThenInclude(Postcategories => Postcategories.Category)
-                                 .Include(t => t.PostTags)
-                                 .ThenInclude(PostTags => PostTags.Tag)
-                                 .AsNoTracking()
-                                 .ToListAsync();
-
+                var posts = await FindPostsAsync();
                 response.Data = _mapper.Map<IEnumerable<GetPostDto>>(posts);
             }
             catch (Exception ex)
@@ -58,12 +48,12 @@ namespace SuetiaeBlogg.Services.Services
 
             return response;
         }
-        public  async Task<ServiceResponse<GetPostDto>> FindPostById(int postId)
+        public  async Task<ServiceResponse<GetPostDto>> GetPostById(int postId)
         {
             ServiceResponse<GetPostDto> response = new ServiceResponse<GetPostDto>();
             try
             {
-                var post = await GetPostByIdAsync(postId);
+                var post = await FindPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -107,6 +97,7 @@ namespace SuetiaeBlogg.Services.Services
                     {
                         response.Message = "There has been a problem retrieving the category";
                     }
+                    
                     var category = query.Data.FirstOrDefault();
                     var postCategory = new PostCategories
                     {
@@ -142,7 +133,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Post> response = new ServiceResponse<Post>();
             try
             {
-                var post = await GetPostByIdAsync(postId);
+                var post = await FindPostByIdAsync(postId);
                 if (post == null)
                 {
                     response.Message = "Post not found";
@@ -151,15 +142,28 @@ namespace SuetiaeBlogg.Services.Services
                 post.Title = postToBeUpdated.Title;
                 post.Summary = postToBeUpdated.Summary;
                 post.Body = postToBeUpdated.Body;
-               post.LastModified = postToBeUpdated.LastModified;
-                
-                
-                //var postCategory =  await _postcategoriesRepository.GetPostCategoryByCategoryNameAsync(postToBeUpdated.Category);
-                //post.PostCategories = category;
-                
-                 
+                post.LastModified = postToBeUpdated.LastModified;
 
-                
+                if (!String.IsNullOrEmpty(postToBeUpdated.Category))
+                {
+                    var query = await _categoryService.FindCategoryByName(postToBeUpdated.Category);
+                    if (!query.Success)
+                    {
+                        response.Message = "There has been a problem retrieving the category";
+                    }
+
+                    var category = query.Data.FirstOrDefault();
+                    var currentPostCategory = post.PostCategories
+                                                  .FirstOrDefault();
+                    post.PostCategories.Remove(currentPostCategory);
+                                      
+                    var postCategory = new PostCategories
+                    {
+                        Post = post,
+                        Category = category
+                    };
+                    _context.PostCategories.Update(postCategory);
+                }
 
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<Post>(post);
@@ -176,7 +180,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = await GetPostByIdAsync(postId);
+                var post = await FindPostByIdAsync(postId);
                 _context.Remove(post);
                 await _context.SaveChangesAsync();
 
@@ -194,7 +198,7 @@ namespace SuetiaeBlogg.Services.Services
             ServiceResponse<Task> response = new ServiceResponse<Task>();
             try
             {
-                var post = await GetPostByIdAsync(postId);
+                var post = await FindPostByIdAsync(postId);
                 var author = await _authorService.FindAuthorById(newComment.AuthorId);
                 if (post == null)
                 {
@@ -220,7 +224,7 @@ namespace SuetiaeBlogg.Services.Services
             }
             return response;
         }
-        public async Task<Post> GetPostByIdAsync(int postId)
+        public async Task<Post> FindPostByIdAsync(int postId)
         {
             return await _context.Posts
                                     .Where(d => d.PostId == postId)
@@ -234,5 +238,20 @@ namespace SuetiaeBlogg.Services.Services
                                     .FirstOrDefaultAsync();
                                     
         }
+        public async Task<IEnumerable<Post>> FindPostsAsync()
+        {
+            return await _context.Posts
+                                 .Include(a => a.Author)
+                                 .Include(t => t.Comments)
+                                 .ThenInclude(t => t.Author)
+                                 .Include(c => c.PostCategories)
+                                 .ThenInclude(Postcategories => Postcategories.Category)
+                                 .Include(t => t.PostTags)
+                                 .ThenInclude(PostTags => PostTags.Tag)
+                                 .AsNoTracking()
+                                 .ToListAsync();
+
+        }
+        
     }
 }

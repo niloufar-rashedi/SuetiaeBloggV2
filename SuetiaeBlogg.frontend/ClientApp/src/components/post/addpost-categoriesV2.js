@@ -5,7 +5,7 @@ import ReturnCategories from './return-categories-addpost';
 import axios from 'axios';
 import Select from 'react-select';
 
-
+  
 
 //https://ckeditor.com/docs/ckeditor4/latest/guide/dev_react.html
 
@@ -65,7 +65,13 @@ class AddPostV2 extends React.Component {
                 'Authorization': `Bearer ` + this.token,
                 'Content-Type': 'application/json'
             }
-        })
+        }).catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+          })
             .then(response => {
                 console.log("Response from server: ", response);
                 alert('Post was sent successfully! Press OK to go back to dashboard');
