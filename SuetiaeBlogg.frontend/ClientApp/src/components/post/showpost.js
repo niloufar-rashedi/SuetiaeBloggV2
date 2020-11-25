@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
-import Card from 'react-bootstrap/Card'
 import AddComment from './addcomment';
 
 class ShowPost extends React.Component {
@@ -13,16 +12,14 @@ class ShowPost extends React.Component {
         };
         
     }
-    
-    
+      
     apiURL = `https://localhost:44351/api/BlogPosts`;
 
     async componentDidMount() {
         await axios.get(`${this.apiURL}/${this.props.match.params.id}`)
             .then(response => {
             console.log('Response from postById', response)
-            
-                this.setState({ post: response.data.data});
+                    this.setState({ post: response.data.data});
         });
     }
 
@@ -30,40 +27,32 @@ class ShowPost extends React.Component {
 
     render() {
         return (
-
             <div className="container justify-content-md-center">
-                <div className="row">
-                    <label>Title </label>
-                    <div>{this.state.post.title}</div>
+            <div className="row d-flex justify-content-center">
+                <div><h1>{this.state.post.title}</h1></div>
+            </div>
+            <div style={{ display: "flex" }}>
+                <p>Published: <Moment format="MM/DD/YYYY"></Moment> by {this.state.post.firstName}</p>
+            </div>
+            <div className="row">
+                <p dangerouslySetInnerHTML={{ __html: this.state.post.body }}></p>
+            </div>
+            <div className="row">
+                <p>Last modified    {this.state.post.lastModified} </p>
+            </div>
+            <div class="form-group">
+                <div class="ui comments"><h3 class="ui dividing header">Comments</h3><div class="comment">
+                    {this.state.post.comments && this.state.post.comments.map(comment => {
+                        return (
+                            <div class="content"><a class="author">{comment.firstName}</a><div class="metadata"><div>{comment.pubDate}</div></div>
+                            <div class="text">{comment.body}</div>
+                            <div class="actions"><a class="">Reply</a></div>
+                            </div>
+                     );
+                     })}
                 </div>
-                <div className="row">
-                    <p>Summary   {this.state.post.summary}</p>
-                </div>
-                <div className="row">
-                    <h3>Body </h3>
-                    <p dangerouslySetInnerHTML={{ __html: this.state.post.body }}></p>
-                </div>
-                <div className="row">
-                    <p>Last modified    {this.state.post.lastModified} </p>
-                </div>
-                <div className="row">
-                    <p>Author       {this.state.post.firstName}</p>
-                </div>
-                <div className="row">
-                    <ul class="list-group list-group-flush"> Comments
-                        {this.state.post.comments && this.state.post.comments.map(comment => {
-                            return (
-                                <div>
-                                    <li className="list-group-item">{comment.pubDate} by {comment.firstName}</li>
-                                    <li className="list-group-item">{comment.body}</li>
-                             </div>
-                                
-                            );
-                            
-                        })};
-                        </ul>
-
-                </div>
+            </div>
+            </div>
                 <div className="row">
                     < AddComment postId = {this.state.post.postId}/>
                 </div>
