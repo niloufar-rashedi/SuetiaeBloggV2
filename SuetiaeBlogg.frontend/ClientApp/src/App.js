@@ -7,6 +7,7 @@ import { About } from './AboutPage/About';
 import { Contact } from './ContactPage/Contact';
 import posts from './components/post/posts';
 import showpost from './components/post/showpost';
+import ShowPostsByCategory from './components/categories/showpostsbycategory'
 import  AuthorsDashboard  from './AuthorPage/AuthorsDashboard';
 import { Counter } from './components/Counter';
 import AddPostByCategory from '../src/components/post/addpost-categories';
@@ -42,8 +43,8 @@ function App() {
               <Switch>
                   <Layout>
                       <Route exact path='/' component={Home} />
-                    <Route path='/showpost/:id' component={showpost} />
-
+                      <Route path='/showpost/:id' component={showpost} />
+                      <Route path='/showbycategory/:name' component={ShowPostsByCategory}/>
                       <Route path='/about' component={About} />
                       <Route path='/contact' component={Contact} />
                       <Route path="/blogs" component={Blogs} />

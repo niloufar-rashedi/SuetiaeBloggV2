@@ -14,13 +14,13 @@ class ShowPost extends React.Component {
         
     }
     
-    postId = this.props.match.params.postId;
+    
     apiURL = `https://localhost:44351/api/BlogPosts`;
 
     async componentDidMount() {
         await axios.get(`${this.apiURL}/${this.props.match.params.id}`)
             .then(response => {
-            console.log('Rasponse from postById', response)
+            console.log('Response from postById', response)
             
                 this.setState({ post: response.data.data});
         });
@@ -50,21 +50,22 @@ class ShowPost extends React.Component {
                     <p>Author       {this.state.post.firstName}</p>
                 </div>
                 <div className="row">
-                    <p>Comments</p>
+                    <ul class="list-group list-group-flush"> Comments
                         {this.state.post.comments && this.state.post.comments.map(comment => {
                             return (
                                 <div>
-                            <p>{comment.pubDate} by {comment.firstName}</p>
-                            <p>{comment.body}</p>
+                                    <li className="list-group-item">{comment.pubDate} by {comment.firstName}</li>
+                                    <li className="list-group-item">{comment.body}</li>
                              </div>
-
+                                
                             );
-
+                            
                         })};
+                        </ul>
 
                 </div>
                 <div className="row">
-                    < AddComment />
+                    < AddComment postId = {this.state.post.postId}/>
                 </div>
 
 

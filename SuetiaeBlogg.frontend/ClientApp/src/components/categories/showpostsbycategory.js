@@ -20,11 +20,12 @@ class ShowPostsByCategory extends React.Component {
     apiURL = `https://localhost:44351/api/BlogPosts/categories`;
  
     async componentDidMount() {
-        await axios.get(`${this.apiURL}/${this.props.match.params.categoryId}/posts`)
+        await axios.get(`${this.apiURL}/${this.props.location.myCustomProps.categoryId}/posts`)
             .then(response => {
             console.log('Response from postByCategoryId', response)
-            
+            console.log('Props content', this.props.match.params.categoryId)
                 this.setState({ posts: response.data.data});
+
         });
     }
 
@@ -33,8 +34,8 @@ class ShowPostsByCategory extends React.Component {
     render() {
         return (
             <div>
-                <h2>All post in category:    {this.props.match.params.categoryId} </h2>
-                <h2>with Id:    {this.props.match.params.categoryId} </h2>
+                <h2>All post in category:    {this.props.location.myCustomProps.name} </h2>
+                <h2>with Id:    {this.props.location.myCustomProps.categoryId} </h2>
                 {this.state.posts && this.state.posts.sort((a,b) => {
                 return new Date(a.lastModified).getTime() - 
                     new Date(b.lastModified).getTime()

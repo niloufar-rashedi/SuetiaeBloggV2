@@ -59,7 +59,7 @@ class AddPostV2 extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
         this.state.authorId = localStorage.getItem('userId');
-        console.log(this.state)
+        console.log('Data from editor', this.state)
         axios.post(this.apiURL, this.state, {
             headers: {
                 'Authorization': `Bearer ` + this.token,

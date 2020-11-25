@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import { Posts } from '../components/post/posts';
 import Carousel from 'react-bootstrap/Carousel'
 import Card from 'react-bootstrap/Card'
+import { ShowCategories } from '../components/categories/showcategories';
 
 import { Button } from 'reactstrap';
 
@@ -87,13 +88,12 @@ export class Home extends Component {
                                 </ul>
                             </div>
                             <div className="col">
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item font-weight-bold">Categories</li>
-                                    <li className="list-group-item">General</li>
-                                    <li className="list-group-item">Event</li>
-                                    <li className="list-group-item">Sverige</li>
-                                    <li className="list-group-item">Nationaldag</li>
-                                    <li className="list-group-item">Historia</li>
+                            <ul class="list-group list-group-flush">
+                                    <li class="list-group-item font-weight-bold">Categories</li>
+                                    <div>
+                        <ShowCategories />
+                        </div>
+                    
                                 </ul>
                             </div>
                         </div>

@@ -9,6 +9,7 @@ namespace SuetiaeBlogg.Core.Models
     public class Comment
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CommentId { get; set; }
         public Author Author { get; set; }
 

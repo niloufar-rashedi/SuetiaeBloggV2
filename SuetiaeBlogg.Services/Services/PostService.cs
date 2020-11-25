@@ -205,13 +205,12 @@ namespace SuetiaeBlogg.Services.Services
                     Body = newComment.Body,
                     PubDate = newComment.PubDate,
                     Post = post
-                };
-                 _context.Comments.Add(comment);
+                   
+            };
+                _context.Comments.Add(comment);
                 comment.Author = author;
-               
                 await _context.SaveChangesAsync();
-                //post.Comments.Add(comment);
-                //_context.Entry(post).State = EntityState.Modified;
+                
                 
             }
             catch (Exception ex)

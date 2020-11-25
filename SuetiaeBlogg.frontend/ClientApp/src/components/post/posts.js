@@ -48,7 +48,7 @@ export class Posts extends React.Component {
         return (
             <div>
                
-               {this.state.posts
+               {this.state.posts && this.state.posts
                .sort((a,b) => {
                 return new Date(a.lastModified).getTime() - 
                     new Date(b.lastModified).getTime()
@@ -62,6 +62,7 @@ export class Posts extends React.Component {
                              <Card.Body>
                                 <Card.Title>{post.title}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{post.summary}</Card.Subtitle>
+                                    <Card.Text>Comments:  {post.comments.length}</Card.Text>
                                 <Card.Link href="#">
                                 <Link to={{pathname: `/showpost/${post.postId}`, query: { id: post.postId }}}><Button variant="btn btn-success" >Read more</Button></Link>
                                 </Card.Link>
