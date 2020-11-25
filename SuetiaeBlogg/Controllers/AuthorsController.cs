@@ -28,6 +28,8 @@ namespace SuetiaeBlogg.API.Controllers
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
+        public object Term { get; set; }
+
         public AuthorsController(IAuthorService authorService)
         {
             _authorService = authorService;

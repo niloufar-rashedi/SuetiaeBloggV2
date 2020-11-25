@@ -256,6 +256,10 @@ namespace SuetiaeBlogg.Services.Services
                                  .ToListAsync();
 
         }
-        
+
+        IEnumerable<Author> IPostService.GetPostsWithoutDto()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
