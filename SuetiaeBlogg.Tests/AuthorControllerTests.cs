@@ -20,7 +20,7 @@ namespace SuetiaeBlogg.Tests
             _factory = factory;
         }
         [Theory]
-        [InlineData("/api/Authors")]
+        [InlineData("/api/BlogPosts")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             //var provider = TestClaimsProvider.WithUserClaims();
