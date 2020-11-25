@@ -40,7 +40,7 @@ class EditPostV2 extends React.Component {
             const [categoryData, postData] = await axios.all([ this.getCategoriesData(), this.getPostData() ]);
             this.setState(
                 {
-                    categories: categoryData.data.data,
+                    categories: [{name: '', id: ''}].concat(categoryData.data.data),
                     title: postData.data.data.title,
                     summary: postData.data.data.summary,
                     body: postData.data.data.body,   
@@ -117,6 +117,7 @@ class EditPostV2 extends React.Component {
             .then(response => {
                 console.log("Response from server: ", response);
                 alert('Post was edited successfully!');
+                window.location.assign('https://localhost:44301/authorsdashboarad'); 
             })
             .catch(error => {
                 console.log(error);

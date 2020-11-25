@@ -18,10 +18,9 @@ class AddPostV2 extends React.Component {
         title: '',
         body: '',
         summary: '',
-        category: {
-            name: ''
-        },
+        category: '',     
         authorId: '',
+        status:'',
         categories: []
     }
     }
@@ -31,7 +30,11 @@ class AddPostV2 extends React.Component {
         await axios.get(this.apiURLCategories)
             .then(response => {
                 console.log(response);
-                this.setState({ categories: response.data.data });
+                this.setState({ 
+                    categories: [{name: '', id: ''}].concat(response.data.data )
+                
+                })
+               
             });
     }
 
@@ -73,10 +76,12 @@ class AddPostV2 extends React.Component {
             }
           })
             .then(response => {
-                console.log("Response from server: ", response);
-                alert('Post was sent successfully! Press OK to go back to dashboard');
-
-                window.location.assign('https://localhost:44301/authorsdashboarad'); 
+                console.log("Response from server: ", response.status);
+                if(response.status === 200)
+                    alert('Post was sent successfully! Press OK to go back to dashboard');
+                else
+                    alert('There has been a problem submitting the post. Press OK to go back to dashboard');
+                 window.location.assign('https://localhost:44301/authorsdashboarad'); 
             })
             .catch(error => {
                 console.log(error);
@@ -100,17 +105,16 @@ class AddPostV2 extends React.Component {
                             <h1>Write your blog here</h1>
                             <div className="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" value={this.state.title} onChange={this.handleChange} placeholder="Title of your post" className="form-control" />
+                                <input type="text" required name="title" value={this.state.title} onChange={this.handleChange} placeholder="Title of your post" className="form-control" />
                             </div>
 
                             <div className="form-group">
                                 
                                 <label>Select a category, otherwise it will be post as "General"</label>
                                 <div>
-                                    <select name="category" onChange={this.handleChange} value={this.state.category}>
-                                        {categories.map((category, index) => {
-                                            return <option>{category.name}</option>
-                                        })}
+                                    <select value={this.state.category}
+              onChange={(e) => this.setState({category: e.target.value})}>
+                                       {this.state.categories.map((cat) => <option key={cat.value} value={cat.value}>{cat.name}</option>)}
                                     </select>
                                 </div>
                                 {/*<input type="text" value={this.state.category.name} onChange={this.handleChange} className="form-control" />*/}
@@ -128,7 +132,7 @@ class AddPostV2 extends React.Component {
                                 <label>Your inspiring blog post</label>
                                 {/*<textarea type="text" name="content" cols="25" rows="14" value={this.state.content} onChange={this.handleChange} className="form-control" placeholder="Enter Message" />*/}
                                 <CKEditor
-                                    body={this.state.body}
+                                    required body={this.state.body}
                                     onChange={this.onEditorChange}
                                     //editor={ClassicEditor}
                                     onInit={editor => {
@@ -136,7 +140,7 @@ class AddPostV2 extends React.Component {
                                     }} />
                                 <label>
                                     Change value:
-                                    <textarea defaultValue={this.state.body} onChange={this.handleChange} />
+                                    <textarea required defaultValue={this.state.body} onChange={this.handleChange} />
                                 </label>
                                     
                                 
