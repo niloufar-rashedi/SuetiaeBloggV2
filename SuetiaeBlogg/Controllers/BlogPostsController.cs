@@ -62,7 +62,7 @@ namespace SuetiaeBlogg.API.Controllers
         public async Task<ActionResult<GetPostDto>> GetPostById(int Id)
         {
 
-            var post = await _postService.FindPostById(Id);
+            var post = await _postService.GetPostById(Id);
             return Ok(post);
         }
 

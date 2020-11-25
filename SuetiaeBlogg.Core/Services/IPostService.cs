@@ -13,7 +13,7 @@ namespace SuetiaeBlogg.Core.Services
     public interface IPostService
     {
         public Task<ServiceResponse<IEnumerable<GetPostDto>>> GetPosts();
-        public Task<ServiceResponse<GetPostDto>> FindPostById(int Id);
+        public Task<ServiceResponse<GetPostDto>> GetPostById(int postId);
         public Task<ServiceResponse<Post>> CreatePost(AddPostDto newPost);
         public Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated);
         public Task<ServiceResponse<Task>> CreateComment(int postId, AddCommentDto newComment);
