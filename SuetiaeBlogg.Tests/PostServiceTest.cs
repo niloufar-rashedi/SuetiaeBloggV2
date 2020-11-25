@@ -1,55 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Moq;
-using NSubstitute;
+using GenFu;
 using SuetiaeBlogg.API.Controllers;
 using SuetiaeBlogg.API.Mapping;
 using SuetiaeBlogg.Core.Models;
-using SuetiaeBlogg.Core.Models.Comments;
-using SuetiaeBlogg.Core.Models.Posts;
 using SuetiaeBlogg.Core.Services;
 using SuetiaeBlogg.Data;
 using SuetiaeBlogg.Services.Services;
 using Xunit;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuetiaeBlogg.Tests.Service
 {
     public class PostServiceTest
     {
+        private IEnumerable<Post> GetFakeData()
+        {
+            var i = 1;
+            var posts = A.ListOf<Post>(3);
+            posts.ForEach(x => x.PostId = i++);
+            return posts.Select(_ => _);
+        }
         [Fact]
-        public async void GetPosts_Should_Return_Posts()
+        public void GetPersonsTest()
         {
-            var _categoryServiceTest = new Mock<ICategoryService>().Object;
-            var _authorServiceTest = new Mock<IAuthorService>().Object;
-            var _mapperTest = new Mock<IMapper>().Object;
+            // arrange
+            var service = new Mock<IPostService>();
 
-            var mockPosts = new List<Post>()
-        {
-            new Post {PostId = 1, Title = "First post", Summary = "First Summary", LastModified = DateTime.Now, Comments = new List<Comment>()},
-            new Post {PostId = 2, Title = "Second post", Summary = "Second Summary", LastModified = DateTime.Now, Comments = new List<Comment>()}
-        }.AsQueryable();
+            var posts = GetFakeData();
+            service.Setup(x => x.GetPostsWithoutDto()).Returns((Delegate)posts);
 
-            var mockSet = Substitute.For<DbSet<Post>, IQueryable<Post>>();
-
-            // setup all IQueryable methods using what you have from "data"
-            ((IQueryable<Post>)mockSet).Provider.Returns(mockPosts.Provider);
-            ((IQueryable<Post>)mockSet).Expression.Returns(mockPosts.Expression);
-            ((IQueryable<Post>)mockSet).ElementType.Returns(mockPosts.ElementType);
-            ((IQueryable<Post>)mockSet).GetEnumerator().Returns(mockPosts.GetEnumerator());
-            var dbContextMock = Substitute.For<SuetiaeBloggDbContext>();
-            dbContextMock.Posts.Returns(mockSet);
+            var controller = new BlogPostsController(service.Object);
 
             // Act
-            var posts = new PostService(dbContextMock, _mapperTest, _categoryServiceTest, _authorServiceTest);
-            var data = await posts.FindPostsAsync();
+            var results = controller.GetGetAllPostsWithoutDto();
+
+            var count = results.Count();
 
             // Assert
-            Assert.Equal("First post", data.FirstOrDefault().Title);
+            Assert.Equal(count, 3);
         }
+
+        private Mock<SuetiaeBloggDbContext> CreateDbContext()
+        {
+            var posts = GetFakeData().AsQueryable();
+
+            var dbSet = new Mock<DbSet<Post>>();
+            dbSet.As<IQueryable<Post>>().Setup(m => m.Provider).Returns(posts.Provider);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.Expression).Returns(posts.Expression);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.ElementType).Returns(posts.ElementType);
+            dbSet.As<IQueryable<Post>>().Setup(m => m.GetEnumerator()).Returns(posts.GetEnumerator());
+
+            var context = new Mock<SuetiaeBloggDbContext>();
+            context.Setup(c => c.Posts).Returns(dbSet.Object);
+            return context;
+        }
+        [Fact]
+        public void FindPostTest()
+        {
+            // arrange
+            var context = CreateDbContext();
+
+            var service = new PostService(context.Object);
+
+            // act
+            var post = service.FindPostById(1);
+
+            // assert
+            Assert.Equal(1, post.Id);
+        }
+
+
+        //    private IUnitOfWork _mockUOW;
+
+
+
+        //    [Fact]
+        //    public  Task GetAllWithCategoriesShouldReturnsAllPostsWithCategories()
+        //    {
+        //        // Arrange
+
+        //        var mockPosts = new List<Post>() {
+        //            new Post() { Title = "this is the first post with complete model", Body = "Write something here!" },
+        //            new Post() { Title = "this is the second post with complete model", Body = "Good news??" }
+        //        };
+
+        //        var mockCategories = new List<Category>(){
+        //            new Category { Name = "General" },
+        //            new Category { Name = "Event" }
+        //        };
+
+        //        var mockPostCategories = new List<PostCategories>() {
+        //            new PostCategories { Post = mockPosts[0], Category = mockCategories[0] },
+        //            new PostCategories { Post = mockPosts[1], Category = mockCategories[1] }
+        //        };
+
+
+        //        //var sut = new PostService();
+
+
+        //    //Act
+
+        //        // Assert
+        //       // Assert.NotNull(result);
+
+        //    }
     }
 }
