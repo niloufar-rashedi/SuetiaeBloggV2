@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SuetiaeBlogg.Tests.Service
 {
-    class CategoryServiceTest
+    public class CategoryServiceTest
     {
     }
 }
