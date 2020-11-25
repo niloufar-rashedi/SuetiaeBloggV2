@@ -18,6 +18,9 @@ namespace SuetiaeBlogg.Core.Services
         public Task<ServiceResponse<Post>> UpdatePost(int postId, AddPostDto postToBeUpdated);
         public Task<ServiceResponse<Task>> CreateComment(int postId, AddCommentDto newComment);
         public Task<ServiceResponse<Task>> DeletePost(int Id);
+
+        //Added methods to ease testing, i.e. avoiding Dto
+        public IEnumerable<Author> GetPostsWithoutDto();
        
     }
 }

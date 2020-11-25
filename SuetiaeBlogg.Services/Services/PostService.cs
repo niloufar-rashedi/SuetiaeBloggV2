@@ -235,5 +235,14 @@ namespace SuetiaeBlogg.Services.Services
                                     .FirstOrDefaultAsync();
                                     
         }
+
+        //Added methods to ease testing, i.e. avoiding Dto
+        IEnumerable<Author> IPostService.GetPostsWithoutDto()
+        {
+            return (IEnumerable<Author>)_context.Posts
+                .OrderBy(x => x.Title)
+                .ToList();
+        }
+
     }
 }
