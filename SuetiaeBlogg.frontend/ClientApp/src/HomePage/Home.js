@@ -32,7 +32,7 @@ export class Home extends Component {
                             alt="Third slide"
                         />
                         <Carousel.Caption>
-                            <h3>Getout of your comfort zone</h3>
+                            <h3>Get out of your comfort zone</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                     </Carousel.Item>
@@ -104,15 +104,15 @@ export class Home extends Component {
 
 
             <div className="row">
-                <Card className="text-dark d-flex justify-content-center">
-                    <Card.Img src="https://images.unsplash.com/photo-1483288578299-bdb6421dee2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1310&q=80" alt="Card image" />
-                    <Card.ImgOverlay>
-                        <Card.Title>Celebrate "kanelbullens dag" with a fantastic recipe</Card.Title>
-                        <Card.Text>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.
+                <Card className="text-center">
+                    <Card.Header><h1>Celebrate "kanelbullens dag" with a fantastic recipe</h1></Card.Header>
+                    <Card.Text><h5>
+                        In Sweden we love Cinnamon Buns so much that we created a special day for them - "Kanelbullens Dag", held on 4 October. To help you get in the mood here are some fun facts, a bit of history, a recipe and guide to some of West Sweden's best cafes.</h5>
                     </Card.Text>
-                        <Card.Text><a href="#" />click to learn more</Card.Text>
-                    </Card.ImgOverlay>
+                    <Card.Link href="/Blogs">click to learn more </Card.Link>
+                    <Card.Body>
+                    <Card.Img variant="top" src="http://2.bp.blogspot.com/-YB7Or37WJno/Ukv8-41GgzI/AAAAAAAAEME/QCPz6vyAfzo/w1200-h630-p-k-no-nu/Kanelbullens+dag.jpg"/>
+                    </Card.Body>
                 </Card>
 
             </div>

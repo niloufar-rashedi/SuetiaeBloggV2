@@ -11,17 +11,17 @@ export class Footer extends Component {
                     <div className="row">
                         <div className="col-sm-12 col-md-6">
                             <h6>About</h6>
-                            <p className="text-justify">Suetiate.se <i>Lorem Ipsum </i> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,s modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam. </p>
+                            <p className="text-justify"><i>Suetiate.se </i> is home for all you expats in Sweden! Uniting expat bloggers with their latest blog posts, blog reviews, expat interviews & contests. Our news team bring you daily news items from Sweden that may help you to enjoy your time here!. Enjoy, share and get involved! </p>
                         </div>
 
                         <div className="col-xs-6 col-md-3">
                             <h6>Categories</h6>
                             <ul className="footer-links">
                                 <li><a href="http://scanfcode.com/category/c-language/">General</a></li>
-                                <li><a href="http://scanfcode.com/category/front-end-development/">Holiday</a></li>
-                                <li><a href="http://scanfcode.com/category/back-end-development/">LEasure activities</a></li>
-                                <li><a href="http://scanfcode.com/category/java-programming-language/">Events</a></li>
+                                <li><a href="http://scanfcode.com/category/front-end-development/">Event</a></li>
+                                <li><a href="http://scanfcode.com/category/back-end-development/"> Sverige</a></li>
+                                <li><a href="http://scanfcode.com/category/java-programming-language/">Nationaldag</a></li>
+                                <li><a href="http://scanfcode.com/category/java-programming-language/">Historia</a></li>
 
                             </ul>
                         </div>
@@ -29,8 +29,8 @@ export class Footer extends Component {
                         <div className="col-xs-6 col-md-3">
                             <h6>Quick Links</h6>
                             <ul className="footer-links">
-                                <li><a href="http://scanfcode.com/about/">About Us</a></li>
-                                <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                                <li><a href="/About">About Us</a></li>
+                                <li><a href="/Contact">Contact Us</a></li>
                                 <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
                                 <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
                                 <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>

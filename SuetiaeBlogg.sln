@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Data", "Suetia
 		{8F251E3B-E7B7-42D7-AEAC-E60F31515696} = {8F251E3B-E7B7-42D7-AEAC-E60F31515696}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.React", "SuetiaeBlogg.React\SuetiaeBlogg.React.csproj", "{E7D139F0-CD67-4937-ADF4-375B701B36E7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Tests", "SuetiaeBlogg.Tests\SuetiaeBlogg.Tests.csproj", "{2B28274F-5A15-42F6-9BC7-471A9F64B409}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuetiaeBlogg.Services", "SuetiaeBlogg.Services\SuetiaeBlogg.Services.csproj", "{CEFA0F68-4533-4FAD-AC8A-7C5A3FC82CC5}"
@@ -43,10 +41,6 @@ Global
 		{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0DFAC78-9DC3-47BD-87C1-ED1A799162A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7D139F0-CD67-4937-ADF4-375B701B36E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7D139F0-CD67-4937-ADF4-375B701B36E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7D139F0-CD67-4937-ADF4-375B701B36E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7D139F0-CD67-4937-ADF4-375B701B36E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2B28274F-5A15-42F6-9BC7-471A9F64B409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B28274F-5A15-42F6-9BC7-471A9F64B409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B28274F-5A15-42F6-9BC7-471A9F64B409}.Release|Any CPU.ActiveCfg = Release|Any CPU

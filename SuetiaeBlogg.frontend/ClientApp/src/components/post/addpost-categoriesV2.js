@@ -128,6 +128,11 @@ class AddPostV2 extends React.Component {
                                 <input type="text" name="summary" value={this.state.summary} onChange={this.handleChange} placeholder="140 character..." className="form-control" />
                             </div>
 
+                            <div>
+                                <p> For copyright reasons, we suggest you to upload pictures from <a href="https://unsplash.com/">Unsplash's website</a></p>
+                               
+                            </div>
+
                             <div className="form-group">
                                 <label>Your inspiring blog post</label>
                                 {/*<textarea type="text" name="content" cols="25" rows="14" value={this.state.content} onChange={this.handleChange} className="form-control" placeholder="Enter Message" />*/}

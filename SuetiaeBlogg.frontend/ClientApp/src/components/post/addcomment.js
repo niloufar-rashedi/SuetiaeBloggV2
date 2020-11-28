@@ -53,7 +53,7 @@ class AddComment extends React.Component {
         return (
             <div>
                 <form  onSubmit={this.handleSubmit}>
-                        <label>Please write your comment here: 
+                        <label> Please write your comment here: 
                         <input type="text" input type="text" required name="body"  value={this.state.body} onChange={this.handleChange} />
                         </label>
                         <input type="submit" value="Submit" />
