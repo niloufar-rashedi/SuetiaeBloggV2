@@ -191,30 +191,6 @@ namespace SuetiaeBlogg.Services.Services
             return true;
         }
 
-        //Author IAuthorService.Authenticate(string username, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //Author IAuthorService.Create(Author author, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IAuthorService.Delete(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //IEnumerable<Author> IAuthorService.GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        Author IAuthorService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Author> FindAuthorById(int authorId)
         {
@@ -238,11 +214,6 @@ namespace SuetiaeBlogg.Services.Services
             
             
         }
-
-        //void IAuthorService.Update(Author userParam, string password)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
 

@@ -254,8 +254,6 @@ namespace SuetiaeBlogg.Services.Services
                                  .ThenInclude(PostTags => PostTags.Tag)
                                  .AsNoTracking()
                                  .ToListAsync();
-
         }
-        
-    }
+	}
 }

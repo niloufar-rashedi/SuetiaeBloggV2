@@ -43,11 +43,6 @@ namespace SuetiaeBlogg.API.Controllers
             _authorService = authorService;
             _logger = logger;
         }
-        //A single-parameter constructor for testing purposes:
-        public BlogPostsController(IPostService postService)
-        {
-            _postService = postService;
-        }
 
         // <summary>
         // Retrieves all posts with details
@@ -106,18 +101,6 @@ namespace SuetiaeBlogg.API.Controllers
             return Ok(posts);
 
         }
-
-        //TODO:
-        //Retrieve posts by authorId then return specific post ID
-        //[HttpGet("~/api/[controller]/authors/{authorId:int}/posts")]
-        //public async Task<ActionResult<IEnumerable<GetPostDto>>> GetPostByAuthor(int authorId)
-        //{
-        //    var posts = await _authorService.FindPostsByAuthorId(authorId);
-
-        //    return Ok(posts);
-
-        //}
-
 
 
         // <summary>
@@ -205,12 +188,6 @@ namespace SuetiaeBlogg.API.Controllers
         {
             await _postService.DeletePost(id);
             return Ok();
-        }
-        //Extra method to test GetAllPostsWithoutDto
-        [HttpGet]
-        public IEnumerable<Post> GetGetAllPostsWithoutDto()
-        {
-            return (IEnumerable<Post>)_postService.GetPostsWithoutDto();
         }
     }
 }
